@@ -1,30 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { App } from './App';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
 import './index.css';
+import { App } from './App';
+import { applyDocumentPrefs } from './lib/prefs';
 
-// Register PWA service worker for full offline precache
+applyDocumentPrefs();
+
+// Service worker (PWA): menyimpan aplikasi & paket Python agar bisa dipakai offline
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
-  import('virtual:pwa-register').then(({ registerSW }) => {
-    registerSW({
-      immediate: true,
-      onNeedRefresh() {
-        console.log('Versi baru tersedia.');
-      },
-      onOfflineReady() {
-        console.log('Aplikasi siap bekerja 100% offline.');
-      },
-    });
-  }).catch((err) => {
-    console.warn('PWA registration info:', err);
-  });
+  import('virtual:pwa-register')
+    .then(({ registerSW }) => registerSW({ immediate: true }))
+    .catch((err) => console.warn('PWA tidak aktif:', err));
 }
 
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(
+const root = document.getElementById('root');
+if (root) {
+  ReactDOM.createRoot(root).render(
     <React.StrictMode>
       <App />
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 }

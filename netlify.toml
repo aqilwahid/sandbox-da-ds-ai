@@ -1,0 +1,8 @@
+# Netlify: header COOP/COEP (agar tombol Stop bisa menghentikan Python tanpa memuat ulang)
+# ada di public/_headers — file yang sama juga dipakai Cloudflare Pages.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"

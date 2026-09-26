@@ -1,0 +1,121 @@
+# Kamus data (data dictionary) semua dataset latihan.
+# - Nama kunci = nama tabel SQL = nama file tanpa .csv.
+# - Deskripsi kolom tampil di tab "Data" pada aplikasi.
+# - Data sintetis & fiktif, dibuat oleh scripts/generate_datasets.py (seed tetap).
+
+penjualan:
+  file: penjualan.csv
+  judul: Transaksi penjualan TokoKita 2025
+  deskripsi: >-
+    Satu baris = satu transaksi di toko online fiktif TokoKita selama Januari–Desember 2025.
+    Nama produk, kategori, dan kota sengaja ikut disimpan di tabel ini agar mudah dianalisis tanpa JOIN.
+  sumber: Data sintetis (fiktif)
+  kolom:
+    id_transaksi: ID unik transaksi (T00001, T00002, …)
+    tanggal: Tanggal transaksi (YYYY-MM-DD)
+    id_pelanggan: ID pelanggan — kunci penghubung ke tabel pelanggan
+    id_produk: ID produk — kunci penghubung ke tabel produk
+    nama_produk: Nama produk yang dibeli
+    kategori: Kategori produk
+    kota: Kota tujuan pengiriman (kota pelanggan)
+    jumlah: Jumlah unit yang dibeli
+    harga_satuan: Harga per unit sebelum diskon (Rupiah)
+    diskon_persen: Diskon dalam persen (0, 5, 10, atau 15)
+    total_harga: Nilai transaksi setelah diskon (Rupiah) = jumlah × harga_satuan × (100 − diskon) / 100
+    metode_bayar: E-Wallet, Transfer Bank, Kartu Kredit, atau COD
+    status: Selesai, Dibatalkan, atau Dikembalikan
+
+pelanggan:
+  file: pelanggan.csv
+  judul: Data pelanggan TokoKita
+  deskripsi: >-
+    Satu baris = satu pelanggan terdaftar. Beberapa pelanggan baru mendaftar di akhir tahun
+    dan belum pernah bertransaksi — berguna untuk latihan LEFT JOIN.
+  sumber: Data sintetis (fiktif)
+  kolom:
+    id_pelanggan: ID unik pelanggan (P001, …)
+    nama: Nama pelanggan (fiktif)
+    kota: Kota domisili
+    segmen: Reguler, Member, atau VIP
+    usia: Usia dalam tahun
+    tanggal_daftar: Tanggal mendaftar akun (YYYY-MM-DD)
+
+produk:
+  file: produk.csv
+  judul: Katalog produk TokoKita
+  deskripsi: Satu baris = satu produk di katalog, lengkap dengan harga, berat, dan stok gudang saat ini.
+  sumber: Data sintetis (fiktif)
+  kolom:
+    id_produk: ID unik produk (PR01, …)
+    nama_produk: Nama produk
+    kategori: Kategori produk
+    harga_satuan: Harga jual per unit (Rupiah)
+    berat_gram: Berat kirim per unit (gram)
+    stok: Stok tersedia di gudang (unit)
+
+properti:
+  file: properti.csv
+  judul: Harga rumah di Jabodetabek
+  deskripsi: >-
+    Satu baris = satu rumah yang diiklankan. Data sengaja "kotor" seperti data asli:
+    ada nilai kosong di kolom garasi dan harga_juta, serta beberapa baris duplikat.
+  sumber: Data sintetis (fiktif)
+  kolom:
+    id_properti: ID iklan properti
+    lokasi: Wilayah (kota/kabupaten) di Jabodetabek
+    kamar_tidur: Jumlah kamar tidur
+    kamar_mandi: Jumlah kamar mandi
+    luas_tanah_m2: Luas tanah (m²)
+    luas_bangunan_m2: Luas bangunan (m²)
+    garasi: Kapasitas garasi (jumlah mobil) — ada yang kosong
+    tahun_dibangun: Tahun rumah dibangun
+    jarak_pusat_kota_km: Jarak ke pusat kota terdekat (km)
+    sertifikat: Jenis sertifikat (SHM, HGB, Girik)
+    harga_juta: Harga jual (juta Rupiah) — ada yang kosong
+
+churn_member:
+  file: churn_member.csv
+  judul: Churn member TokoKita
+  deskripsi: >-
+    Satu baris = satu member program loyalitas. Kolom churn = 1 berarti member berhenti belanja
+    dalam 3 bulan terakhir. Cocok untuk latihan klasifikasi.
+  sumber: Data sintetis (fiktif)
+  kolom:
+    id_member: ID member
+    usia: Usia member
+    kota: Kota domisili
+    lama_member_bulan: Lama menjadi member (bulan)
+    frekuensi_belanja_bulanan: Rata-rata jumlah transaksi per bulan
+    rata_belanja_ribu: Rata-rata nilai belanja per transaksi (ribu Rupiah)
+    jumlah_keluhan: Jumlah keluhan ke layanan pelanggan (6 bulan terakhir)
+    pakai_aplikasi: Apakah member memakai aplikasi mobile (Ya/Tidak)
+    skor_kepuasan: Skor survei kepuasan 1–5
+    churn: 1 = berhenti belanja, 0 = masih aktif
+
+ulasan:
+  file: ulasan.csv
+  judul: Ulasan produk TokoKita
+  deskripsi: >-
+    Satu baris = satu ulasan pelanggan beserta label sentimen dan aspek yang dikomentari
+    (dilabeli manual oleh tim CS — jadi bisa dipakai sebagai "kunci jawaban" untuk evaluasi).
+  sumber: Data sintetis (fiktif)
+  kolom:
+    id_ulasan: ID ulasan
+    produk: Nama produk yang diulas
+    teks_ulasan: Isi ulasan
+    rating: Bintang 1–5
+    sentimen: positif, netral, atau negatif (label manual)
+    aspek: Pengiriman, Kualitas Produk, Layanan, Harga, atau Umum
+
+kebijakan:
+  file: kebijakan.csv
+  judul: Basis pengetahuan kebijakan TokoKita
+  deskripsi: >-
+    Kumpulan dokumen kebijakan layanan (retur, pengiriman, pembayaran, member, dll.).
+    Dipakai sebagai "sumber pengetahuan" pada latihan RAG.
+  sumber: Data sintetis (fiktif)
+  kolom:
+    id_dok: ID dokumen (K01, …)
+    judul: Judul dokumen
+    kategori: Kelompok topik
+    isi: Isi kebijakan

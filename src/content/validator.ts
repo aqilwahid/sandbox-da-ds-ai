@@ -1,4 +1,5 @@
-import type { Exercise } from './types';
+import type { DatasetInfo, Exercise } from './types';
+import { LEVELS, TRACK_IDS } from './types';
 
 export interface ValidationIssue {
   type: 'error' | 'warning';
@@ -12,154 +13,98 @@ export interface ValidationResult {
   issues: ValidationIssue[];
 }
 
-export function validateExercises(exercises: Exercise[]): ValidationResult {
+/** Validasi struktur konten. Dipakai saat build (script) dan saat aplikasi memuat konten. */
+export function validateExercises(
+  exercises: Exercise[],
+  datasets?: Record<string, DatasetInfo>,
+): ValidationResult {
   const issues: ValidationIssue[] = [];
   const idMap = new Map<string, Exercise>();
+  const orderMap = new Map<string, Exercise>();
 
-  // 1. Check duplicate IDs & required fields
+  const err = (ex: Exercise | undefined, message: string) =>
+    issues.push({ type: 'error', file: ex?.filePath, exerciseId: ex?.id, message });
+  const warn = (ex: Exercise | undefined, message: string) =>
+    issues.push({ type: 'warning', file: ex?.filePath, exerciseId: ex?.id, message });
+
   for (const ex of exercises) {
+    const fm = ex.frontmatter;
     if (!ex.id) {
-      issues.push({
-        type: 'error',
-        file: ex.filePath,
-        message: 'Latihan wajib memiliki properti frontmatter "id".',
-      });
+      err(ex, 'Frontmatter "id" wajib diisi.');
       continue;
     }
-
-    if (idMap.has(ex.id)) {
-      const existing = idMap.get(ex.id)!;
-      issues.push({
-        type: 'error',
-        file: ex.filePath,
-        exerciseId: ex.id,
-        message: `ID duplikat ditemukan: "${ex.id}" ada di file "${ex.filePath}" dan "${existing.filePath}". ID harus unik secara global.`,
-      });
-    } else {
-      idMap.set(ex.id, ex);
+    if (!/^[a-z0-9][a-z0-9-]*$/.test(ex.id)) {
+      err(ex, `ID "${ex.id}" hanya boleh huruf kecil, angka, dan tanda minus.`);
     }
+    const dup = idMap.get(ex.id);
+    if (dup) err(ex, `ID duplikat "${ex.id}" (juga dipakai di ${dup.filePath}).`);
+    else idMap.set(ex.id, ex);
 
-    // Check title
-    if (!ex.frontmatter.title) {
-      issues.push({
-        type: 'error',
-        file: ex.filePath,
-        exerciseId: ex.id,
-        message: 'Frontmatter "title" wajib diisi.',
-      });
+    if (!TRACK_IDS.includes(fm.track)) {
+      err(ex, `Track "${fm.track}" tidak valid. Pilihan: ${TRACK_IDS.join(', ')}.`);
     }
+    const orderKey = `${fm.track}:${ex.order}`;
+    const sameOrder = orderMap.get(orderKey);
+    if (sameOrder) err(ex, `Nomor urut ${ex.order} dipakai dua kali di track ${fm.track} (${sameOrder.filePath}).`);
+    else orderMap.set(orderKey, ex);
 
-    // Check track
-    if (!['analyst', 'datascience', 'ai'].includes(ex.frontmatter.track)) {
-      issues.push({
-        type: 'error',
-        file: ex.filePath,
-        exerciseId: ex.id,
-        message: `Track "${ex.frontmatter.track}" tidak valid. Track yang diizinkan: 'analyst' | 'datascience' | 'ai'.`,
-      });
+    if (!fm.title) err(ex, 'Frontmatter "title" wajib diisi.');
+    if (!ex.sections.instruksi.trim()) err(ex, 'Section "## instruksi" hilang atau kosong.');
+    const seen = (ex as Exercise & { _seen?: Set<string> })._seen;
+    if (seen && !seen.has('starter')) err(ex, 'Section "## starter" hilang (boleh kosong, tapi judulnya harus ada).');
+    if (!ex.sections.solusi.trim()) err(ex, 'Section "## solusi" hilang atau kosong.');
+    if (ex.language === 'python' && !ex.sections.checker.trim()) {
+      err(ex, 'Latihan Python wajib punya section "## checker".');
     }
+    if (ex.sections.hints.length === 0) warn(ex, 'Belum ada hint (## hint-1, ## hint-2, ...).');
+    if (ex.language === 'sql' && fm.datasets.length === 0) err(ex, 'Latihan SQL wajib menyebutkan datasets (nama tabel).');
 
-    // Check required sections
-    if (!ex.sections.instruksi || !ex.sections.instruksi.trim()) {
-      issues.push({
-        type: 'error',
-        file: ex.filePath,
-        exerciseId: ex.id,
-        message: 'Section wajib "## instruksi" hilang atau kosong.',
-      });
-    }
-
-    if (!ex.sections.starter && ex.sections.starter !== '') {
-      issues.push({
-        type: 'error',
-        file: ex.filePath,
-        exerciseId: ex.id,
-        message: 'Section wajib "## starter" hilang.',
-      });
-    }
-
-    if (!ex.sections.solusi || !ex.sections.solusi.trim()) {
-      issues.push({
-        type: 'error',
-        file: ex.filePath,
-        exerciseId: ex.id,
-        message: 'Section wajib "## solusi" hilang atau kosong.',
-      });
-    }
-
-    if (!ex.sections.checker || !ex.sections.checker.trim()) {
-      issues.push({
-        type: 'error',
-        file: ex.filePath,
-        exerciseId: ex.id,
-        message: 'Section wajib "## checker" hilang atau kosong.',
-      });
-    }
-  }
-
-  // 2. Check broken prerequisites
-  for (const ex of exercises) {
-    for (const prereqId of ex.frontmatter.prerequisites) {
-      if (!idMap.has(prereqId)) {
-        issues.push({
-          type: 'error',
-          file: ex.filePath,
-          exerciseId: ex.id,
-          message: `Prerequisite "${prereqId}" tidak ditemukan dalam daftar latihan. Pastikan ID tersebut sudah terdefinisi.`,
-        });
+    if (datasets) {
+      for (const ds of fm.datasets) {
+        if (!datasets[ds]) err(ex, `Dataset "${ds}" belum terdaftar di content/datasets.yaml.`);
       }
     }
   }
 
-  // 3. Check circular prerequisite dependencies (Cycle detection using DFS)
-  // Build adjacency list: exerciseId -> prerequisites
-  const adj = new Map<string, string[]>();
-  exercises.forEach((ex) => {
-    adj.set(ex.id, ex.frontmatter.prerequisites);
-  });
+  for (const ex of exercises) {
+    for (const p of ex.frontmatter.prerequisites) {
+      if (!idMap.has(p)) err(ex, `Prasyarat "${p}" tidak ditemukan.`);
+    }
+  }
 
-  const visited = new Set<string>();
-  const inStack = new Set<string>();
-  const cyclePaths: string[][] = [];
-
-  function checkCycle(currentId: string, path: string[]) {
-    visited.add(currentId);
-    inStack.add(currentId);
-    path.push(currentId);
-
-    const neighbors = adj.get(currentId) || [];
-    for (const neighbor of neighbors) {
-      if (!idMap.has(neighbor)) continue; // Already reported as broken prereq
-
-      if (!visited.has(neighbor)) {
-        checkCycle(neighbor, [...path]);
-      } else if (inStack.has(neighbor)) {
-        // Cycle detected
-        const cycleStartIndex = path.indexOf(neighbor);
-        const cycle = [...path.slice(cycleStartIndex), neighbor];
-        cyclePaths.push(cycle);
+  // Level sebaiknya tidak turun di tengah track (judul level di daftar latihan akan muncul berulang)
+  for (const track of TRACK_IDS) {
+    const list = exercises.filter((e) => e.frontmatter.track === track).sort((a, b) => a.order - b.order);
+    let maxIdx = -1;
+    let maxLevel = '';
+    for (const ex of list) {
+      const idx = LEVELS.indexOf(ex.frontmatter.level);
+      if (idx >= 0 && idx < maxIdx) warn(ex, `Level "${ex.frontmatter.level}" muncul setelah latihan level "${maxLevel}" — urutkan dari pemula ke lanjut.`);
+      if (idx > maxIdx) {
+        maxIdx = idx;
+        maxLevel = ex.frontmatter.level;
       }
     }
-
-    inStack.delete(currentId);
   }
 
-  for (const ex of exercises) {
-    if (!visited.has(ex.id)) {
-      checkCycle(ex.id, []);
+  // Deteksi siklus prasyarat (DFS)
+  const state = new Map<string, 0 | 1 | 2>();
+  const cycles: string[][] = [];
+  const visit = (id: string, path: string[]) => {
+    state.set(id, 1);
+    const ex = idMap.get(id);
+    for (const p of ex?.frontmatter.prerequisites || []) {
+      if (!idMap.has(p)) continue;
+      const st = state.get(p) || 0;
+      if (st === 0) visit(p, [...path, p]);
+      else if (st === 1) cycles.push([...path.slice(path.indexOf(p)), p]);
     }
-  }
-
-  for (const cycle of cyclePaths) {
-    issues.push({
-      type: 'error',
-      message: `Terdeteksi siklus prasyarat (circular dependency): ${cycle.join(' -> ')}. Setiap alur belajar harus acyclic (DAG).`,
-    });
-  }
-
-  const errors = issues.filter((i) => i.type === 'error');
-  return {
-    valid: errors.length === 0,
-    issues,
+    state.set(id, 2);
   };
+  for (const id of idMap.keys()) if (!state.get(id)) visit(id, [id]);
+  for (const c of cycles) {
+    issues.push({ type: 'error', message: `Siklus prasyarat terdeteksi: ${c.join(' → ')}` });
+  }
+
+  return { valid: !issues.some((i) => i.type === 'error'), issues };
 }

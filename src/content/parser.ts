@@ -1,111 +1,182 @@
 import yaml from 'js-yaml';
-import type { Exercise, ExerciseFrontmatter, ExerciseSections, TrackId } from './types';
+import type {
+  DatasetInfo,
+  Exercise,
+  ExerciseFrontmatter,
+  ExerciseSections,
+  Language,
+  Level,
+  TrackId,
+} from './types';
+import { LEVELS, TRACK_IDS } from './types';
+
+/**
+ * Parser file latihan Markdown.
+ *
+ * Format:
+ *   ---
+ *   (frontmatter YAML)
+ *   ---
+ *   ## instruksi      (markdown, boleh berisi blok ```visual)
+ *   ## starter        (kode awal)
+ *   ## solusi         (kode solusi referensi)
+ *   ## checker        (kode Python penilai; opsional untuk SQL)
+ *   ## hint-1 .. n    (petunjuk bertahap)
+ *   ## pembahasan     (opsional)
+ *
+ * Dipakai oleh aplikasi (Vite) dan oleh script Node (tsx), jadi tidak boleh
+ * memakai API khusus browser.
+ */
+
+const SECTION_RE = /^##[ \t]+([a-zA-Z0-9_-]+)[ \t]*$/gm;
+
+/** File latihan harus diawali nomor urut, mis. `03-group-by.md`. File lain (README, _draft) diabaikan. */
+export function isExerciseFile(filePath: string): boolean {
+  const name = filePath.replace(/\\/g, '/').split('/').pop() || '';
+  return /^\d+-[^/]+\.md$/i.test(name);
+}
+
+function toStringArray(v: unknown): string[] {
+  if (Array.isArray(v)) return v.map((x) => String(x).trim()).filter(Boolean);
+  if (typeof v === 'string' && v.trim()) return v.split(',').map((s) => s.trim()).filter(Boolean);
+  return [];
+}
+
+function normalizeDatasetName(name: string): string {
+  return name.replace(/\.(csv|parquet|json)$/i, '').trim();
+}
+
+function normalizeLanguage(parsed: Record<string, unknown>): Language {
+  const lang = String(parsed.language ?? '').toLowerCase().trim();
+  if (lang === 'sql' || lang === 'python') return lang;
+  const runtime = String(parsed.runtime ?? '').toLowerCase().trim();
+  if (['duckdb', 'sql', 'sqlite'].includes(runtime)) return 'sql';
+  return 'python';
+}
+
+export function cleanCodeBlock(content: string): string {
+  const trimmed = content.trim();
+  const fence = trimmed.match(/^(`{3,}|~{3,})[^\n]*\n([\s\S]*?)\n\1\s*$/);
+  if (fence) return fence[2];
+  return trimmed;
+}
 
 export function parseExerciseMarkdown(rawContent: string, filePath: string): Exercise {
-  const normalized = rawContent.replace(/\r\n/g, '\n');
-  const frontmatterMatch = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-
-  if (!frontmatterMatch) {
-    throw new Error(`File ${filePath} tidak memiliki format frontmatter YAML valid (--- ... ---).`);
+  const normalized = rawContent.replace(/\r\n/g, '\n').replace(/^﻿/, '');
+  const fm = normalized.match(/^---\n([\s\S]*?)\n---[ \t]*\n([\s\S]*)$/);
+  if (!fm) {
+    throw new Error(`File ${filePath} tidak memiliki frontmatter YAML (--- ... ---) di baris pertama.`);
   }
+  const [, rawYaml, rawBody] = fm;
 
-  const [, rawYaml, rawBody] = frontmatterMatch;
-  let frontmatter: ExerciseFrontmatter;
-
+  let parsed: Record<string, unknown>;
   try {
-    const parsed = yaml.load(rawYaml) as any;
-    if (!parsed || typeof parsed !== 'object') {
-      throw new Error('Frontmatter kosong atau bukan objek valid');
-    }
-
-    frontmatter = {
-      id: String(parsed.id || '').trim(),
-      track: (parsed.track || 'analyst') as TrackId,
-      title: String(parsed.title || '').trim(),
-      estimatedMinutes: Number(parsed.estimatedMinutes) || 10,
-      runtime: String(parsed.runtime || 'mock').trim(),
-      packages: Array.isArray(parsed.packages) ? parsed.packages.map(String) : [],
-      datasets: Array.isArray(parsed.datasets) ? parsed.datasets.map(String) : [],
-      prerequisites: Array.isArray(parsed.prerequisites) ? parsed.prerequisites.map(String) : [],
-    };
-  } catch (err: any) {
-    throw new Error(`Gagal parse YAML frontmatter pada ${filePath}: ${err.message}`);
+    const loaded = yaml.load(rawYaml);
+    if (!loaded || typeof loaded !== 'object') throw new Error('frontmatter kosong');
+    parsed = loaded as Record<string, unknown>;
+  } catch (err) {
+    throw new Error(`Frontmatter YAML tidak valid di ${filePath}: ${(err as Error).message}`);
   }
 
-  // Parse H2 sections
-  // Format: ## <section_name>
-  const sectionRegex = /^##\s+([a-zA-Z0-9_-]+)\s*$/gm;
+  const language = normalizeLanguage(parsed);
+  const level = String(parsed.level ?? 'pemula').toLowerCase() as Level;
+  const frontmatter: ExerciseFrontmatter = {
+    id: String(parsed.id ?? '').trim(),
+    track: String(parsed.track ?? '').trim() as TrackId,
+    title: String(parsed.title ?? '').trim(),
+    level: LEVELS.includes(level) ? level : 'pemula',
+    estimatedMinutes: Number(parsed.estimatedMinutes) || 10,
+    language,
+    datasets: toStringArray(parsed.datasets).map(normalizeDatasetName),
+    packages: toStringArray(parsed.packages),
+    prerequisites: toStringArray(parsed.prerequisites),
+    concepts: toStringArray(parsed.concepts ?? parsed.tags),
+    timeoutSec: Number(parsed.timeoutSec) || (language === 'sql' ? 20 : 40),
+  };
+
   const sections: ExerciseSections = {
     instruksi: '',
     starter: '',
     solusi: '',
     checker: '',
     hints: [],
+    pembahasan: '',
   };
 
-  const matches: { name: string; index: number; contentStartIndex: number }[] = [];
-  let match: RegExpExecArray | null;
-
-  while ((match = sectionRegex.exec(rawBody)) !== null) {
-    matches.push({
-      name: match[1].toLowerCase(),
-      index: match.index,
-      contentStartIndex: match.index + match[0].length,
-    });
+  const matches: { name: string; index: number; start: number }[] = [];
+  SECTION_RE.lastIndex = 0;
+  let m: RegExpExecArray | null;
+  while ((m = SECTION_RE.exec(rawBody)) !== null) {
+    matches.push({ name: m[1].toLowerCase(), index: m.index, start: m.index + m[0].length });
   }
 
   const hintMap = new Map<number, string>();
-
+  const seen = new Set<string>();
   for (let i = 0; i < matches.length; i++) {
-    const current = matches[i];
-    const nextIndex = i + 1 < matches.length ? matches[i + 1].index : rawBody.length;
-    const content = rawBody.slice(current.contentStartIndex, nextIndex).trim();
-
-    if (current.name === 'instruksi') {
-      sections.instruksi = content;
-    } else if (current.name === 'starter') {
-      // Remove codeblock wrapper if present
-      sections.starter = cleanCodeBlock(content);
-    } else if (current.name === 'solusi') {
-      sections.solusi = cleanCodeBlock(content);
-    } else if (current.name === 'checker') {
-      sections.checker = cleanCodeBlock(content);
-    } else if (current.name.startsWith('hint-')) {
-      const hintNum = parseInt(current.name.replace('hint-', ''), 10);
-      if (!isNaN(hintNum)) {
-        hintMap.set(hintNum, content);
-      }
+    const cur = matches[i];
+    const end = i + 1 < matches.length ? matches[i + 1].index : rawBody.length;
+    const content = rawBody.slice(cur.start, end).trim();
+    seen.add(cur.name);
+    switch (cur.name) {
+      case 'instruksi':
+        sections.instruksi = content;
+        break;
+      case 'starter':
+        sections.starter = cleanCodeBlock(content);
+        break;
+      case 'solusi':
+        sections.solusi = cleanCodeBlock(content);
+        break;
+      case 'checker':
+        sections.checker = cleanCodeBlock(content);
+        break;
+      case 'pembahasan':
+        sections.pembahasan = content;
+        break;
+      default:
+        if (cur.name.startsWith('hint-')) {
+          const n = parseInt(cur.name.slice(5), 10);
+          if (!Number.isNaN(n)) hintMap.set(n, content);
+        }
     }
   }
+  sections.hints = [...hintMap.keys()].sort((a, b) => a - b).map((k) => hintMap.get(k)!);
 
-  // Sort hints numerically (hint-1, hint-2, hint-3)
-  const sortedHintKeys = Array.from(hintMap.keys()).sort((a, b) => a - b);
-  sections.hints = sortedHintKeys.map((k) => hintMap.get(k)!);
-
-  // Extract order and slug from filename if possible (e.g., content/analyst/01-sql-agregasi.md)
-  const pathParts = filePath.replace(/\\/g, '/').split('/');
-  const filename = pathParts[pathParts.length - 1] || '';
-  const fileMatch = filename.match(/^(\d+)-(.*)\.md$/);
+  const fileName = filePath.replace(/\\/g, '/').split('/').pop() || '';
+  const fileMatch = fileName.match(/^(\d+)-(.*)\.md$/i);
   const order = fileMatch ? parseInt(fileMatch[1], 10) : 99;
-  const slug = fileMatch ? fileMatch[2] : filename.replace(/\.md$/, '');
+  const slug = fileMatch ? fileMatch[2] : fileName.replace(/\.md$/i, '');
 
-  return {
+  const exercise: Exercise = {
     id: frontmatter.id,
     frontmatter,
     sections,
     filePath,
     track: frontmatter.track,
+    language,
     order,
     slug,
   };
+  // Tandai section yang tidak ada sama sekali (beda dengan kosong) untuk validator
+  (exercise as Exercise & { _seen?: Set<string> })._seen = seen;
+  return exercise;
 }
 
-function cleanCodeBlock(content: string): string {
-  // If content is surrounded by ```...```, remove the code fence
-  const trimmed = content.trim();
-  const fenceMatch = trimmed.match(/^```[a-zA-Z0-9_-]*\n([\s\S]*?)\n```$/);
-  if (fenceMatch) {
-    return fenceMatch[1];
+export function parseDatasetRegistry(rawYaml: string): Record<string, DatasetInfo> {
+  const loaded = (yaml.load(rawYaml) || {}) as Record<string, Record<string, unknown>>;
+  const out: Record<string, DatasetInfo> = {};
+  for (const [name, v] of Object.entries(loaded)) {
+    const cols = (v.kolom || v.columns || {}) as Record<string, string>;
+    out[name] = {
+      name,
+      file: String(v.file ?? `${name}.csv`),
+      title: String(v.judul ?? v.title ?? name),
+      description: String(v.deskripsi ?? v.description ?? ''),
+      source: v.sumber ? String(v.sumber) : v.source ? String(v.source) : undefined,
+      columns: Object.entries(cols).map(([col, desc]) => ({ name: col, description: String(desc ?? '') })),
+    };
   }
-  return trimmed;
+  return out;
 }
+
+export { TRACK_IDS };

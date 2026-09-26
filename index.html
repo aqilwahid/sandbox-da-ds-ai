@@ -1,18 +1,24 @@
 <!doctype html>
-<html lang="id" class="dark h-full">
+<html lang="id" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Platform latihan hands-on coding berbasis browser offline untuk Data Analyst, Data Science, dan AI." />
-    <title>Hands-On Coding Sandbox | Offline In-Browser Training</title>
-    <!-- Preconnect to Google Fonts for premium typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Sandbox latihan hands-on Data Analyst (SQL), Data Science (Python), dan AI Engineering — berjalan langsung di browser dengan visual interaktif." />
+    <meta name="theme-color" content="#0b0f16" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Sandbox Data & AI</title>
+    <script>
+      // Terapkan tema & ukuran tersimpan sebelum render (hindari kedip)
+      try {
+        var p = JSON.parse(localStorage.getItem('sbx-prefs-v2') || '{}');
+        document.documentElement.dataset.theme = p.theme || 'dark';
+        document.documentElement.dataset.size = p.size || 'md';
+      } catch (e) {}
+    </script>
   </head>
-  <body class="h-full bg-dark-900 text-slate-100 antialiased overflow-hidden select-none font-sans">
-    <div id="root" class="h-full w-full flex flex-col"></div>
+  <body>
+    <div id="root"></div>
+    <noscript>Aplikasi ini membutuhkan JavaScript.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,0 +1,37 @@
+id_produk,nama_produk,kategori,harga_satuan,berat_gram,stok
+PR01,Laptop 14 inci Core i5,Elektronik,8499000,1600,9
+PR02,Smartphone 128 GB,Elektronik,3299000,400,25
+PR03,Headset Bluetooth,Elektronik,459000,250,150
+PR04,Mouse Nirkabel,Elektronik,149000,150,150
+PR05,Power Bank 10.000 mAh,Elektronik,229000,300,42
+PR06,Smartwatch Sport,Elektronik,899000,200,0
+PR07,Speaker Portabel,Elektronik,379000,700,0
+PR08,Monitor 24 inci,Elektronik,1899000,4200,6
+PR09,Kemeja Batik Pria,Fashion,189000,300,8
+PR10,Gamis Katun,Fashion,245000,450,8
+PR11,Sepatu Lari,Fashion,529000,900,85
+PR12,Jaket Hoodie,Fashion,199000,600,85
+PR13,Kaos Polos Premium,Fashion,79000,200,0
+PR14,Tas Ransel Kerja,Fashion,315000,800,40
+PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,89000,280,8
+PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,28000,120,25
+PR17,Madu Hutan 500 ml,Makanan & Minuman,115000,700,8
+PR18,Kurma Premium 1 kg,Makanan & Minuman,135000,1050,85
+PR19,Keripik Singkong Pedas,Makanan & Minuman,22000,200,25
+PR20,Sambal Roa Botol,Makanan & Minuman,45000,250,85
+PR21,"Rice Cooker 1,8 L",Rumah Tangga,459000,2800,3
+PR22,Blender 2 L,Rumah Tangga,389000,2500,25
+PR23,Setrika Uap,Rumah Tangga,275000,1400,3
+PR24,Set Panci Anti Lengket,Rumah Tangga,649000,3500,25
+PR25,Lampu LED Pintar,Rumah Tangga,99000,150,3
+PR26,Dispenser Air,Rumah Tangga,729000,6000,8
+PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,159000,100,120
+PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,89000,80,12
+PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,45000,300,3
+PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,35000,100,12
+PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,95000,150,120
+PR32,Buku Belajar Python,Buku & Alat Tulis,139000,600,40
+PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,42000,900,0
+PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,36000,200,150
+PR35,Planner 2026,Buku & Alat Tulis,85000,400,8
+PR36,Buku Statistik Terapan,Buku & Alat Tulis,169000,700,120

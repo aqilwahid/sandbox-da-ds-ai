@@ -1,185 +1,144 @@
-import React from 'react';
-import {
-  CheckCircle2,
-  Circle,
-  Clock,
-  Eye,
-  Lock,
-  Search,
-  Flame,
-} from 'lucide-react';
-import type { Exercise, TrackId } from '../../content/types';
-import { TRACKS } from '../../content/types';
+import React, { useMemo, useState } from 'react';
+import { CheckCircle2, ChevronsLeft, ChevronsRight, Circle, CircleDot, Eye, Search } from 'lucide-react';
+import { exercisesByTrack } from '../../content/loader';
+import { LEVEL_LABEL, TRACK_IDS, TRACKS, type Exercise, type TrackId } from '../../content/types';
 import type { ExerciseProgressRecord } from '../../db';
 
-interface SidebarProps {
-  exercises: Exercise[];
-  currentExerciseId: string;
-  onSelectExercise: (id: string) => void;
-  currentTrack: TrackId;
+interface Props {
+  track: TrackId;
+  currentId: string;
   progressMap: Record<string, ExerciseProgressRecord>;
+  onSelect: (id: string) => void;
+  onTrack: (t: TrackId) => void;
+  collapsed: boolean;
+  onToggle: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({
-  exercises,
-  currentExerciseId,
-  onSelectExercise,
-  currentTrack,
-  progressMap,
-}) => {
-  const [searchQuery, setSearchQuery] = React.useState('');
+export const StatusIcon: React.FC<{ status?: string; size?: number }> = ({ status, size = 15 }) => {
+  if (status === 'lulus') return <CheckCircle2 size={size} className="shrink-0 text-ok" aria-label="Lulus" />;
+  if (status === 'lihat-solusi') return <Eye size={size} className="shrink-0 text-fg2" aria-label="Solusi dilihat" />;
+  if (status === 'dicoba') return <CircleDot size={size} className="shrink-0 text-warn" aria-label="Sedang dikerjakan" />;
+  return <Circle size={size} className="shrink-0 text-fg3/60" aria-label="Belum dikerjakan" />;
+};
 
-  const trackExercises = exercises.filter((ex) => ex.track === currentTrack);
-  const filteredExercises = trackExercises.filter((ex) =>
-    ex.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    ex.id.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+export const Sidebar: React.FC<Props> = ({ track, currentId, progressMap, onSelect, onTrack, collapsed, onToggle }) => {
+  const [q, setQ] = useState('');
+  const list = exercisesByTrack(track);
+  const passed = list.filter((e) => progressMap[e.id]?.status === 'lulus').length;
+  const pct = list.length ? Math.round((passed / list.length) * 100) : 0;
+  const filtered = useMemo(() => {
+    const needle = q.toLowerCase();
+    return list.filter(
+      (e) => !needle || e.frontmatter.title.toLowerCase().includes(needle) || e.frontmatter.concepts.some((c) => c.toLowerCase().includes(needle)),
+    );
+  }, [list, q]);
 
-  // Compute track completion stats
-  const totalCount = trackExercises.length;
-  const passedCount = trackExercises.filter(
-    (ex) => progressMap[ex.id]?.status === 'lulus'
-  ).length;
-  const percentComplete = totalCount > 0 ? Math.round((passedCount / totalCount) * 100) : 0;
+  if (collapsed) {
+    return (
+      <aside className="flex h-full w-12 flex-col items-center gap-1 border-r border-line bg-panel py-2">
+        <button type="button" className="btn-ghost mb-1" onClick={onToggle} title="Buka daftar latihan" aria-label="Buka daftar latihan">
+          <ChevronsRight size={15} />
+        </button>
+        {list.map((e, i) => (
+          <button
+            key={e.id}
+            type="button"
+            onClick={() => onSelect(e.id)}
+            title={`${i + 1}. ${e.frontmatter.title}`}
+            className={`relative flex h-8 w-8 items-center justify-center rounded-lg text-2xs font-semibold ${
+              e.id === currentId ? 'bg-accent-solid text-white' : 'text-fg2 hover:bg-panel3'
+            }`}
+          >
+            {i + 1}
+            {progressMap[e.id]?.status === 'lulus' && <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-ok ring-2 ring-panel" />}
+          </button>
+        ))}
+      </aside>
+    );
+  }
 
-  const currentTrackMeta = TRACKS[currentTrack];
-
-  const getStatusIcon = (exercise: Exercise) => {
-    const progress = progressMap[exercise.id];
-    const status = progress?.status || 'belum';
-
-    switch (status) {
-      case 'lulus':
-        return <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />;
-      case 'lihat-solusi':
-        return (
-          <span title="Solusi dilihat" className="inline-flex">
-            <Eye size={16} className="text-purple-400 shrink-0" />
-          </span>
-        );
-      case 'dicoba':
-        return (
-          <span className="w-3.5 h-3.5 rounded-full border-2 border-amber-400 border-t-transparent animate-spin shrink-0" title="Sedang dikerjakan" />
-        );
-      case 'belum':
-      default:
-        return <Circle size={15} className="text-slate-600 shrink-0" />;
-    }
-  };
-
-  const isPrerequisiteMet = (exercise: Exercise) => {
-    if (!exercise.frontmatter.prerequisites || exercise.frontmatter.prerequisites.length === 0) {
-      return true;
-    }
-    return exercise.frontmatter.prerequisites.every((prereqId) => {
-      const p = progressMap[prereqId];
-      return p && (p.status === 'lulus' || p.status === 'lihat-solusi');
-    });
-  };
-
+  let lastLevel = '';
   return (
-    <aside className="h-full flex flex-col bg-dark-900 border-r border-slate-800 select-none">
-      {/* Track Header & Progress */}
-      <div className="p-4 border-b border-slate-800 bg-dark-850">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-            {currentTrackMeta.name}
-          </span>
-          <span className="text-xs font-mono text-brand-400 font-bold">
-            {passedCount}/{totalCount} ({percentComplete}%)
-          </span>
+    <aside className="flex h-full min-w-0 flex-col border-r border-line bg-panel">
+      <div className="space-y-2.5 border-b border-line p-3">
+        <div className="flex items-center justify-between">
+          <div className="grid flex-1 grid-cols-3 gap-0.5 rounded-lg border border-line bg-panel2 p-0.5" role="tablist" aria-label="Pilih track">
+            {TRACK_IDS.map((t) => (
+              <button
+                key={t}
+                type="button"
+                role="tab"
+                aria-selected={t === track}
+                onClick={() => onTrack(t)}
+                className={`rounded-md px-1 py-1 text-2xs font-semibold transition-colors ${t === track ? 'bg-panel3 text-fg shadow-card' : 'text-fg3 hover:text-fg'}`}
+                title={TRACKS[t].name}
+              >
+                <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full align-middle" style={{ background: `rgb(var(--c-track-${t}))` }} />
+                {TRACKS[t].short}
+              </button>
+            ))}
+          </div>
+          <button type="button" className="btn-ghost ml-1 !px-1.5" onClick={onToggle} title="Sembunyikan daftar" aria-label="Sembunyikan daftar latihan">
+            <ChevronsLeft size={15} />
+          </button>
         </div>
-
-        {/* Track Progress Bar */}
-        <div className="w-full bg-dark-950 rounded-full h-1.5 overflow-hidden border border-slate-800 mb-3">
-          <div
-            className="h-full bg-gradient-to-r from-brand-500 to-emerald-400 rounded-full transition-all duration-500"
-            style={{ width: `${percentComplete}%` }}
-          />
+        <div>
+          <div className="flex items-baseline justify-between">
+            <span className="text-xs font-semibold text-fg">{TRACKS[track].name}</span>
+            <span className="text-2xs text-fg3 tabular">
+              {passed}/{list.length} lulus
+            </span>
+          </div>
+          <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-panel3">
+            <div className="h-full rounded-full bg-ok transition-[width] duration-500" style={{ width: `${pct}%` }} />
+          </div>
         </div>
-
-        {/* Search Input */}
         <div className="relative">
-          <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500" />
-          <input
-            type="text"
-            placeholder="Cari modul latihan..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-dark-950 border border-slate-800 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
-          />
+          <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-fg3" />
+          <input className="input !pl-8" placeholder="Cari judul atau konsep…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Cari latihan" />
         </div>
       </div>
-
-      {/* Exercise List */}
-      <div className="flex-1 overflow-y-auto p-2 space-y-1">
-        {filteredExercises.map((ex, idx) => {
-          const isActive = ex.id === currentExerciseId;
-          const prereqMet = isPrerequisiteMet(ex);
-          const progress = progressMap[ex.id];
-
+      <nav className="min-h-0 flex-1 overflow-y-auto p-2" aria-label="Daftar latihan">
+        {filtered.map((e: Exercise) => {
+          const idx = list.indexOf(e);
+          const p = progressMap[e.id];
+          const active = e.id === currentId;
+          const header = e.frontmatter.level !== lastLevel ? LEVEL_LABEL[e.frontmatter.level] : null;
+          lastLevel = e.frontmatter.level;
           return (
-            <button
-              key={ex.id}
-              onClick={() => onSelectExercise(ex.id)}
-              className={`w-full text-left p-2.5 rounded-lg border transition-all flex items-start gap-2.5 group relative ${
-                isActive
-                  ? 'bg-brand-600/15 border-brand-500/50 shadow-sm text-slate-100'
-                  : 'bg-transparent border-transparent hover:bg-slate-800/60 text-slate-300 hover:text-slate-100'
-              }`}
-            >
-              <div className="mt-0.5">{getStatusIcon(ex)}</div>
-
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-1 mb-0.5">
-                  <span className="text-xs font-semibold truncate leading-tight">
-                    {idx + 1}. {ex.frontmatter.title}
+            <React.Fragment key={e.id}>
+              {header && !q && <div className="px-2 pb-1 pt-2.5 text-[10px] font-semibold uppercase tracking-wider text-fg3">{header}</div>}
+              <button
+                type="button"
+                onClick={() => onSelect(e.id)}
+                aria-current={active ? 'true' : undefined}
+                className={`group mb-0.5 flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors ${
+                  active ? 'bg-accent/15 ring-1 ring-accent/40' : 'hover:bg-panel3'
+                }`}
+              >
+                <span className="mt-0.5">
+                  <StatusIcon status={p?.status} />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className={`block text-xs leading-snug ${active ? 'font-semibold text-fg' : 'text-fg'}`}>
+                    <span className="text-fg3 tabular">{idx + 1}.</span> {e.frontmatter.title}
                   </span>
-                  {!prereqMet && (
-                    <span title="Prasyarat belum diselesaikan" className="inline-flex">
-                      <Lock size={12} className="text-amber-400 shrink-0" />
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-2 text-[10px] text-slate-500 font-mono">
-                  <span className="flex items-center gap-1">
-                    <Clock size={10} />
-                    {ex.frontmatter.estimatedMinutes}m
+                  <span className="mt-0.5 flex items-center gap-1.5 text-[10.5px] text-fg3">
+                    <span>{e.frontmatter.estimatedMinutes} mnt</span>
+                    {p?.lastScore && p.status !== 'lulus' && (
+                      <span className="tabular">
+                        · {p.lastScore.passed}/{p.lastScore.total} kriteria
+                      </span>
+                    )}
+                    {p?.attemptsCount ? <span className="tabular">· {p.attemptsCount}× jalan</span> : null}
                   </span>
-                  <span>•</span>
-                  <span className="uppercase text-slate-400">{ex.frontmatter.runtime}</span>
-                  {progress?.attemptsCount ? (
-                    <>
-                      <span>•</span>
-                      <span className="text-amber-400/80">{progress.attemptsCount}x tes</span>
-                    </>
-                  ) : null}
-                </div>
-              </div>
-
-              {isActive && (
-                <div className="absolute right-2 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-brand-500 rounded-full" />
-              )}
-            </button>
+                </span>
+              </button>
+            </React.Fragment>
           );
         })}
-
-        {filteredExercises.length === 0 && (
-          <div className="p-6 text-center text-xs text-slate-500">
-            Tidak ada latihan yang cocok dengan pencarian.
-          </div>
-        )}
-      </div>
-
-      {/* Footer Info */}
-      <div className="p-3 border-t border-slate-800/80 bg-dark-950 text-[11px] text-slate-400 flex items-center justify-between">
-        <span className="flex items-center gap-1 text-slate-400">
-          <Flame size={12} className="text-amber-400" />
-          Offline WebAssembly
-        </span>
-        <span className="font-mono text-slate-400">v1.0.0</span>
-      </div>
+        {!filtered.length && <p className="p-4 text-center text-xs text-fg3">Tidak ada latihan yang cocok.</p>}
+      </nav>
     </aside>
   );
 };

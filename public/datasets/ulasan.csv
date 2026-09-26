@@ -1,0 +1,161 @@
+id_ulasan,produk,teks_ulasan,rating,sentimen,aspek
+U001,Serum Wajah Vitamin C,Packing rapi dan aman.,5,positif,Pengiriman
+U002,Buku Tulis A5 (isi 10),Barang sudah diterima.,3,netral,Umum
+U003,Serum Wajah Vitamin C,Produk original dan berfungsi dengan baik. Mantap.,4,positif,Kualitas Produk
+U004,Jaket Hoodie,Packing rapi dan aman. Sukses terus.,4,positif,Pengiriman
+U005,Vitamin C 1000 mg,"Mantap, kualitasnya melebihi ekspektasi. Terima kasih!",4,positif,Kualitas Produk
+U006,Kurma Premium 1 kg,Produk original dan berfungsi dengan baik.,5,positif,Kualitas Produk
+U007,Headset Bluetooth,Kardus rusak waktu diterima.,2,negatif,Pengiriman
+U008,Kemeja Batik Pria,"Pengiriman standar, barang biasa saja.",3,netral,Pengiriman
+U009,Blender 2 L,Pelayanan ramah dan responsif.,4,positif,Layanan
+U010,Smartphone 128 GB,"Recommended seller, pasti belanja lagi.",5,positif,Umum
+U011,Smartphone 128 GB,Warnanya luntur setelah dicuci.,1,negatif,Kualitas Produk
+U012,Sambal Roa Botol,Packing rapi dan aman. Mantap.,5,positif,Pengiriman
+U013,Setrika Uap,Barang bagus dan sesuai deskripsi. Mantap.,5,positif,Kualitas Produk
+U014,Laptop 14 inci Core i5,Barang bagus dan sesuai deskripsi. Sukses terus.,4,positif,Kualitas Produk
+U015,Laptop 14 inci Core i5,"Pengiriman cepat, sehari langsung sampai. Sukses terus.",4,positif,Pengiriman
+U016,Monitor 24 inci,Harganya kemahalan dibanding toko lain.,1,negatif,Harga
+U017,Masker Kain (isi 5),"Pengiriman cepat, sehari langsung sampai.",5,positif,Pengiriman
+U018,Sambal Roa Botol,Status paket tidak bergerak berhari-hari.,1,negatif,Pengiriman
+U019,Monitor 24 inci,Kardus rusak waktu diterima. Kecewa.,2,negatif,Pengiriman
+U020,Laptop 14 inci Core i5,Refund belum masuk padahal sudah lewat seminggu. Tolong diperbaiki.,1,negatif,Layanan
+U021,Kaos Polos Premium,Komplain saya diabaikan.,2,negatif,Layanan
+U022,Madu Hutan 500 ml,"Sesuai pesanan, belum dicoba.",3,netral,Umum
+U023,Tas Ransel Kerja,Ukurannya tidak sesuai tabel ukuran. Kecewa.,2,negatif,Kualitas Produk
+U024,Tas Ransel Kerja,Admin tidak ramah saat ditanya. Tolong diperbaiki.,2,negatif,Layanan
+U025,Headset Bluetooth,Kurir telat dan paketnya penyok. Tolong diperbaiki.,1,negatif,Pengiriman
+U026,Sabun Herbal (isi 3),"Suka banget, worth it.",5,positif,Umum
+U027,"Rice Cooker 1,8 L",Lumayan untuk harga segini.,4,netral,Harga
+U028,Smartphone 128 GB,Pelayanan ramah dan responsif. Mantap.,4,positif,Layanan
+U029,Planner 2026,"Mantap, kualitasnya melebihi ekspektasi.",4,positif,Kualitas Produk
+U030,Laptop 14 inci Core i5,"Suka banget, worth it. Mantap.",5,positif,Umum
+U031,Kopi Arabika Gayo 250 g,"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U032,Pulpen Gel (isi 12),Ongkos kirim mahal tapi pengirimannya lambat. Mohon ditindaklanjuti.,2,negatif,Pengiriman
+U033,Buku Statistik Terapan,Barang dikirim ke alamat yang salah. Tidak akan beli lagi.,1,negatif,Pengiriman
+U034,Planner 2026,"Pengiriman cepat, sehari langsung sampai. Mantap.",5,positif,Pengiriman
+U035,Smartwatch Sport,Oke lah.,3,netral,Umum
+U036,Keripik Singkong Pedas,"Barang cacat, ada goresan di bagian depan. Mohon ditindaklanjuti.",2,negatif,Kualitas Produk
+U037,Madu Hutan 500 ml,Refund belum masuk padahal sudah lewat seminggu. Mohon ditindaklanjuti.,1,negatif,Layanan
+U038,Sambal Roa Botol,"Pengiriman cepat, sehari langsung sampai. Terima kasih!",5,positif,Pengiriman
+U039,Monitor 24 inci,Produk original dan berfungsi dengan baik. Sukses terus.,4,positif,Kualitas Produk
+U040,Smartphone 128 GB,Barang bagus dan sesuai deskripsi.,4,positif,Kualitas Produk
+U041,Masker Kain (isi 5),"Recommended seller, pasti belanja lagi. Sukses terus.",5,positif,Umum
+U042,Vitamin C 1000 mg,Pengajuan retur dipersulit. Kecewa.,2,negatif,Layanan
+U043,Vitamin C 1000 mg,Baru dipakai dua hari sudah rusak. Tidak akan beli lagi.,1,negatif,Kualitas Produk
+U044,Smartphone 128 GB,Barang bagus dan sesuai deskripsi. Terima kasih!,5,positif,Kualitas Produk
+U045,Laptop 14 inci Core i5,Produk original dan berfungsi dengan baik. Terima kasih!,4,positif,Kualitas Produk
+U046,Buku Belajar Python,Pelayanan ramah dan responsif. Sukses terus.,5,positif,Layanan
+U047,Buku Tulis A5 (isi 10),Harga naik terus tiap minggu.,1,negatif,Harga
+U048,Pulpen Gel (isi 12),Barang dikirim ke alamat yang salah.,2,negatif,Pengiriman
+U049,Planner 2026,"Recommended seller, pasti belanja lagi. Terima kasih!",4,positif,Umum
+U050,Setrika Uap,"Recommended seller, pasti belanja lagi. Mantap.",5,positif,Umum
+U051,Jaket Hoodie,Packing rapi dan aman. Terima kasih!,5,positif,Pengiriman
+U052,Pulpen Gel (isi 12),"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U053,Sunscreen SPF 50,Pelayanan ramah dan responsif. Terima kasih!,4,positif,Layanan
+U054,Serum Wajah Vitamin C,"Mantap, kualitasnya melebihi ekspektasi. Sukses terus.",5,positif,Kualitas Produk
+U055,Monitor 24 inci,Tidak sebanding dengan harganya. Kecewa.,1,negatif,Harga
+U056,Madu Hutan 500 ml,Harga naik terus tiap minggu. Mohon ditindaklanjuti.,2,negatif,Harga
+U057,Keripik Singkong Pedas,Warnanya luntur setelah dicuci. Kecewa.,2,negatif,Kualitas Produk
+U058,Setrika Uap,"Suka banget, worth it. Sukses terus.",5,positif,Umum
+U059,Set Panci Anti Lengket,"Suka banget, worth it. Terima kasih!",5,positif,Umum
+U060,Gamis Katun,"Mantap, kualitasnya melebihi ekspektasi. Mantap.",5,positif,Kualitas Produk
+U061,Vitamin C 1000 mg,"CS lambat membalas chat, sudah 5 hari belum dijawab.",1,negatif,Layanan
+U062,Kaos Polos Premium,Barang sudah diterima.,3,netral,Umum
+U063,Buku Belajar Python,Barang bagus dan sesuai deskripsi.,4,positif,Kualitas Produk
+U064,Serum Wajah Vitamin C,"CS lambat membalas chat, sudah 5 hari belum dijawab. Tolong diperbaiki.",2,negatif,Layanan
+U065,Power Bank 10.000 mAh,Oke lah.,3,netral,Umum
+U066,Headset Bluetooth,"Baterainya cepat habis, mengecewakan. Mohon ditindaklanjuti.",1,negatif,Kualitas Produk
+U067,Sunscreen SPF 50,Tidak sebanding dengan harganya. Tolong diperbaiki.,1,negatif,Harga
+U068,Teh Hijau Celup (isi 25),Admin tidak ramah saat ditanya. Kecewa.,2,negatif,Layanan
+U069,Sepatu Lari,"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U070,Buku Statistik Terapan,Packing rapi dan aman. Mantap.,5,positif,Pengiriman
+U071,Dispenser Air,Paket datang terlambat 4 hari dari estimasi.,1,negatif,Pengiriman
+U072,Sambal Roa Botol,"Kualitas bahannya tipis, tidak sesuai foto. Tidak akan beli lagi.",2,negatif,Kualitas Produk
+U073,Power Bank 10.000 mAh,Barang dikirim ke alamat yang salah. Tolong diperbaiki.,1,negatif,Pengiriman
+U074,Kemeja Batik Pria,Lumayan untuk harga segini.,3,netral,Harga
+U075,Kurma Premium 1 kg,"Pengiriman standar, barang biasa saja.",3,netral,Pengiriman
+U076,"Rice Cooker 1,8 L","Pengiriman lama sekali, sudah seminggu baru sampai.",1,negatif,Pengiriman
+U077,Sambal Roa Botol,"Kualitas bahannya tipis, tidak sesuai foto. Mohon ditindaklanjuti.",2,negatif,Kualitas Produk
+U078,Gamis Katun,Baru dipakai dua hari sudah rusak.,2,negatif,Kualitas Produk
+U079,Sunscreen SPF 50,"Pengiriman lama sekali, sudah seminggu baru sampai. Kecewa.",1,negatif,Pengiriman
+U080,"Rice Cooker 1,8 L","Kualitas bahannya tipis, tidak sesuai foto.",2,negatif,Kualitas Produk
+U081,Power Bank 10.000 mAh,"Kualitas bahannya tipis, tidak sesuai foto. Tolong diperbaiki.",1,negatif,Kualitas Produk
+U082,Vitamin C 1000 mg,"Baterainya cepat habis, mengecewakan. Tidak akan beli lagi.",2,negatif,Kualitas Produk
+U083,Serum Wajah Vitamin C,Produk original dan berfungsi dengan baik. Mantap.,5,positif,Kualitas Produk
+U084,Masker Kain (isi 5),"Recommended seller, pasti belanja lagi.",5,positif,Umum
+U085,Tas Ransel Kerja,"Pengiriman standar, barang biasa saja.",4,netral,Pengiriman
+U086,Vitamin C 1000 mg,Refund belum masuk padahal sudah lewat seminggu.,2,negatif,Layanan
+U087,Kurma Premium 1 kg,"Suka banget, worth it. Mantap.",4,positif,Umum
+U088,Jaket Hoodie,Oke lah.,3,netral,Umum
+U089,Sabun Herbal (isi 3),"Diskonnya palsu, harga dinaikkan dulu. Tolong diperbaiki.",2,negatif,Harga
+U090,Teh Hijau Celup (isi 25),Kurir telat dan paketnya penyok. Kecewa.,1,negatif,Pengiriman
+U091,Power Bank 10.000 mAh,Baru dipakai dua hari sudah rusak. Kecewa.,1,negatif,Kualitas Produk
+U092,Tas Ransel Kerja,"Baterainya cepat habis, mengecewakan.",1,negatif,Kualitas Produk
+U093,Setrika Uap,"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U094,Keripik Singkong Pedas,Pelayanan ramah dan responsif.,4,positif,Layanan
+U095,Masker Kain (isi 5),Status paket tidak bergerak berhari-hari. Tolong diperbaiki.,1,negatif,Pengiriman
+U096,Sambal Roa Botol,Packing rapi dan aman. Terima kasih!,5,positif,Pengiriman
+U097,Serum Wajah Vitamin C,Pesanan dibatalkan sepihak tanpa penjelasan.,1,negatif,Layanan
+U098,Serum Wajah Vitamin C,"Pengiriman cepat, sehari langsung sampai.",5,positif,Pengiriman
+U099,Jaket Hoodie,"Pengiriman cepat, sehari langsung sampai.",5,positif,Pengiriman
+U100,Madu Hutan 500 ml,Admin tidak ramah saat ditanya.,2,negatif,Layanan
+U101,Lampu LED Pintar,Paket datang terlambat 5 hari dari estimasi. Tidak akan beli lagi.,1,negatif,Pengiriman
+U102,Laptop 14 inci Core i5,Pelayanan ramah dan responsif.,4,positif,Layanan
+U103,Blender 2 L,Barang bagus dan sesuai deskripsi.,4,positif,Kualitas Produk
+U104,Speaker Portabel,Kurir telat dan paketnya penyok.,1,negatif,Pengiriman
+U105,Setrika Uap,"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U106,Smartphone 128 GB,Oke lah.,3,netral,Umum
+U107,Mouse Nirkabel,Harganya kemahalan dibanding toko lain. Kecewa.,2,negatif,Harga
+U108,Vitamin C 1000 mg,"Mantap, kualitasnya melebihi ekspektasi.",5,positif,Kualitas Produk
+U109,Power Bank 10.000 mAh,"Pengiriman cepat, sehari langsung sampai. Mantap.",4,positif,Pengiriman
+U110,Lampu LED Pintar,"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U111,Buku Belajar Python,Rasanya hambar dan kemasannya bocor. Kecewa.,2,negatif,Kualitas Produk
+U112,Smartwatch Sport,"Mantap, kualitasnya melebihi ekspektasi.",5,positif,Kualitas Produk
+U113,Keripik Singkong Pedas,"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U114,Dispenser Air,"Suka banget, worth it.",5,positif,Umum
+U115,Madu Hutan 500 ml,"Mantap, kualitasnya melebihi ekspektasi.",5,positif,Kualitas Produk
+U116,Smartwatch Sport,Pengajuan retur dipersulit. Tidak akan beli lagi.,1,negatif,Layanan
+U117,Kemeja Batik Pria,"Kualitas bahannya tipis, tidak sesuai foto. Kecewa.",1,negatif,Kualitas Produk
+U118,Lampu LED Pintar,"Suka banget, worth it.",5,positif,Umum
+U119,Dispenser Air,Pesanan dibatalkan sepihak tanpa penjelasan. Tidak akan beli lagi.,2,negatif,Layanan
+U120,Planner 2026,"Sesuai pesanan, belum dicoba.",3,netral,Umum
+U121,Smartwatch Sport,"Mantap, kualitasnya melebihi ekspektasi.",4,positif,Kualitas Produk
+U122,Jaket Hoodie,Kardus rusak waktu diterima. Tidak akan beli lagi.,1,negatif,Pengiriman
+U123,Sabun Herbal (isi 3),Harga naik terus tiap minggu. Tolong diperbaiki.,2,negatif,Harga
+U124,Sambal Roa Botol,Rasanya hambar dan kemasannya bocor.,2,negatif,Kualitas Produk
+U125,Buku Tulis A5 (isi 10),Packing rapi dan aman.,5,positif,Pengiriman
+U126,Planner 2026,"Barang cacat, ada goresan di bagian depan.",2,negatif,Kualitas Produk
+U127,Sabun Herbal (isi 3),Harga naik terus tiap minggu. Tidak akan beli lagi.,2,negatif,Harga
+U128,Serum Wajah Vitamin C,Pesanan dibatalkan sepihak tanpa penjelasan. Kecewa.,1,negatif,Layanan
+U129,Jaket Hoodie,"Suka banget, worth it. Terima kasih!",4,positif,Umum
+U130,Kaos Polos Premium,Barang bagus dan sesuai deskripsi.,5,positif,Kualitas Produk
+U131,Speaker Portabel,"Pengiriman cepat, sehari langsung sampai.",5,positif,Pengiriman
+U132,Tas Ransel Kerja,Paket datang terlambat 2 hari dari estimasi. Mohon ditindaklanjuti.,1,negatif,Pengiriman
+U133,Kemeja Batik Pria,Tidak sebanding dengan harganya.,2,negatif,Harga
+U134,Kopi Arabika Gayo 250 g,Barang sudah diterima.,4,netral,Umum
+U135,Dispenser Air,Paket datang terlambat 3 hari dari estimasi. Tidak akan beli lagi.,1,negatif,Pengiriman
+U136,Headset Bluetooth,Paket datang terlambat 6 hari dari estimasi. Tolong diperbaiki.,1,negatif,Pengiriman
+U137,Vitamin C 1000 mg,Ongkos kirim mahal tapi pengirimannya lambat. Tidak akan beli lagi.,2,negatif,Pengiriman
+U138,Tas Ransel Kerja,Oke lah.,3,netral,Umum
+U139,Set Panci Anti Lengket,Status paket tidak bergerak berhari-hari. Kecewa.,1,negatif,Pengiriman
+U140,Madu Hutan 500 ml,Warnanya luntur setelah dicuci. Tidak akan beli lagi.,2,negatif,Kualitas Produk
+U141,Smartwatch Sport,Lumayan untuk harga segini.,3,netral,Harga
+U142,Sunscreen SPF 50,"Pengiriman cepat, sehari langsung sampai.",4,positif,Pengiriman
+U143,Kurma Premium 1 kg,Ongkos kirim mahal tapi pengirimannya lambat.,1,negatif,Pengiriman
+U144,Set Panci Anti Lengket,Oke lah.,4,netral,Umum
+U145,Pulpen Gel (isi 12),"Baterainya cepat habis, mengecewakan. Tolong diperbaiki.",1,negatif,Kualitas Produk
+U146,Madu Hutan 500 ml,Ukurannya tidak sesuai tabel ukuran.,1,negatif,Kualitas Produk
+U147,Headset Bluetooth,"Suka banget, worth it.",4,positif,Umum
+U148,Buku Statistik Terapan,"Recommended seller, pasti belanja lagi.",5,positif,Umum
+U149,Buku Belajar Python,Ukurannya tidak sesuai tabel ukuran. Tolong diperbaiki.,1,negatif,Kualitas Produk
+U150,Kemeja Batik Pria,"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U151,Power Bank 10.000 mAh,Barang bagus dan sesuai deskripsi. Sukses terus.,5,positif,Kualitas Produk
+U152,Kopi Arabika Gayo 250 g,Oke lah.,3,netral,Umum
+U153,"Rice Cooker 1,8 L","CS lambat membalas chat, sudah 3 hari belum dijawab. Tolong diperbaiki.",2,negatif,Layanan
+U154,Keripik Singkong Pedas,Pengajuan retur dipersulit. Mohon ditindaklanjuti.,2,negatif,Layanan
+U155,Planner 2026,"Sesuai pesanan, belum dicoba.",3,netral,Umum
+U156,Sabun Herbal (isi 3),Oke lah.,3,netral,Umum
+U157,Setrika Uap,"Kualitas cukup, tidak terlalu istimewa.",3,netral,Kualitas Produk
+U158,Lampu LED Pintar,Pelayanan ramah dan responsif. Mantap.,4,positif,Layanan
+U159,Planner 2026,Oke lah.,3,netral,Umum
+U160,Mouse Nirkabel,Produk original dan berfungsi dengan baik. Terima kasih!,4,positif,Kualitas Produk

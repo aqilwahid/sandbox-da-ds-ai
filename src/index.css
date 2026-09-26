@@ -2,156 +2,457 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------
+   Token warna (RGB triplet agar bisa dipakai dengan opacity Tailwind)
+   Tema gelap = bawaan; tema terang untuk proyektor / ruangan terang.
+------------------------------------------------------------------- */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --c-bg: 11 15 22;
+  --c-panel: 16 21 31;
+  --c-panel2: 21 27 39;
+  --c-panel3: 29 37 52;
+  --c-line: 36 44 60;
+  --c-line2: 52 63 83;
+  --c-fg: 230 234 242;
+  --c-fg2: 172 182 199;
+  --c-fg3: 130 142 162;
+  --c-accent: 143 153 255;
+  --c-accent-solid: 79 91 213;
+  --c-ok: 74 222 128;
+  --c-warn: 251 191 36;
+  --c-err: 248 113 113;
+  --c-info: 56 189 248;
+  --c-track-analyst: 96 165 250;
+  --c-track-datascience: 167 139 250;
+  --c-track-ai: 52 211 153;
+
+  /* Grafik (palet kategorikal tervalidasi untuk permukaan gelap) */
+  --chart-surface: rgb(var(--c-panel));
+  --chart-grid: #222c3d;
+  --chart-axis: #3a4659;
+  --chart-text: #8a96ab;
+  --chart-text-strong: #e6eaf2;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --group-1: rgb(57 135 229 / 0.18);
+  --group-2: rgb(217 89 38 / 0.18);
+  --group-3: rgb(25 158 112 / 0.2);
+  --group-4: rgb(201 133 0 / 0.2);
+  --group-5: rgb(213 81 129 / 0.18);
+  --group-6: rgb(144 133 233 / 0.2);
+
+  --code-size: 13.5px;
+  --cm-bg: rgb(var(--c-panel));
+  --cm-gutter: rgb(var(--c-panel));
+  --cm-active: rgb(143 153 255 / 0.07);
+  --cm-selection: rgb(143 153 255 / 0.28);
+  --cm-error-line: rgb(248 113 113 / 0.14);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --c-bg: 243 245 248;
+  --c-panel: 255 255 255;
+  --c-panel2: 248 250 252;
+  --c-panel3: 237 241 246;
+  --c-line: 225 230 237;
+  --c-line2: 203 211 222;
+  --c-fg: 17 24 39;
+  --c-fg2: 71 85 105;
+  --c-fg3: 100 112 132;
+  --c-accent: 68 80 200;
+  --c-accent-solid: 79 91 213;
+  --c-ok: 21 128 61;
+  --c-warn: 180 83 9;
+  --c-err: 185 28 28;
+  --c-info: 3 105 161;
+  --c-track-analyst: 37 99 235;
+  --c-track-datascience: 109 40 217;
+  --c-track-ai: 4 120 87;
+
+  --chart-surface: #ffffff;
+  --chart-grid: #e8ebf0;
+  --chart-axis: #c5ccd6;
+  --chart-text: #667085;
+  --chart-text-strong: #111827;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #4a3aa7;
+  --series-8: #e34948;
+  --group-1: rgb(42 120 214 / 0.13);
+  --group-2: rgb(235 104 52 / 0.14);
+  --group-3: rgb(27 175 122 / 0.15);
+  --group-4: rgb(237 161 0 / 0.16);
+  --group-5: rgb(232 123 164 / 0.16);
+  --group-6: rgb(74 58 167 / 0.12);
+
+  --cm-active: rgb(79 91 213 / 0.06);
+  --cm-selection: rgb(79 91 213 / 0.18);
+  --cm-error-line: rgb(185 28 28 / 0.09);
+}
+
+/* Mode presentasi (proyektor): semua ukuran berbasis rem ikut membesar */
+:root[data-size='lg'] {
+  font-size: 18px;
+  --code-size: 16px;
+}
+:root[data-size='xl'] {
+  font-size: 20px;
+  --code-size: 18px;
+}
+
 @layer base {
   * {
-    border-color: #1e293b;
+    border-color: rgb(var(--c-line));
   }
-
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
   body {
-    background-color: #0c1017;
-    color: #e2e8f0;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background: rgb(var(--c-bg));
+    color: rgb(var(--c-fg));
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
   }
-
-  /* Custom sleek scrollbar */
+  ::selection {
+    background: rgb(var(--c-accent) / 0.3);
+  }
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #0f172a;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #334155;
-    border-radius: 3px;
+    background: rgb(var(--c-line2));
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: rgb(var(--c-fg3) / 0.6);
+    background-clip: content-box;
+    border: 2px solid transparent;
+  }
+  button,
+  [role='button'] {
+    -webkit-tap-highlight-color: transparent;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-accent));
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
-/* Custom markdown rendering typography */
-.prose-dark {
-  color: #cbd5e1;
-  font-size: 0.925rem;
-  line-height: 1.65;
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md border border-line bg-panel2 px-2.5 py-1.5 text-xs font-medium text-fg2 transition-colors hover:bg-panel3 hover:text-fg disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md bg-accent-solid px-3 py-1.5 text-xs font-semibold text-white shadow-card transition hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium text-fg2 transition-colors hover:bg-panel3 hover:text-fg disabled:opacity-50;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-line bg-panel2 px-2 py-0.5 text-2xs font-medium text-fg2;
+  }
+  .card {
+    @apply rounded-xl border border-line bg-panel shadow-card;
+  }
+  .tab {
+    @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium text-fg3 transition-colors hover:bg-panel3 hover:text-fg;
+  }
+  .tab-active {
+    @apply bg-panel3 text-fg shadow-card;
+  }
+  .kbd {
+    @apply rounded border border-line2 bg-panel2 px-1 py-px font-mono text-2xs text-fg2;
+  }
+  .input {
+    @apply w-full rounded-md border border-line bg-panel2 px-2.5 py-1.5 text-xs text-fg placeholder:text-fg3 focus:border-accent focus:outline-none;
+  }
 }
 
-.prose-dark h1,
-.prose-dark h2,
-.prose-dark h3,
-.prose-dark h4 {
-  color: #f8fafc;
-  font-weight: 600;
-  margin-top: 1.25em;
-  margin-bottom: 0.5em;
+/* ------------------------------------------------------------------
+   Tipografi instruksi (hasil render Markdown)
+------------------------------------------------------------------- */
+.prose-sbx {
+  color: rgb(var(--c-fg2));
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.prose-sbx > *:first-child {
+  margin-top: 0;
+}
+.prose-sbx h1,
+.prose-sbx h2,
+.prose-sbx h3,
+.prose-sbx h4 {
+  color: rgb(var(--c-fg));
+  font-weight: 650;
   letter-spacing: -0.01em;
+  margin: 1.4em 0 0.5em;
+  line-height: 1.3;
 }
-
-.prose-dark h2 {
-  font-size: 1.25rem;
-  border-bottom: 1px solid #1e293b;
-  padding-bottom: 0.3em;
+.prose-sbx h3 {
+  font-size: 1rem;
 }
-
-.prose-dark h3 {
-  font-size: 1.05rem;
-  color: #38bdf8;
+.prose-sbx h4 {
+  font-size: 0.92rem;
 }
-
-.prose-dark p {
-  margin-bottom: 0.85em;
+.prose-sbx p {
+  margin: 0 0 0.8em;
 }
-
-.prose-dark ul, .prose-dark ol {
-  padding-left: 1.25rem;
-  margin-bottom: 0.85em;
+.prose-sbx strong {
+  color: rgb(var(--c-fg));
+  font-weight: 600;
 }
-
-.prose-dark ul {
-  list-style-type: disc;
+.prose-sbx a {
+  color: rgb(var(--c-accent));
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
-
-.prose-dark ol {
-  list-style-type: decimal;
+.prose-sbx ul,
+.prose-sbx ol {
+  padding-left: 1.3rem;
+  margin: 0 0 0.9em;
 }
-
-.prose-dark li {
-  margin-bottom: 0.3em;
+.prose-sbx ul {
+  list-style: disc;
 }
-
-.prose-dark code {
-  background: #1e293b;
-  color: #38bdf8;
-  padding: 0.15rem 0.35rem;
-  border-radius: 0.25rem;
-  font-size: 0.85em;
-  font-family: 'JetBrains Mono', monospace;
+.prose-sbx ol {
+  list-style: decimal;
 }
-
-.prose-dark pre {
-  background: #090d16;
-  border: 1px solid #1e293b;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
+.prose-sbx li {
+  margin: 0.25em 0;
+}
+.prose-sbx li::marker {
+  color: rgb(var(--c-fg3));
+}
+.prose-sbx code {
+  font-family: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.84em;
+  background: rgb(var(--c-panel3));
+  color: rgb(var(--c-fg));
+  padding: 0.12em 0.38em;
+  border-radius: 0.3rem;
+  border: 1px solid rgb(var(--c-line));
+  white-space: nowrap;
+}
+.prose-sbx pre {
+  position: relative;
+  background: rgb(var(--c-panel2));
+  border: 1px solid rgb(var(--c-line));
+  border-radius: 0.6rem;
+  padding: 0.8rem 1rem;
   overflow-x: auto;
-  margin: 0.85em 0;
+  margin: 0.9em 0;
+  line-height: 1.55;
 }
-
-.prose-dark pre code {
+.prose-sbx pre code {
   background: transparent;
+  border: 0;
   padding: 0;
-  color: #e2e8f0;
+  white-space: pre;
+  font-size: 0.82rem;
 }
-
-.prose-dark blockquote {
-  border-left: 3px solid #6366f1;
-  padding-left: 0.75rem;
-  color: #94a3b8;
-  font-style: italic;
-  margin: 0.85em 0;
+.prose-sbx blockquote {
+  margin: 1em 0;
+  padding: 0.65rem 0.9rem;
+  border-left: 3px solid rgb(var(--c-accent));
+  background: rgb(var(--c-accent) / 0.07);
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: rgb(var(--c-fg2));
 }
-
-.prose-dark table {
+.prose-sbx blockquote p:last-child {
+  margin-bottom: 0;
+}
+.prose-sbx table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1em 0;
+  margin: 0.9em 0;
+  font-size: 0.82rem;
+  display: block;
+  overflow-x: auto;
 }
-
-.prose-dark th, .prose-dark td {
-  border: 1px solid #334155;
-  padding: 0.4rem 0.6rem;
+.prose-sbx th,
+.prose-sbx td {
+  border: 1px solid rgb(var(--c-line));
+  padding: 0.35rem 0.6rem;
   text-align: left;
+  vertical-align: top;
+}
+.prose-sbx th {
+  background: rgb(var(--c-panel2));
+  color: rgb(var(--c-fg));
+  font-weight: 600;
+}
+.prose-sbx td code {
+  white-space: normal;
+}
+.prose-sbx hr {
+  border: 0;
+  border-top: 1px solid rgb(var(--c-line));
+  margin: 1.4em 0;
 }
 
-.prose-dark th {
-  background: #1e293b;
-  color: #f8fafc;
-}
-
-/* CodeMirror customizations */
+/* ------------------------------------------------------------------
+   CodeMirror
+------------------------------------------------------------------- */
 .cm-editor {
   height: 100%;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13.5px;
-  background-color: #0c1017 !important;
+  font-size: var(--code-size);
+  background: var(--cm-bg);
 }
-
 .cm-editor .cm-scroller {
-  overflow: auto;
+  font-family: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  line-height: 1.6;
 }
-
 .cm-editor .cm-gutters {
-  background-color: #0c1017 !important;
-  border-right: 1px solid #1e293b !important;
-  color: #475569 !important;
+  background: var(--cm-gutter) !important;
+  border-right: 1px solid rgb(var(--c-line)) !important;
+  color: rgb(var(--c-fg3)) !important;
 }
-
 .cm-editor .cm-activeLine {
-  background-color: rgba(99, 102, 241, 0.07) !important;
+  background: var(--cm-active) !important;
+}
+.cm-editor .cm-activeLineGutter {
+  background: var(--cm-active) !important;
+  color: rgb(var(--c-accent)) !important;
+}
+.cm-editor.cm-focused {
+  outline: none !important;
+}
+.cm-editor .cm-selectionBackground,
+.cm-editor.cm-focused .cm-selectionBackground {
+  background: var(--cm-selection) !important;
+}
+.cm-editor .cm-error-line {
+  background: var(--cm-error-line) !important;
+  box-shadow: inset 3px 0 0 rgb(var(--c-err));
+}
+.cm-editor .cm-tooltip {
+  background: rgb(var(--c-panel2));
+  border: 1px solid rgb(var(--c-line2));
+  color: rgb(var(--c-fg));
+  border-radius: 6px;
+}
+.cm-editor .cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background: rgb(var(--c-accent-solid));
+  color: white;
 }
 
-.cm-editor .cm-activeLineGutter {
-  background-color: rgba(99, 102, 241, 0.12) !important;
-  color: #818cf8 !important;
+/* Tabel data */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Warna sintaks (dipakai editor & blok kode di instruksi)
+------------------------------------------------------------------- */
+:root,
+:root[data-theme='dark'] {
+  --syn-keyword: #c4a7ff;
+  --syn-string: #9ece6a;
+  --syn-number: #f7b267;
+  --syn-comment: #7c879b;
+  --syn-def: #7dcfff;
+  --syn-prop: #82aaff;
+  --syn-type: #e0af68;
+  --syn-op: #aab4c5;
+}
+:root[data-theme='light'] {
+  --syn-keyword: #7c3aed;
+  --syn-string: #15803d;
+  --syn-number: #b45309;
+  --syn-comment: #6b7280;
+  --syn-def: #0369a1;
+  --syn-prop: #1d4ed8;
+  --syn-type: #a16207;
+  --syn-op: #475569;
+}
+.tok-keyword,
+.tok-controlKeyword,
+.tok-operatorKeyword { color: var(--syn-keyword); }
+.tok-string,
+.tok-string2 { color: var(--syn-string); }
+.tok-number,
+.tok-bool,
+.tok-atom,
+.tok-literal { color: var(--syn-number); }
+.tok-comment { color: var(--syn-comment); font-style: italic; }
+.tok-definition,
+.tok-macroName { color: var(--syn-def); }
+.tok-propertyName { color: var(--syn-prop); }
+.tok-typeName,
+.tok-className,
+.tok-namespace { color: var(--syn-type); }
+.tok-operator,
+.tok-punctuation { color: var(--syn-op); }
+.tok-invalid { text-decoration: underline wavy rgb(var(--c-err)); }
+
+/* Blok kode di instruksi: bar bahasa + tombol salin */
+.prose-sbx .code-wrap {
+  margin: 0.9em 0;
+  border: 1px solid rgb(var(--c-line));
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background: rgb(var(--c-panel2));
+}
+.prose-sbx .code-wrap pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+.prose-sbx .code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0.5rem 0.2rem 0.8rem;
+  border-bottom: 1px solid rgb(var(--c-line));
+  font-size: 0.7rem;
+  color: rgb(var(--c-fg3));
+  min-height: 1.7rem;
+}
+.prose-sbx .code-lang {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.prose-sbx .code-copy {
+  margin-left: auto;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.35rem;
+  color: rgb(var(--c-fg2));
+}
+.prose-sbx .code-copy:hover {
+  background: rgb(var(--c-panel3));
+  color: rgb(var(--c-fg));
 }

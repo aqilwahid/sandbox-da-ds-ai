@@ -1,0 +1,829 @@
+id_transaksi,tanggal,id_pelanggan,id_produk,nama_produk,kategori,kota,jumlah,harga_satuan,diskon_persen,total_harga,metode_bayar,status
+T00001,2025-01-01,P068,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Jakarta,2,36000,5,68400,E-Wallet,Selesai
+T00002,2025-01-01,P109,PR02,Smartphone 128 GB,Elektronik,Surabaya,1,3299000,0,3299000,Transfer Bank,Selesai
+T00003,2025-01-01,P022,PR02,Smartphone 128 GB,Elektronik,Makassar,1,3299000,5,3134050,Kartu Kredit,Selesai
+T00004,2025-01-02,P091,PR10,Gamis Katun,Fashion,Makassar,1,245000,0,245000,Transfer Bank,Dibatalkan
+T00005,2025-01-03,P055,PR09,Kemeja Batik Pria,Fashion,Surabaya,2,189000,10,340200,COD,Selesai
+T00006,2025-01-03,P004,PR13,Kaos Polos Premium,Fashion,Semarang,3,79000,0,237000,Transfer Bank,Dibatalkan
+T00007,2025-01-03,P104,PR13,Kaos Polos Premium,Fashion,Jakarta,3,79000,10,213300,Kartu Kredit,Selesai
+T00008,2025-01-04,P046,PR09,Kemeja Batik Pria,Fashion,Yogyakarta,1,189000,0,189000,Kartu Kredit,Selesai
+T00009,2025-01-04,P034,PR10,Gamis Katun,Fashion,Medan,1,245000,0,245000,Kartu Kredit,Selesai
+T00010,2025-01-04,P069,PR10,Gamis Katun,Fashion,Yogyakarta,2,245000,10,441000,E-Wallet,Selesai
+T00011,2025-01-04,P033,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,0,79000,Kartu Kredit,Selesai
+T00012,2025-01-05,P047,PR07,Speaker Portabel,Elektronik,Bandung,2,379000,0,758000,Transfer Bank,Selesai
+T00013,2025-01-05,P026,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Medan,1,459000,0,459000,Transfer Bank,Selesai
+T00014,2025-01-05,P099,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,2,45000,5,85500,E-Wallet,Selesai
+T00015,2025-01-06,P099,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Jakarta,1,35000,15,29750,Transfer Bank,Selesai
+T00016,2025-01-07,P080,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Medan,1,45000,5,42750,E-Wallet,Selesai
+T00017,2025-01-07,P001,PR18,Kurma Premium 1 kg,Makanan & Minuman,Yogyakarta,1,135000,5,128250,Transfer Bank,Selesai
+T00018,2025-01-08,P035,PR17,Madu Hutan 500 ml,Makanan & Minuman,Denpasar,1,115000,15,97750,E-Wallet,Selesai
+T00019,2025-01-09,P062,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,1,95000,5,90250,Transfer Bank,Selesai
+T00020,2025-01-09,P081,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Bandung,2,89000,0,178000,Kartu Kredit,Selesai
+T00021,2025-01-10,P079,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Medan,2,45000,0,90000,COD,Selesai
+T00022,2025-01-10,P104,PR26,Dispenser Air,Rumah Tangga,Jakarta,1,729000,0,729000,Transfer Bank,Selesai
+T00023,2025-01-10,P011,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Bandung,1,45000,0,45000,Transfer Bank,Selesai
+T00024,2025-01-10,P080,PR05,Power Bank 10.000 mAh,Elektronik,Medan,2,229000,15,389300,Transfer Bank,Selesai
+T00025,2025-01-10,P029,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Yogyakarta,1,95000,10,85500,Kartu Kredit,Selesai
+T00026,2025-01-12,P062,PR23,Setrika Uap,Rumah Tangga,Jakarta,1,275000,0,275000,Transfer Bank,Selesai
+T00027,2025-01-12,P085,PR17,Madu Hutan 500 ml,Makanan & Minuman,Jakarta,1,115000,15,97750,E-Wallet,Selesai
+T00028,2025-01-13,P077,PR14,Tas Ransel Kerja,Fashion,Surabaya,1,315000,0,315000,Transfer Bank,Dibatalkan
+T00029,2025-01-13,P014,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Surabaya,1,89000,5,84550,E-Wallet,Selesai
+T00030,2025-01-13,P003,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Denpasar,1,459000,0,459000,Transfer Bank,Selesai
+T00031,2025-01-14,P040,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Jakarta,1,42000,0,42000,E-Wallet,Selesai
+T00032,2025-01-14,P090,PR05,Power Bank 10.000 mAh,Elektronik,Bandung,2,229000,0,458000,Transfer Bank,Selesai
+T00033,2025-01-15,P037,PR05,Power Bank 10.000 mAh,Elektronik,Bandung,3,229000,0,687000,Kartu Kredit,Selesai
+T00034,2025-01-15,P004,PR18,Kurma Premium 1 kg,Makanan & Minuman,Semarang,2,135000,0,270000,Transfer Bank,Selesai
+T00035,2025-01-16,P069,PR12,Jaket Hoodie,Fashion,Yogyakarta,1,199000,0,199000,Transfer Bank,Selesai
+T00036,2025-01-16,P071,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Surabaya,1,36000,0,36000,E-Wallet,Selesai
+T00037,2025-01-16,P029,PR09,Kemeja Batik Pria,Fashion,Yogyakarta,1,189000,0,189000,Kartu Kredit,Selesai
+T00038,2025-01-17,P014,PR32,Buku Belajar Python,Buku & Alat Tulis,Surabaya,3,139000,0,417000,Transfer Bank,Selesai
+T00039,2025-01-17,P068,PR11,Sepatu Lari,Fashion,Jakarta,1,529000,0,529000,Transfer Bank,Dibatalkan
+T00040,2025-01-17,P047,PR18,Kurma Premium 1 kg,Makanan & Minuman,Bandung,2,135000,5,256500,Kartu Kredit,Selesai
+T00041,2025-01-18,P035,PR17,Madu Hutan 500 ml,Makanan & Minuman,Denpasar,2,115000,0,230000,E-Wallet,Selesai
+T00042,2025-01-18,P081,PR20,Sambal Roa Botol,Makanan & Minuman,Bandung,1,45000,0,45000,E-Wallet,Selesai
+T00043,2025-01-19,P029,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Yogyakarta,2,159000,0,318000,E-Wallet,Selesai
+T00044,2025-01-20,P098,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Semarang,1,169000,5,160550,Transfer Bank,Selesai
+T00045,2025-01-20,P101,PR07,Speaker Portabel,Elektronik,Jakarta,1,379000,0,379000,Transfer Bank,Dibatalkan
+T00046,2025-01-21,P067,PR13,Kaos Polos Premium,Fashion,Semarang,1,79000,0,79000,E-Wallet,Selesai
+T00047,2025-01-23,P087,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Jakarta,1,28000,0,28000,Transfer Bank,Selesai
+T00048,2025-01-23,P006,PR11,Sepatu Lari,Fashion,Yogyakarta,2,529000,15,899300,Transfer Bank,Selesai
+T00049,2025-01-23,P011,PR25,Lampu LED Pintar,Rumah Tangga,Bandung,1,99000,5,94050,E-Wallet,Selesai
+T00050,2025-01-23,P085,PR12,Jaket Hoodie,Fashion,Jakarta,1,199000,0,199000,Transfer Bank,Selesai
+T00051,2025-01-23,P037,PR17,Madu Hutan 500 ml,Makanan & Minuman,Bandung,1,115000,15,97750,E-Wallet,Selesai
+T00052,2025-01-24,P063,PR10,Gamis Katun,Fashion,Surabaya,1,245000,10,220500,Transfer Bank,Selesai
+T00053,2025-01-25,P108,PR10,Gamis Katun,Fashion,Jakarta,1,245000,5,232750,Kartu Kredit,Selesai
+T00054,2025-01-25,P062,PR32,Buku Belajar Python,Buku & Alat Tulis,Jakarta,1,139000,0,139000,E-Wallet,Selesai
+T00055,2025-01-25,P068,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,1,135000,15,114750,COD,Selesai
+T00056,2025-01-25,P002,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,1,135000,0,135000,E-Wallet,Selesai
+T00057,2025-01-25,P094,PR19,Keripik Singkong Pedas,Makanan & Minuman,Surabaya,1,22000,5,20900,E-Wallet,Selesai
+T00058,2025-01-25,P056,PR10,Gamis Katun,Fashion,Jakarta,1,245000,0,245000,E-Wallet,Selesai
+T00059,2025-01-26,P008,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Bandung,2,28000,0,56000,Kartu Kredit,Selesai
+T00060,2025-01-26,P092,PR12,Jaket Hoodie,Fashion,Bandung,1,199000,0,199000,Kartu Kredit,Dibatalkan
+T00061,2025-01-27,P035,PR17,Madu Hutan 500 ml,Makanan & Minuman,Denpasar,4,115000,5,437000,Transfer Bank,Selesai
+T00062,2025-01-28,P005,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Bandung,4,28000,0,112000,Transfer Bank,Selesai
+T00063,2025-01-28,P099,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Jakarta,1,459000,10,413100,E-Wallet,Selesai
+T00064,2025-01-29,P088,PR24,Set Panci Anti Lengket,Rumah Tangga,Bandung,1,649000,0,649000,Transfer Bank,Selesai
+T00065,2025-01-30,P068,PR35,Planner 2026,Buku & Alat Tulis,Jakarta,1,85000,15,72250,Transfer Bank,Selesai
+T00066,2025-01-31,P100,PR18,Kurma Premium 1 kg,Makanan & Minuman,Yogyakarta,3,135000,0,405000,Transfer Bank,Selesai
+T00067,2025-02-01,P048,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,0,1899000,Transfer Bank,Selesai
+T00068,2025-02-02,P069,PR10,Gamis Katun,Fashion,Yogyakarta,3,245000,0,735000,E-Wallet,Selesai
+T00069,2025-02-02,P027,PR02,Smartphone 128 GB,Elektronik,Jakarta,1,3299000,0,3299000,E-Wallet,Selesai
+T00070,2025-02-02,P051,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,1,99000,15,84150,COD,Selesai
+T00071,2025-02-03,P053,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,1,45000,0,45000,E-Wallet,Selesai
+T00072,2025-02-03,P097,PR13,Kaos Polos Premium,Fashion,Yogyakarta,1,79000,0,79000,E-Wallet,Selesai
+T00073,2025-02-03,P100,PR10,Gamis Katun,Fashion,Yogyakarta,1,245000,0,245000,Kartu Kredit,Selesai
+T00074,2025-02-04,P091,PR23,Setrika Uap,Rumah Tangga,Makassar,1,275000,0,275000,Kartu Kredit,Dikembalikan
+T00075,2025-02-04,P056,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,0,1899000,E-Wallet,Selesai
+T00076,2025-02-05,P035,PR07,Speaker Portabel,Elektronik,Denpasar,3,379000,5,1080150,E-Wallet,Selesai
+T00077,2025-02-06,P008,PR06,Smartwatch Sport,Elektronik,Bandung,1,899000,0,899000,E-Wallet,Selesai
+T00078,2025-02-06,P104,PR07,Speaker Portabel,Elektronik,Jakarta,1,379000,0,379000,Transfer Bank,Selesai
+T00079,2025-02-06,P062,PR26,Dispenser Air,Rumah Tangga,Jakarta,1,729000,0,729000,E-Wallet,Selesai
+T00080,2025-02-07,P060,PR12,Jaket Hoodie,Fashion,Jakarta,1,199000,0,199000,Transfer Bank,Selesai
+T00081,2025-02-07,P030,PR11,Sepatu Lari,Fashion,Jakarta,1,529000,0,529000,Transfer Bank,Selesai
+T00082,2025-02-07,P105,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Bandung,2,459000,0,918000,Transfer Bank,Selesai
+T00083,2025-02-08,P043,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Jakarta,1,35000,0,35000,E-Wallet,Selesai
+T00084,2025-02-08,P063,PR20,Sambal Roa Botol,Makanan & Minuman,Surabaya,2,45000,0,90000,Transfer Bank,Selesai
+T00085,2025-02-08,P038,PR24,Set Panci Anti Lengket,Rumah Tangga,Surabaya,3,649000,5,1849650,Kartu Kredit,Selesai
+T00086,2025-02-09,P098,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Semarang,1,169000,0,169000,E-Wallet,Dibatalkan
+T00087,2025-02-10,P056,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,2,99000,15,168300,E-Wallet,Selesai
+T00088,2025-02-11,P063,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Surabaya,5,89000,15,378250,E-Wallet,Selesai
+T00089,2025-02-13,P010,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Medan,1,89000,0,89000,E-Wallet,Selesai
+T00090,2025-02-14,P071,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Surabaya,3,89000,5,253650,E-Wallet,Selesai
+T00091,2025-02-15,P029,PR25,Lampu LED Pintar,Rumah Tangga,Yogyakarta,2,99000,10,178200,E-Wallet,Selesai
+T00092,2025-02-15,P055,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,3,28000,5,79800,Transfer Bank,Selesai
+T00093,2025-02-16,P083,PR10,Gamis Katun,Fashion,Yogyakarta,1,245000,0,245000,E-Wallet,Dibatalkan
+T00094,2025-02-16,P051,PR12,Jaket Hoodie,Fashion,Jakarta,2,199000,0,398000,COD,Selesai
+T00095,2025-02-17,P036,PR19,Keripik Singkong Pedas,Makanan & Minuman,Surabaya,1,22000,5,20900,E-Wallet,Selesai
+T00096,2025-02-18,P023,PR11,Sepatu Lari,Fashion,Surabaya,1,529000,5,502550,E-Wallet,Selesai
+T00097,2025-02-19,P006,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Yogyakarta,1,169000,0,169000,Transfer Bank,Dibatalkan
+T00098,2025-02-20,P005,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Bandung,2,89000,0,178000,Transfer Bank,Selesai
+T00099,2025-02-20,P029,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Yogyakarta,3,36000,0,108000,E-Wallet,Selesai
+T00100,2025-02-22,P074,PR18,Kurma Premium 1 kg,Makanan & Minuman,Yogyakarta,3,135000,0,405000,E-Wallet,Selesai
+T00101,2025-02-22,P043,PR11,Sepatu Lari,Fashion,Jakarta,1,529000,15,449650,COD,Selesai
+T00102,2025-02-24,P005,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Bandung,1,28000,0,28000,Kartu Kredit,Selesai
+T00103,2025-02-24,P027,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Jakarta,3,169000,15,430950,E-Wallet,Selesai
+T00104,2025-02-24,P004,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Semarang,1,95000,5,90250,Kartu Kredit,Selesai
+T00105,2025-02-25,P057,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,3,45000,0,135000,Transfer Bank,Selesai
+T00106,2025-02-25,P037,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Bandung,1,89000,0,89000,Transfer Bank,Selesai
+T00107,2025-02-26,P031,PR18,Kurma Premium 1 kg,Makanan & Minuman,Bandung,2,135000,5,256500,Transfer Bank,Selesai
+T00108,2025-02-26,P084,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Surabaya,1,159000,0,159000,Transfer Bank,Selesai
+T00109,2025-02-27,P063,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Surabaya,1,459000,0,459000,E-Wallet,Selesai
+T00110,2025-02-27,P027,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,10,283500,Kartu Kredit,Selesai
+T00111,2025-02-27,P080,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Medan,1,89000,0,89000,COD,Selesai
+T00112,2025-02-28,P010,PR17,Madu Hutan 500 ml,Makanan & Minuman,Medan,2,115000,0,230000,Kartu Kredit,Selesai
+T00113,2025-02-28,P082,PR10,Gamis Katun,Fashion,Denpasar,2,245000,0,490000,Transfer Bank,Selesai
+T00114,2025-03-01,P105,PR17,Madu Hutan 500 ml,Makanan & Minuman,Bandung,2,115000,10,207000,Kartu Kredit,Selesai
+T00115,2025-03-01,P091,PR13,Kaos Polos Premium,Fashion,Makassar,2,79000,5,150100,Transfer Bank,Selesai
+T00116,2025-03-01,P069,PR07,Speaker Portabel,Elektronik,Yogyakarta,2,379000,5,720100,Kartu Kredit,Selesai
+T00117,2025-03-01,P101,PR19,Keripik Singkong Pedas,Makanan & Minuman,Jakarta,4,22000,0,88000,Kartu Kredit,Selesai
+T00118,2025-03-01,P009,PR19,Keripik Singkong Pedas,Makanan & Minuman,Jakarta,5,22000,10,99000,E-Wallet,Selesai
+T00119,2025-03-02,P002,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,3,45000,0,135000,Kartu Kredit,Selesai
+T00120,2025-03-02,P005,PR10,Gamis Katun,Fashion,Bandung,1,245000,0,245000,E-Wallet,Selesai
+T00121,2025-03-03,P056,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Jakarta,2,28000,15,47600,Transfer Bank,Selesai
+T00122,2025-03-03,P079,PR19,Keripik Singkong Pedas,Makanan & Minuman,Medan,2,22000,10,39600,Transfer Bank,Selesai
+T00123,2025-03-03,P093,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,2,159000,0,318000,Transfer Bank,Selesai
+T00124,2025-03-03,P043,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Jakarta,1,28000,0,28000,E-Wallet,Selesai
+T00125,2025-03-03,P099,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,1,45000,0,45000,Kartu Kredit,Selesai
+T00126,2025-03-03,P016,PR12,Jaket Hoodie,Fashion,Jakarta,1,199000,10,179100,Transfer Bank,Selesai
+T00127,2025-03-03,P098,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Semarang,3,28000,10,75600,Transfer Bank,Selesai
+T00128,2025-03-04,P063,PR19,Keripik Singkong Pedas,Makanan & Minuman,Surabaya,2,22000,5,41800,Kartu Kredit,Selesai
+T00129,2025-03-04,P049,PR09,Kemeja Batik Pria,Fashion,Jakarta,2,189000,5,359100,Kartu Kredit,Selesai
+T00130,2025-03-04,P108,PR06,Smartwatch Sport,Elektronik,Jakarta,1,899000,0,899000,COD,Selesai
+T00131,2025-03-05,P093,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,10,283500,COD,Selesai
+T00132,2025-03-05,P082,PR13,Kaos Polos Premium,Fashion,Denpasar,1,79000,0,79000,COD,Selesai
+T00133,2025-03-05,P048,PR24,Set Panci Anti Lengket,Rumah Tangga,Jakarta,2,649000,0,1298000,Transfer Bank,Selesai
+T00134,2025-03-06,P104,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Jakarta,1,28000,0,28000,COD,Selesai
+T00135,2025-03-08,P048,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,1,45000,10,40500,Transfer Bank,Selesai
+T00136,2025-03-08,P029,PR35,Planner 2026,Buku & Alat Tulis,Yogyakarta,2,85000,10,153000,COD,Selesai
+T00137,2025-03-08,P074,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Yogyakarta,2,89000,5,169100,E-Wallet,Selesai
+T00138,2025-03-08,P055,PR09,Kemeja Batik Pria,Fashion,Surabaya,2,189000,5,359100,Kartu Kredit,Selesai
+T00139,2025-03-08,P070,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,3,99000,10,267300,Transfer Bank,Selesai
+T00140,2025-03-09,P087,PR05,Power Bank 10.000 mAh,Elektronik,Jakarta,3,229000,15,583950,COD,Selesai
+T00141,2025-03-09,P071,PR35,Planner 2026,Buku & Alat Tulis,Surabaya,2,85000,5,161500,COD,Selesai
+T00142,2025-03-09,P063,PR14,Tas Ransel Kerja,Fashion,Surabaya,2,315000,0,630000,Transfer Bank,Selesai
+T00143,2025-03-10,P031,PR19,Keripik Singkong Pedas,Makanan & Minuman,Bandung,5,22000,15,93500,E-Wallet,Selesai
+T00144,2025-03-11,P069,PR09,Kemeja Batik Pria,Fashion,Yogyakarta,3,189000,5,538650,Transfer Bank,Dibatalkan
+T00145,2025-03-11,P098,PR18,Kurma Premium 1 kg,Makanan & Minuman,Semarang,4,135000,0,540000,E-Wallet,Selesai
+T00146,2025-03-12,P072,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Yogyakarta,1,45000,15,38250,E-Wallet,Selesai
+T00147,2025-03-12,P105,PR09,Kemeja Batik Pria,Fashion,Bandung,1,189000,0,189000,E-Wallet,Selesai
+T00148,2025-03-12,P016,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,1,159000,15,135150,E-Wallet,Selesai
+T00149,2025-03-12,P070,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,1,135000,0,135000,Transfer Bank,Selesai
+T00150,2025-03-12,P020,PR14,Tas Ransel Kerja,Fashion,Medan,3,315000,10,850500,Kartu Kredit,Selesai
+T00151,2025-03-12,P071,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Surabaya,3,459000,5,1308150,COD,Selesai
+T00152,2025-03-14,P089,PR02,Smartphone 128 GB,Elektronik,Surabaya,1,3299000,0,3299000,Transfer Bank,Selesai
+T00153,2025-03-14,P071,PR22,Blender 2 L,Rumah Tangga,Surabaya,1,389000,15,330650,Kartu Kredit,Selesai
+T00154,2025-03-15,P040,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,1,95000,10,85500,E-Wallet,Selesai
+T00155,2025-03-15,P019,PR20,Sambal Roa Botol,Makanan & Minuman,Yogyakarta,1,45000,0,45000,Transfer Bank,Selesai
+T00156,2025-03-15,P044,PR19,Keripik Singkong Pedas,Makanan & Minuman,Medan,1,22000,0,22000,Transfer Bank,Selesai
+T00157,2025-03-16,P041,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,3,95000,0,285000,COD,Selesai
+T00158,2025-03-16,P069,PR14,Tas Ransel Kerja,Fashion,Yogyakarta,3,315000,5,897750,E-Wallet,Selesai
+T00159,2025-03-16,P082,PR09,Kemeja Batik Pria,Fashion,Denpasar,1,189000,15,160650,Transfer Bank,Selesai
+T00160,2025-03-17,P045,PR09,Kemeja Batik Pria,Fashion,Yogyakarta,1,189000,5,179550,E-Wallet,Selesai
+T00161,2025-03-17,P043,PR10,Gamis Katun,Fashion,Jakarta,1,245000,10,220500,COD,Selesai
+T00162,2025-03-17,P077,PR14,Tas Ransel Kerja,Fashion,Surabaya,1,315000,15,267750,Transfer Bank,Selesai
+T00163,2025-03-17,P064,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Yogyakarta,1,89000,5,84550,E-Wallet,Selesai
+T00164,2025-03-18,P047,PR09,Kemeja Batik Pria,Fashion,Bandung,3,189000,0,567000,E-Wallet,Selesai
+T00165,2025-03-18,P015,PR13,Kaos Polos Premium,Fashion,Jakarta,3,79000,15,201450,Transfer Bank,Selesai
+T00166,2025-03-20,P063,PR04,Mouse Nirkabel,Elektronik,Surabaya,1,149000,0,149000,E-Wallet,Selesai
+T00167,2025-03-22,P056,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,1,99000,10,89100,E-Wallet,Selesai
+T00168,2025-03-22,P072,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Yogyakarta,1,95000,0,95000,E-Wallet,Selesai
+T00169,2025-03-22,P036,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Surabaya,1,36000,5,34200,E-Wallet,Selesai
+T00170,2025-03-22,P056,PR17,Madu Hutan 500 ml,Makanan & Minuman,Jakarta,1,115000,15,97750,Transfer Bank,Selesai
+T00171,2025-03-23,P102,PR04,Mouse Nirkabel,Elektronik,Surabaya,2,149000,5,283100,E-Wallet,Selesai
+T00172,2025-03-23,P088,PR13,Kaos Polos Premium,Fashion,Bandung,2,79000,15,134300,COD,Dibatalkan
+T00173,2025-03-24,P020,PR18,Kurma Premium 1 kg,Makanan & Minuman,Medan,1,135000,15,114750,E-Wallet,Selesai
+T00174,2025-03-24,P019,PR04,Mouse Nirkabel,Elektronik,Yogyakarta,1,149000,0,149000,COD,Selesai
+T00175,2025-03-24,P086,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,4,89000,0,356000,E-Wallet,Selesai
+T00176,2025-03-25,P085,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,10,71100,Kartu Kredit,Selesai
+T00177,2025-03-25,P043,PR09,Kemeja Batik Pria,Fashion,Jakarta,1,189000,10,170100,Transfer Bank,Selesai
+T00178,2025-03-25,P026,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Medan,1,36000,15,30600,Transfer Bank,Selesai
+T00179,2025-03-25,P086,PR09,Kemeja Batik Pria,Fashion,Jakarta,2,189000,5,359100,Kartu Kredit,Selesai
+T00180,2025-03-25,P089,PR03,Headset Bluetooth,Elektronik,Surabaya,1,459000,10,413100,COD,Selesai
+T00181,2025-03-26,P039,PR01,Laptop 14 inci Core i5,Elektronik,Jakarta,1,8499000,0,8499000,Transfer Bank,Selesai
+T00182,2025-03-26,P031,PR14,Tas Ransel Kerja,Fashion,Bandung,3,315000,10,850500,COD,Selesai
+T00183,2025-03-26,P108,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,1,135000,10,121500,Transfer Bank,Selesai
+T00184,2025-03-26,P033,PR17,Madu Hutan 500 ml,Makanan & Minuman,Jakarta,1,115000,10,103500,E-Wallet,Selesai
+T00185,2025-03-26,P030,PR19,Keripik Singkong Pedas,Makanan & Minuman,Jakarta,2,22000,0,44000,E-Wallet,Selesai
+T00186,2025-03-27,P102,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Surabaya,3,89000,10,240300,Transfer Bank,Selesai
+T00187,2025-03-28,P019,PR23,Setrika Uap,Rumah Tangga,Yogyakarta,3,275000,15,701250,E-Wallet,Selesai
+T00188,2025-03-28,P048,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,1,135000,0,135000,Kartu Kredit,Selesai
+T00189,2025-03-28,P080,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Medan,1,95000,15,80750,Kartu Kredit,Selesai
+T00190,2025-03-28,P015,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Jakarta,3,459000,0,1377000,Transfer Bank,Dibatalkan
+T00191,2025-03-28,P027,PR12,Jaket Hoodie,Fashion,Jakarta,2,199000,5,378100,E-Wallet,Selesai
+T00192,2025-03-29,P008,PR19,Keripik Singkong Pedas,Makanan & Minuman,Bandung,2,22000,5,41800,Transfer Bank,Selesai
+T00193,2025-03-29,P053,PR10,Gamis Katun,Fashion,Jakarta,3,245000,5,698250,E-Wallet,Selesai
+T00194,2025-03-29,P104,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,1,45000,0,45000,Transfer Bank,Selesai
+T00195,2025-03-29,P084,PR20,Sambal Roa Botol,Makanan & Minuman,Surabaya,1,45000,0,45000,Kartu Kredit,Selesai
+T00196,2025-03-29,P007,PR07,Speaker Portabel,Elektronik,Jakarta,1,379000,0,379000,E-Wallet,Selesai
+T00197,2025-03-29,P005,PR35,Planner 2026,Buku & Alat Tulis,Bandung,3,85000,0,255000,COD,Selesai
+T00198,2025-03-29,P070,PR24,Set Panci Anti Lengket,Rumah Tangga,Jakarta,3,649000,10,1752300,E-Wallet,Selesai
+T00199,2025-03-29,P083,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Yogyakarta,1,459000,0,459000,Kartu Kredit,Selesai
+T00200,2025-03-29,P039,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Jakarta,3,42000,0,126000,Transfer Bank,Selesai
+T00201,2025-03-30,P108,PR24,Set Panci Anti Lengket,Rumah Tangga,Jakarta,2,649000,0,1298000,Kartu Kredit,Dikembalikan
+T00202,2025-03-30,P071,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Surabaya,1,45000,10,40500,COD,Selesai
+T00203,2025-03-30,P015,PR07,Speaker Portabel,Elektronik,Jakarta,1,379000,5,360050,Transfer Bank,Selesai
+T00204,2025-03-30,P060,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,4,89000,10,320400,E-Wallet,Selesai
+T00205,2025-03-30,P105,PR13,Kaos Polos Premium,Fashion,Bandung,1,79000,5,75050,COD,Selesai
+T00206,2025-03-30,P089,PR09,Kemeja Batik Pria,Fashion,Surabaya,2,189000,5,359100,E-Wallet,Selesai
+T00207,2025-03-31,P037,PR18,Kurma Premium 1 kg,Makanan & Minuman,Bandung,1,135000,0,135000,Transfer Bank,Selesai
+T00208,2025-03-31,P022,PR18,Kurma Premium 1 kg,Makanan & Minuman,Makassar,1,135000,0,135000,Transfer Bank,Selesai
+T00209,2025-03-31,P097,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Yogyakarta,2,89000,10,160200,COD,Selesai
+T00210,2025-03-31,P040,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,1,99000,5,94050,E-Wallet,Selesai
+T00211,2025-04-01,P057,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,1,45000,10,40500,Kartu Kredit,Selesai
+T00212,2025-04-02,P011,PR13,Kaos Polos Premium,Fashion,Bandung,1,79000,0,79000,Transfer Bank,Selesai
+T00213,2025-04-02,P106,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Makassar,1,89000,0,89000,Kartu Kredit,Selesai
+T00214,2025-04-02,P097,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Yogyakarta,1,95000,0,95000,Transfer Bank,Selesai
+T00215,2025-04-04,P011,PR19,Keripik Singkong Pedas,Makanan & Minuman,Bandung,2,22000,0,44000,Kartu Kredit,Selesai
+T00216,2025-04-04,P088,PR19,Keripik Singkong Pedas,Makanan & Minuman,Bandung,1,22000,0,22000,Transfer Bank,Dibatalkan
+T00217,2025-04-04,P074,PR14,Tas Ransel Kerja,Fashion,Yogyakarta,3,315000,0,945000,Transfer Bank,Selesai
+T00218,2025-04-05,P015,PR05,Power Bank 10.000 mAh,Elektronik,Jakarta,1,229000,0,229000,E-Wallet,Selesai
+T00219,2025-04-05,P048,PR05,Power Bank 10.000 mAh,Elektronik,Jakarta,1,229000,0,229000,Transfer Bank,Selesai
+T00220,2025-04-05,P089,PR26,Dispenser Air,Rumah Tangga,Surabaya,1,729000,5,692550,E-Wallet,Selesai
+T00221,2025-04-06,P056,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Jakarta,1,89000,0,89000,Transfer Bank,Selesai
+T00222,2025-04-06,P015,PR07,Speaker Portabel,Elektronik,Jakarta,2,379000,15,644300,Transfer Bank,Selesai
+T00223,2025-04-07,P058,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,1,99000,0,99000,E-Wallet,Selesai
+T00224,2025-04-07,P108,PR02,Smartphone 128 GB,Elektronik,Jakarta,1,3299000,15,2804150,E-Wallet,Selesai
+T00225,2025-04-08,P006,PR20,Sambal Roa Botol,Makanan & Minuman,Yogyakarta,2,45000,0,90000,COD,Dibatalkan
+T00226,2025-04-08,P007,PR11,Sepatu Lari,Fashion,Jakarta,2,529000,0,1058000,Transfer Bank,Selesai
+T00227,2025-04-09,P093,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Jakarta,1,36000,5,34200,Transfer Bank,Selesai
+T00228,2025-04-09,P074,PR07,Speaker Portabel,Elektronik,Yogyakarta,2,379000,5,720100,E-Wallet,Selesai
+T00229,2025-04-09,P081,PR19,Keripik Singkong Pedas,Makanan & Minuman,Bandung,5,22000,15,93500,E-Wallet,Selesai
+T00230,2025-04-09,P098,PR35,Planner 2026,Buku & Alat Tulis,Semarang,1,85000,0,85000,E-Wallet,Selesai
+T00231,2025-04-11,P056,PR17,Madu Hutan 500 ml,Makanan & Minuman,Jakarta,2,115000,10,207000,COD,Selesai
+T00232,2025-04-11,P005,PR14,Tas Ransel Kerja,Fashion,Bandung,1,315000,0,315000,Kartu Kredit,Selesai
+T00233,2025-04-11,P006,PR10,Gamis Katun,Fashion,Yogyakarta,2,245000,0,490000,Transfer Bank,Selesai
+T00234,2025-04-11,P075,PR07,Speaker Portabel,Elektronik,Makassar,1,379000,0,379000,COD,Selesai
+T00235,2025-04-12,P083,PR12,Jaket Hoodie,Fashion,Yogyakarta,2,199000,0,398000,Transfer Bank,Selesai
+T00236,2025-04-12,P005,PR08,Monitor 24 inci,Elektronik,Bandung,1,1899000,15,1614150,Kartu Kredit,Selesai
+T00237,2025-04-12,P091,PR03,Headset Bluetooth,Elektronik,Makassar,2,459000,5,872100,Kartu Kredit,Dibatalkan
+T00238,2025-04-14,P057,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,1,159000,10,143100,E-Wallet,Selesai
+T00239,2025-04-15,P081,PR23,Setrika Uap,Rumah Tangga,Bandung,2,275000,15,467500,Transfer Bank,Selesai
+T00240,2025-04-15,P081,PR35,Planner 2026,Buku & Alat Tulis,Bandung,1,85000,5,80750,E-Wallet,Selesai
+T00241,2025-04-15,P089,PR07,Speaker Portabel,Elektronik,Surabaya,2,379000,5,720100,Transfer Bank,Dibatalkan
+T00242,2025-04-16,P105,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Bandung,1,42000,0,42000,Kartu Kredit,Selesai
+T00243,2025-04-16,P031,PR07,Speaker Portabel,Elektronik,Bandung,3,379000,10,1023300,Kartu Kredit,Selesai
+T00244,2025-04-17,P067,PR17,Madu Hutan 500 ml,Makanan & Minuman,Semarang,2,115000,0,230000,COD,Selesai
+T00245,2025-04-17,P082,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Denpasar,1,45000,10,40500,Transfer Bank,Selesai
+T00246,2025-04-18,P081,PR18,Kurma Premium 1 kg,Makanan & Minuman,Bandung,2,135000,0,270000,E-Wallet,Selesai
+T00247,2025-04-18,P082,PR14,Tas Ransel Kerja,Fashion,Denpasar,2,315000,15,535500,COD,Selesai
+T00248,2025-04-19,P033,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,0,1899000,Kartu Kredit,Selesai
+T00249,2025-04-19,P108,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Jakarta,1,36000,15,30600,Transfer Bank,Selesai
+T00250,2025-04-19,P097,PR24,Set Panci Anti Lengket,Rumah Tangga,Yogyakarta,1,649000,0,649000,Transfer Bank,Selesai
+T00251,2025-04-20,P084,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Surabaya,1,169000,0,169000,E-Wallet,Selesai
+T00252,2025-04-20,P082,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Denpasar,1,89000,0,89000,Transfer Bank,Selesai
+T00253,2025-04-20,P035,PR03,Headset Bluetooth,Elektronik,Denpasar,1,459000,0,459000,E-Wallet,Selesai
+T00254,2025-04-20,P099,PR11,Sepatu Lari,Fashion,Jakarta,1,529000,0,529000,COD,Selesai
+T00255,2025-04-20,P056,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Jakarta,1,35000,10,31500,E-Wallet,Selesai
+T00256,2025-04-21,P031,PR07,Speaker Portabel,Elektronik,Bandung,3,379000,15,966450,E-Wallet,Selesai
+T00257,2025-04-21,P081,PR04,Mouse Nirkabel,Elektronik,Bandung,1,149000,5,141550,E-Wallet,Selesai
+T00258,2025-04-21,P002,PR19,Keripik Singkong Pedas,Makanan & Minuman,Jakarta,4,22000,10,79200,COD,Selesai
+T00259,2025-04-21,P029,PR20,Sambal Roa Botol,Makanan & Minuman,Yogyakarta,1,45000,10,40500,E-Wallet,Selesai
+T00260,2025-04-22,P017,PR04,Mouse Nirkabel,Elektronik,Jakarta,1,149000,0,149000,E-Wallet,Selesai
+T00261,2025-04-23,P007,PR04,Mouse Nirkabel,Elektronik,Jakarta,1,149000,5,141550,Transfer Bank,Selesai
+T00262,2025-04-24,P100,PR13,Kaos Polos Premium,Fashion,Yogyakarta,2,79000,0,158000,COD,Selesai
+T00263,2025-04-24,P084,PR08,Monitor 24 inci,Elektronik,Surabaya,1,1899000,0,1899000,Transfer Bank,Selesai
+T00264,2025-04-25,P026,PR24,Set Panci Anti Lengket,Rumah Tangga,Medan,1,649000,0,649000,E-Wallet,Selesai
+T00265,2025-04-25,P099,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,0,315000,E-Wallet,Selesai
+T00266,2025-04-25,P077,PR22,Blender 2 L,Rumah Tangga,Surabaya,1,389000,0,389000,E-Wallet,Selesai
+T00267,2025-04-25,P005,PR17,Madu Hutan 500 ml,Makanan & Minuman,Bandung,2,115000,15,195500,COD,Selesai
+T00268,2025-04-26,P056,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Jakarta,1,169000,10,152100,E-Wallet,Selesai
+T00269,2025-04-26,P007,PR07,Speaker Portabel,Elektronik,Jakarta,2,379000,15,644300,Kartu Kredit,Selesai
+T00270,2025-04-26,P106,PR10,Gamis Katun,Fashion,Makassar,2,245000,0,490000,COD,Selesai
+T00271,2025-04-27,P062,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,0,315000,Transfer Bank,Selesai
+T00272,2025-04-27,P092,PR23,Setrika Uap,Rumah Tangga,Bandung,3,275000,0,825000,E-Wallet,Selesai
+T00273,2025-04-27,P075,PR09,Kemeja Batik Pria,Fashion,Makassar,1,189000,0,189000,Kartu Kredit,Selesai
+T00274,2025-04-28,P098,PR12,Jaket Hoodie,Fashion,Semarang,1,199000,0,199000,Kartu Kredit,Selesai
+T00275,2025-04-28,P049,PR10,Gamis Katun,Fashion,Jakarta,1,245000,5,232750,E-Wallet,Selesai
+T00276,2025-04-28,P105,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Bandung,2,89000,0,178000,Transfer Bank,Selesai
+T00277,2025-04-28,P010,PR23,Setrika Uap,Rumah Tangga,Medan,1,275000,10,247500,Kartu Kredit,Selesai
+T00278,2025-04-28,P101,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,3,95000,0,285000,E-Wallet,Selesai
+T00279,2025-04-30,P008,PR14,Tas Ransel Kerja,Fashion,Bandung,1,315000,10,283500,E-Wallet,Selesai
+T00280,2025-05-01,P015,PR04,Mouse Nirkabel,Elektronik,Jakarta,2,149000,0,298000,E-Wallet,Selesai
+T00281,2025-05-01,P097,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Yogyakarta,2,459000,0,918000,E-Wallet,Selesai
+T00282,2025-05-01,P099,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,2,159000,0,318000,E-Wallet,Selesai
+T00283,2025-05-01,P097,PR17,Madu Hutan 500 ml,Makanan & Minuman,Yogyakarta,1,115000,0,115000,COD,Selesai
+T00284,2025-05-01,P091,PR22,Blender 2 L,Rumah Tangga,Makassar,1,389000,0,389000,E-Wallet,Selesai
+T00285,2025-05-02,P077,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Surabaya,1,45000,5,42750,E-Wallet,Selesai
+T00286,2025-05-02,P093,PR24,Set Panci Anti Lengket,Rumah Tangga,Jakarta,1,649000,0,649000,COD,Selesai
+T00287,2025-05-03,P106,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Makassar,1,28000,0,28000,E-Wallet,Selesai
+T00288,2025-05-03,P033,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,2,89000,5,169100,Kartu Kredit,Selesai
+T00289,2025-05-03,P056,PR05,Power Bank 10.000 mAh,Elektronik,Jakarta,1,229000,0,229000,E-Wallet,Selesai
+T00290,2025-05-03,P058,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,1,95000,10,85500,E-Wallet,Selesai
+T00291,2025-05-04,P013,PR10,Gamis Katun,Fashion,Makassar,3,245000,0,735000,Transfer Bank,Selesai
+T00292,2025-05-05,P087,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,0,79000,COD,Selesai
+T00293,2025-05-06,P052,PR10,Gamis Katun,Fashion,Yogyakarta,1,245000,0,245000,Transfer Bank,Selesai
+T00294,2025-05-06,P050,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Surabaya,1,95000,0,95000,Transfer Bank,Selesai
+T00295,2025-05-07,P040,PR17,Madu Hutan 500 ml,Makanan & Minuman,Jakarta,1,115000,0,115000,Transfer Bank,Selesai
+T00296,2025-05-08,P075,PR03,Headset Bluetooth,Elektronik,Makassar,1,459000,0,459000,Transfer Bank,Selesai
+T00297,2025-05-09,P102,PR12,Jaket Hoodie,Fashion,Surabaya,1,199000,0,199000,E-Wallet,Selesai
+T00298,2025-05-09,P014,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Surabaya,1,36000,0,36000,Transfer Bank,Selesai
+T00299,2025-05-10,P081,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Bandung,1,35000,10,31500,COD,Selesai
+T00300,2025-05-11,P029,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Yogyakarta,1,459000,10,413100,Transfer Bank,Selesai
+T00301,2025-05-11,P020,PR03,Headset Bluetooth,Elektronik,Medan,2,459000,0,918000,Transfer Bank,Selesai
+T00302,2025-05-12,P091,PR11,Sepatu Lari,Fashion,Makassar,1,529000,0,529000,E-Wallet,Selesai
+T00303,2025-05-12,P088,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,2,95000,5,180500,Transfer Bank,Selesai
+T00304,2025-05-13,P099,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,2,135000,0,270000,COD,Selesai
+T00305,2025-05-14,P106,PR18,Kurma Premium 1 kg,Makanan & Minuman,Makassar,1,135000,10,121500,Kartu Kredit,Selesai
+T00306,2025-05-15,P012,PR11,Sepatu Lari,Fashion,Yogyakarta,2,529000,10,952200,Transfer Bank,Selesai
+T00307,2025-05-16,P006,PR13,Kaos Polos Premium,Fashion,Yogyakarta,2,79000,0,158000,Transfer Bank,Selesai
+T00308,2025-05-16,P067,PR19,Keripik Singkong Pedas,Makanan & Minuman,Semarang,1,22000,5,20900,Transfer Bank,Selesai
+T00309,2025-05-16,P028,PR17,Madu Hutan 500 ml,Makanan & Minuman,Medan,1,115000,15,97750,Kartu Kredit,Selesai
+T00310,2025-05-18,P074,PR19,Keripik Singkong Pedas,Makanan & Minuman,Yogyakarta,1,22000,0,22000,Transfer Bank,Selesai
+T00311,2025-05-19,P082,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Denpasar,1,28000,10,25200,Kartu Kredit,Selesai
+T00312,2025-05-19,P044,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Medan,1,95000,5,90250,COD,Selesai
+T00313,2025-05-19,P060,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,1,45000,5,42750,E-Wallet,Selesai
+T00314,2025-05-20,P006,PR05,Power Bank 10.000 mAh,Elektronik,Yogyakarta,1,229000,15,194650,COD,Selesai
+T00315,2025-05-20,P033,PR04,Mouse Nirkabel,Elektronik,Jakarta,3,149000,0,447000,E-Wallet,Selesai
+T00316,2025-05-20,P011,PR11,Sepatu Lari,Fashion,Bandung,1,529000,0,529000,E-Wallet,Selesai
+T00317,2025-05-21,P002,PR19,Keripik Singkong Pedas,Makanan & Minuman,Jakarta,4,22000,0,88000,Transfer Bank,Selesai
+T00318,2025-05-24,P044,PR20,Sambal Roa Botol,Makanan & Minuman,Medan,5,45000,0,225000,E-Wallet,Selesai
+T00319,2025-05-25,P082,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Denpasar,3,95000,0,285000,Kartu Kredit,Selesai
+T00320,2025-05-25,P099,PR19,Keripik Singkong Pedas,Makanan & Minuman,Jakarta,1,22000,0,22000,Transfer Bank,Selesai
+T00321,2025-05-25,P099,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,5,299250,E-Wallet,Selesai
+T00322,2025-05-26,P090,PR17,Madu Hutan 500 ml,Makanan & Minuman,Bandung,2,115000,0,230000,Transfer Bank,Selesai
+T00323,2025-05-26,P025,PR26,Dispenser Air,Rumah Tangga,Bandung,1,729000,0,729000,E-Wallet,Selesai
+T00324,2025-05-27,P104,PR19,Keripik Singkong Pedas,Makanan & Minuman,Jakarta,1,22000,5,20900,COD,Selesai
+T00325,2025-05-27,P070,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,2,89000,0,178000,E-Wallet,Selesai
+T00326,2025-05-28,P002,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,2,45000,5,85500,Transfer Bank,Selesai
+T00327,2025-05-28,P067,PR05,Power Bank 10.000 mAh,Elektronik,Semarang,1,229000,0,229000,COD,Selesai
+T00328,2025-05-28,P085,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,3,45000,10,121500,Kartu Kredit,Selesai
+T00329,2025-05-29,P109,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Surabaya,1,459000,0,459000,COD,Selesai
+T00330,2025-05-30,P004,PR06,Smartwatch Sport,Elektronik,Semarang,1,899000,0,899000,E-Wallet,Selesai
+T00331,2025-06-01,P064,PR11,Sepatu Lari,Fashion,Yogyakarta,1,529000,0,529000,E-Wallet,Selesai
+T00332,2025-06-01,P098,PR09,Kemeja Batik Pria,Fashion,Semarang,2,189000,0,378000,Kartu Kredit,Selesai
+T00333,2025-06-02,P023,PR24,Set Panci Anti Lengket,Rumah Tangga,Surabaya,2,649000,10,1168200,COD,Selesai
+T00334,2025-06-02,P081,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Bandung,1,89000,0,89000,Transfer Bank,Selesai
+T00335,2025-06-03,P079,PR24,Set Panci Anti Lengket,Rumah Tangga,Medan,1,649000,5,616550,E-Wallet,Selesai
+T00336,2025-06-03,P056,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,3,135000,0,405000,E-Wallet,Selesai
+T00337,2025-06-05,P014,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Surabaya,1,35000,0,35000,Kartu Kredit,Selesai
+T00338,2025-06-07,P033,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Jakarta,1,42000,5,39900,Kartu Kredit,Selesai
+T00339,2025-06-07,P013,PR05,Power Bank 10.000 mAh,Elektronik,Makassar,2,229000,0,458000,COD,Selesai
+T00340,2025-06-07,P065,PR25,Lampu LED Pintar,Rumah Tangga,Yogyakarta,1,99000,0,99000,Transfer Bank,Dibatalkan
+T00341,2025-06-08,P095,PR12,Jaket Hoodie,Fashion,Surabaya,2,199000,0,398000,Kartu Kredit,Selesai
+T00342,2025-06-08,P081,PR26,Dispenser Air,Rumah Tangga,Bandung,2,729000,10,1312200,E-Wallet,Selesai
+T00343,2025-06-08,P007,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,2,89000,10,160200,Kartu Kredit,Selesai
+T00344,2025-06-08,P081,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Bandung,2,28000,15,47600,E-Wallet,Selesai
+T00345,2025-06-09,P082,PR02,Smartphone 128 GB,Elektronik,Denpasar,1,3299000,0,3299000,Kartu Kredit,Selesai
+T00346,2025-06-09,P102,PR04,Mouse Nirkabel,Elektronik,Surabaya,2,149000,0,298000,Transfer Bank,Selesai
+T00347,2025-06-10,P081,PR09,Kemeja Batik Pria,Fashion,Bandung,1,189000,0,189000,E-Wallet,Selesai
+T00348,2025-06-10,P064,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Yogyakarta,1,42000,0,42000,Transfer Bank,Dibatalkan
+T00349,2025-06-10,P012,PR03,Headset Bluetooth,Elektronik,Yogyakarta,2,459000,0,918000,Transfer Bank,Selesai
+T00350,2025-06-11,P040,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,2,135000,5,256500,Transfer Bank,Selesai
+T00351,2025-06-11,P002,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,1,45000,0,45000,COD,Selesai
+T00352,2025-06-12,P027,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,4,135000,5,513000,COD,Selesai
+T00353,2025-06-13,P069,PR25,Lampu LED Pintar,Rumah Tangga,Yogyakarta,2,99000,0,198000,COD,Dibatalkan
+T00354,2025-06-13,P019,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Yogyakarta,1,45000,10,40500,Transfer Bank,Selesai
+T00355,2025-06-13,P082,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Denpasar,1,45000,15,38250,E-Wallet,Selesai
+T00356,2025-06-14,P056,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,10,1709100,Transfer Bank,Selesai
+T00357,2025-06-14,P036,PR13,Kaos Polos Premium,Fashion,Surabaya,1,79000,0,79000,E-Wallet,Selesai
+T00358,2025-06-14,P085,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,0,79000,E-Wallet,Selesai
+T00359,2025-06-14,P016,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,1,95000,0,95000,Transfer Bank,Selesai
+T00360,2025-06-15,P080,PR17,Madu Hutan 500 ml,Makanan & Minuman,Medan,3,115000,0,345000,E-Wallet,Selesai
+T00361,2025-06-15,P004,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Semarang,1,42000,0,42000,Transfer Bank,Selesai
+T00362,2025-06-15,P047,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Bandung,3,45000,5,128250,Kartu Kredit,Selesai
+T00363,2025-06-17,P084,PR19,Keripik Singkong Pedas,Makanan & Minuman,Surabaya,4,22000,0,88000,COD,Selesai
+T00364,2025-06-17,P025,PR12,Jaket Hoodie,Fashion,Bandung,1,199000,0,199000,Kartu Kredit,Selesai
+T00365,2025-06-18,P009,PR35,Planner 2026,Buku & Alat Tulis,Jakarta,2,85000,0,170000,E-Wallet,Selesai
+T00366,2025-06-20,P098,PR03,Headset Bluetooth,Elektronik,Semarang,1,459000,0,459000,Transfer Bank,Selesai
+T00367,2025-06-20,P108,PR03,Headset Bluetooth,Elektronik,Jakarta,1,459000,0,459000,E-Wallet,Selesai
+T00368,2025-06-20,P056,PR07,Speaker Portabel,Elektronik,Jakarta,1,379000,10,341100,E-Wallet,Selesai
+T00369,2025-06-20,P022,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Makassar,2,45000,0,90000,Kartu Kredit,Selesai
+T00370,2025-06-21,P050,PR06,Smartwatch Sport,Elektronik,Surabaya,1,899000,0,899000,E-Wallet,Selesai
+T00371,2025-06-21,P082,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Denpasar,1,459000,0,459000,Transfer Bank,Selesai
+T00372,2025-06-22,P063,PR12,Jaket Hoodie,Fashion,Surabaya,1,199000,0,199000,E-Wallet,Selesai
+T00373,2025-06-22,P004,PR03,Headset Bluetooth,Elektronik,Semarang,1,459000,5,436050,E-Wallet,Selesai
+T00374,2025-06-22,P093,PR13,Kaos Polos Premium,Fashion,Jakarta,2,79000,0,158000,E-Wallet,Selesai
+T00375,2025-06-22,P012,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Yogyakarta,2,89000,10,160200,E-Wallet,Dikembalikan
+T00376,2025-06-23,P008,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Bandung,1,159000,0,159000,Transfer Bank,Selesai
+T00377,2025-06-23,P045,PR09,Kemeja Batik Pria,Fashion,Yogyakarta,1,189000,0,189000,Kartu Kredit,Selesai
+T00378,2025-06-23,P029,PR17,Madu Hutan 500 ml,Makanan & Minuman,Yogyakarta,1,115000,0,115000,E-Wallet,Selesai
+T00379,2025-06-25,P081,PR10,Gamis Katun,Fashion,Bandung,1,245000,0,245000,Transfer Bank,Selesai
+T00380,2025-06-25,P028,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Medan,2,89000,5,169100,Transfer Bank,Selesai
+T00381,2025-06-25,P049,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,2,135000,0,270000,Transfer Bank,Selesai
+T00382,2025-06-26,P071,PR13,Kaos Polos Premium,Fashion,Surabaya,3,79000,0,237000,E-Wallet,Selesai
+T00383,2025-06-27,P029,PR13,Kaos Polos Premium,Fashion,Yogyakarta,1,79000,0,79000,COD,Selesai
+T00384,2025-06-28,P049,PR12,Jaket Hoodie,Fashion,Jakarta,2,199000,0,398000,COD,Selesai
+T00385,2025-06-28,P012,PR32,Buku Belajar Python,Buku & Alat Tulis,Yogyakarta,1,139000,0,139000,E-Wallet,Selesai
+T00386,2025-06-29,P047,PR22,Blender 2 L,Rumah Tangga,Bandung,2,389000,15,661300,E-Wallet,Selesai
+T00387,2025-06-30,P063,PR08,Monitor 24 inci,Elektronik,Surabaya,1,1899000,0,1899000,Transfer Bank,Selesai
+T00388,2025-06-30,P005,PR23,Setrika Uap,Rumah Tangga,Bandung,1,275000,0,275000,Transfer Bank,Selesai
+T00389,2025-07-01,P073,PR35,Planner 2026,Buku & Alat Tulis,Jakarta,1,85000,0,85000,COD,Selesai
+T00390,2025-07-02,P105,PR19,Keripik Singkong Pedas,Makanan & Minuman,Bandung,4,22000,0,88000,Transfer Bank,Selesai
+T00391,2025-07-02,P056,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,1,45000,0,45000,E-Wallet,Selesai
+T00392,2025-07-02,P045,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Yogyakarta,2,159000,10,286200,COD,Selesai
+T00393,2025-07-03,P082,PR07,Speaker Portabel,Elektronik,Denpasar,1,379000,0,379000,COD,Selesai
+T00394,2025-07-03,P006,PR32,Buku Belajar Python,Buku & Alat Tulis,Yogyakarta,2,139000,5,264100,COD,Selesai
+T00395,2025-07-03,P088,PR04,Mouse Nirkabel,Elektronik,Bandung,3,149000,0,447000,Transfer Bank,Selesai
+T00396,2025-07-03,P009,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Jakarta,1,36000,0,36000,Transfer Bank,Selesai
+T00397,2025-07-03,P089,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,3,28000,15,71400,Kartu Kredit,Selesai
+T00398,2025-07-05,P102,PR35,Planner 2026,Buku & Alat Tulis,Surabaya,1,85000,0,85000,E-Wallet,Selesai
+T00399,2025-07-06,P079,PR10,Gamis Katun,Fashion,Medan,1,245000,0,245000,E-Wallet,Dikembalikan
+T00400,2025-07-06,P010,PR18,Kurma Premium 1 kg,Makanan & Minuman,Medan,3,135000,0,405000,E-Wallet,Selesai
+T00401,2025-07-06,P083,PR10,Gamis Katun,Fashion,Yogyakarta,1,245000,0,245000,E-Wallet,Selesai
+T00402,2025-07-07,P081,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Bandung,2,36000,0,72000,E-Wallet,Selesai
+T00403,2025-07-07,P001,PR14,Tas Ransel Kerja,Fashion,Yogyakarta,1,315000,15,267750,E-Wallet,Selesai
+T00404,2025-07-08,P046,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Yogyakarta,2,89000,15,151300,Kartu Kredit,Selesai
+T00405,2025-07-08,P105,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Bandung,1,169000,0,169000,COD,Selesai
+T00406,2025-07-08,P094,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Surabaya,1,42000,5,39900,E-Wallet,Selesai
+T00407,2025-07-10,P090,PR23,Setrika Uap,Rumah Tangga,Bandung,1,275000,0,275000,E-Wallet,Selesai
+T00408,2025-07-10,P085,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,3,159000,5,453150,E-Wallet,Dibatalkan
+T00409,2025-07-10,P085,PR04,Mouse Nirkabel,Elektronik,Jakarta,2,149000,0,298000,E-Wallet,Selesai
+T00410,2025-07-10,P073,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Jakarta,1,459000,0,459000,Kartu Kredit,Dikembalikan
+T00411,2025-07-10,P008,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Bandung,1,42000,5,39900,COD,Selesai
+T00412,2025-07-12,P046,PR32,Buku Belajar Python,Buku & Alat Tulis,Yogyakarta,1,139000,5,132050,E-Wallet,Selesai
+T00413,2025-07-13,P037,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Bandung,2,36000,0,72000,E-Wallet,Dikembalikan
+T00414,2025-07-14,P072,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Yogyakarta,1,36000,10,32400,E-Wallet,Selesai
+T00415,2025-07-14,P035,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Denpasar,1,45000,0,45000,COD,Selesai
+T00416,2025-07-14,P059,PR22,Blender 2 L,Rumah Tangga,Medan,1,389000,0,389000,E-Wallet,Selesai
+T00417,2025-07-15,P065,PR08,Monitor 24 inci,Elektronik,Yogyakarta,1,1899000,0,1899000,Transfer Bank,Selesai
+T00418,2025-07-15,P001,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Yogyakarta,1,45000,0,45000,COD,Selesai
+T00419,2025-07-16,P005,PR14,Tas Ransel Kerja,Fashion,Bandung,1,315000,0,315000,COD,Selesai
+T00420,2025-07-17,P025,PR03,Headset Bluetooth,Elektronik,Bandung,3,459000,0,1377000,Transfer Bank,Selesai
+T00421,2025-07-18,P042,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,0,79000,E-Wallet,Selesai
+T00422,2025-07-18,P079,PR10,Gamis Katun,Fashion,Medan,1,245000,10,220500,Kartu Kredit,Selesai
+T00423,2025-07-19,P097,PR07,Speaker Portabel,Elektronik,Yogyakarta,1,379000,0,379000,E-Wallet,Selesai
+T00424,2025-07-19,P023,PR10,Gamis Katun,Fashion,Surabaya,1,245000,0,245000,Kartu Kredit,Selesai
+T00425,2025-07-19,P098,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Semarang,1,45000,10,40500,E-Wallet,Selesai
+T00426,2025-07-20,P023,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Surabaya,1,169000,0,169000,Kartu Kredit,Selesai
+T00427,2025-07-20,P009,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Jakarta,1,169000,0,169000,COD,Dikembalikan
+T00428,2025-07-21,P106,PR07,Speaker Portabel,Elektronik,Makassar,3,379000,0,1137000,COD,Selesai
+T00429,2025-07-21,P109,PR35,Planner 2026,Buku & Alat Tulis,Surabaya,2,85000,0,170000,COD,Selesai
+T00430,2025-07-21,P097,PR35,Planner 2026,Buku & Alat Tulis,Yogyakarta,1,85000,15,72250,E-Wallet,Selesai
+T00431,2025-07-21,P097,PR03,Headset Bluetooth,Elektronik,Yogyakarta,2,459000,0,918000,Transfer Bank,Selesai
+T00432,2025-07-22,P084,PR05,Power Bank 10.000 mAh,Elektronik,Surabaya,2,229000,5,435100,Transfer Bank,Selesai
+T00433,2025-07-22,P104,PR04,Mouse Nirkabel,Elektronik,Jakarta,1,149000,10,134100,Kartu Kredit,Selesai
+T00434,2025-07-22,P044,PR24,Set Panci Anti Lengket,Rumah Tangga,Medan,2,649000,0,1298000,COD,Dibatalkan
+T00435,2025-07-23,P048,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,0,1899000,E-Wallet,Selesai
+T00436,2025-07-23,P085,PR26,Dispenser Air,Rumah Tangga,Jakarta,1,729000,0,729000,E-Wallet,Selesai
+T00437,2025-07-23,P035,PR22,Blender 2 L,Rumah Tangga,Denpasar,2,389000,15,661300,E-Wallet,Dibatalkan
+T00438,2025-07-25,P062,PR09,Kemeja Batik Pria,Fashion,Jakarta,1,189000,0,189000,Kartu Kredit,Selesai
+T00439,2025-07-25,P050,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,5,28000,0,140000,Transfer Bank,Selesai
+T00440,2025-07-26,P057,PR07,Speaker Portabel,Elektronik,Jakarta,1,379000,0,379000,Kartu Kredit,Selesai
+T00441,2025-07-27,P029,PR12,Jaket Hoodie,Fashion,Yogyakarta,1,199000,0,199000,Kartu Kredit,Selesai
+T00442,2025-07-27,P097,PR18,Kurma Premium 1 kg,Makanan & Minuman,Yogyakarta,3,135000,5,384750,COD,Selesai
+T00443,2025-07-27,P014,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Surabaya,1,42000,5,39900,COD,Selesai
+T00444,2025-07-27,P088,PR17,Madu Hutan 500 ml,Makanan & Minuman,Bandung,4,115000,0,460000,E-Wallet,Selesai
+T00445,2025-07-27,P057,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,0,79000,E-Wallet,Dibatalkan
+T00446,2025-07-27,P020,PR20,Sambal Roa Botol,Makanan & Minuman,Medan,1,45000,0,45000,E-Wallet,Selesai
+T00447,2025-07-27,P075,PR32,Buku Belajar Python,Buku & Alat Tulis,Makassar,1,139000,0,139000,Kartu Kredit,Selesai
+T00448,2025-07-27,P053,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,3,95000,0,285000,Transfer Bank,Selesai
+T00449,2025-07-27,P050,PR03,Headset Bluetooth,Elektronik,Surabaya,1,459000,0,459000,E-Wallet,Selesai
+T00450,2025-07-28,P019,PR10,Gamis Katun,Fashion,Yogyakarta,1,245000,10,220500,COD,Dikembalikan
+T00451,2025-07-29,P068,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,1,99000,0,99000,E-Wallet,Selesai
+T00452,2025-07-30,P083,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Yogyakarta,1,36000,0,36000,E-Wallet,Selesai
+T00453,2025-07-30,P024,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Surabaya,1,89000,10,80100,E-Wallet,Selesai
+T00454,2025-07-30,P050,PR35,Planner 2026,Buku & Alat Tulis,Surabaya,3,85000,15,216750,COD,Selesai
+T00455,2025-07-31,P005,PR08,Monitor 24 inci,Elektronik,Bandung,1,1899000,0,1899000,Transfer Bank,Selesai
+T00456,2025-07-31,P037,PR11,Sepatu Lari,Fashion,Bandung,1,529000,0,529000,E-Wallet,Selesai
+T00457,2025-08-01,P041,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,1,95000,0,95000,Kartu Kredit,Selesai
+T00458,2025-08-01,P064,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Yogyakarta,2,35000,5,66500,COD,Selesai
+T00459,2025-08-01,P060,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Jakarta,2,28000,0,56000,Kartu Kredit,Selesai
+T00460,2025-08-01,P090,PR05,Power Bank 10.000 mAh,Elektronik,Bandung,2,229000,0,458000,Kartu Kredit,Dikembalikan
+T00461,2025-08-02,P063,PR13,Kaos Polos Premium,Fashion,Surabaya,2,79000,15,134300,Transfer Bank,Selesai
+T00462,2025-08-02,P069,PR25,Lampu LED Pintar,Rumah Tangga,Yogyakarta,2,99000,15,168300,Kartu Kredit,Selesai
+T00463,2025-08-02,P039,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,1,45000,0,45000,Transfer Bank,Selesai
+T00464,2025-08-02,P092,PR12,Jaket Hoodie,Fashion,Bandung,2,199000,5,378100,Transfer Bank,Selesai
+T00465,2025-08-02,P036,PR11,Sepatu Lari,Fashion,Surabaya,1,529000,0,529000,Kartu Kredit,Selesai
+T00466,2025-08-03,P100,PR01,Laptop 14 inci Core i5,Elektronik,Yogyakarta,1,8499000,0,8499000,Transfer Bank,Selesai
+T00467,2025-08-04,P081,PR20,Sambal Roa Botol,Makanan & Minuman,Bandung,2,45000,5,85500,Transfer Bank,Dibatalkan
+T00468,2025-08-05,P007,PR09,Kemeja Batik Pria,Fashion,Jakarta,1,189000,15,160650,Transfer Bank,Selesai
+T00469,2025-08-06,P045,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Yogyakarta,1,45000,0,45000,E-Wallet,Dibatalkan
+T00470,2025-08-07,P042,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,0,315000,E-Wallet,Selesai
+T00471,2025-08-07,P043,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,2,135000,0,270000,Transfer Bank,Selesai
+T00472,2025-08-08,P031,PR32,Buku Belajar Python,Buku & Alat Tulis,Bandung,2,139000,10,250200,Transfer Bank,Selesai
+T00473,2025-08-10,P050,PR11,Sepatu Lari,Fashion,Surabaya,3,529000,5,1507650,E-Wallet,Selesai
+T00474,2025-08-10,P079,PR19,Keripik Singkong Pedas,Makanan & Minuman,Medan,3,22000,5,62700,E-Wallet,Selesai
+T00475,2025-08-10,P099,PR13,Kaos Polos Premium,Fashion,Jakarta,2,79000,0,158000,Transfer Bank,Selesai
+T00476,2025-08-11,P080,PR13,Kaos Polos Premium,Fashion,Medan,1,79000,5,75050,Kartu Kredit,Selesai
+T00477,2025-08-11,P074,PR12,Jaket Hoodie,Fashion,Yogyakarta,1,199000,0,199000,Kartu Kredit,Dibatalkan
+T00478,2025-08-13,P079,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Medan,3,159000,0,477000,E-Wallet,Selesai
+T00479,2025-08-13,P014,PR01,Laptop 14 inci Core i5,Elektronik,Surabaya,1,8499000,0,8499000,Transfer Bank,Selesai
+T00480,2025-08-13,P013,PR18,Kurma Premium 1 kg,Makanan & Minuman,Makassar,1,135000,0,135000,Kartu Kredit,Selesai
+T00481,2025-08-14,P022,PR17,Madu Hutan 500 ml,Makanan & Minuman,Makassar,1,115000,10,103500,E-Wallet,Selesai
+T00482,2025-08-14,P068,PR04,Mouse Nirkabel,Elektronik,Jakarta,1,149000,0,149000,Transfer Bank,Selesai
+T00483,2025-08-16,P019,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Yogyakarta,1,35000,10,31500,Transfer Bank,Selesai
+T00484,2025-08-17,P007,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Jakarta,2,36000,5,68400,Kartu Kredit,Selesai
+T00485,2025-08-17,P010,PR25,Lampu LED Pintar,Rumah Tangga,Medan,1,99000,0,99000,E-Wallet,Selesai
+T00486,2025-08-19,P006,PR25,Lampu LED Pintar,Rumah Tangga,Yogyakarta,1,99000,0,99000,Kartu Kredit,Selesai
+T00487,2025-08-19,P091,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Makassar,1,28000,0,28000,COD,Selesai
+T00488,2025-08-20,P042,PR06,Smartwatch Sport,Elektronik,Jakarta,2,899000,15,1528300,E-Wallet,Selesai
+T00489,2025-08-20,P005,PR18,Kurma Premium 1 kg,Makanan & Minuman,Bandung,1,135000,0,135000,Transfer Bank,Selesai
+T00490,2025-08-20,P045,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Yogyakarta,1,159000,10,143100,Kartu Kredit,Selesai
+T00491,2025-08-21,P105,PR13,Kaos Polos Premium,Fashion,Bandung,1,79000,0,79000,E-Wallet,Selesai
+T00492,2025-08-22,P008,PR10,Gamis Katun,Fashion,Bandung,1,245000,0,245000,E-Wallet,Selesai
+T00493,2025-08-22,P014,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,1,28000,0,28000,E-Wallet,Selesai
+T00494,2025-08-22,P109,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Surabaya,1,159000,10,143100,E-Wallet,Selesai
+T00495,2025-08-23,P067,PR13,Kaos Polos Premium,Fashion,Semarang,2,79000,0,158000,E-Wallet,Selesai
+T00496,2025-08-23,P073,PR32,Buku Belajar Python,Buku & Alat Tulis,Jakarta,2,139000,0,278000,Transfer Bank,Selesai
+T00497,2025-08-24,P079,PR25,Lampu LED Pintar,Rumah Tangga,Medan,1,99000,0,99000,Kartu Kredit,Selesai
+T00498,2025-08-25,P053,PR05,Power Bank 10.000 mAh,Elektronik,Jakarta,1,229000,0,229000,E-Wallet,Selesai
+T00499,2025-08-25,P034,PR18,Kurma Premium 1 kg,Makanan & Minuman,Medan,2,135000,0,270000,E-Wallet,Selesai
+T00500,2025-08-26,P085,PR07,Speaker Portabel,Elektronik,Jakarta,2,379000,0,758000,Transfer Bank,Selesai
+T00501,2025-08-26,P067,PR14,Tas Ransel Kerja,Fashion,Semarang,1,315000,0,315000,Transfer Bank,Selesai
+T00502,2025-08-26,P085,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Jakarta,1,459000,0,459000,Kartu Kredit,Selesai
+T00503,2025-08-27,P108,PR23,Setrika Uap,Rumah Tangga,Jakarta,2,275000,0,550000,E-Wallet,Selesai
+T00504,2025-08-27,P034,PR35,Planner 2026,Buku & Alat Tulis,Medan,1,85000,15,72250,E-Wallet,Selesai
+T00505,2025-08-28,P058,PR05,Power Bank 10.000 mAh,Elektronik,Jakarta,2,229000,5,435100,COD,Selesai
+T00506,2025-08-28,P009,PR10,Gamis Katun,Fashion,Jakarta,2,245000,0,490000,COD,Selesai
+T00507,2025-08-29,P080,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Medan,1,89000,10,80100,E-Wallet,Selesai
+T00508,2025-08-30,P087,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,1,45000,10,40500,Kartu Kredit,Selesai
+T00509,2025-08-30,P098,PR23,Setrika Uap,Rumah Tangga,Semarang,1,275000,0,275000,COD,Selesai
+T00510,2025-08-31,P059,PR08,Monitor 24 inci,Elektronik,Medan,1,1899000,0,1899000,Transfer Bank,Selesai
+T00511,2025-08-31,P099,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,1,89000,10,80100,Transfer Bank,Selesai
+T00512,2025-09-01,P107,PR23,Setrika Uap,Rumah Tangga,Semarang,1,275000,0,275000,E-Wallet,Selesai
+T00513,2025-09-01,P107,PR20,Sambal Roa Botol,Makanan & Minuman,Semarang,4,45000,0,180000,E-Wallet,Selesai
+T00514,2025-09-01,P041,PR10,Gamis Katun,Fashion,Bandung,1,245000,15,208250,COD,Selesai
+T00515,2025-09-02,P079,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Medan,1,95000,0,95000,Transfer Bank,Selesai
+T00516,2025-09-02,P084,PR04,Mouse Nirkabel,Elektronik,Surabaya,3,149000,5,424650,COD,Selesai
+T00517,2025-09-02,P057,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,2,89000,0,178000,E-Wallet,Selesai
+T00518,2025-09-03,P059,PR25,Lampu LED Pintar,Rumah Tangga,Medan,3,99000,0,297000,Kartu Kredit,Selesai
+T00519,2025-09-03,P069,PR06,Smartwatch Sport,Elektronik,Yogyakarta,3,899000,15,2292450,Kartu Kredit,Selesai
+T00520,2025-09-04,P049,PR10,Gamis Katun,Fashion,Jakarta,2,245000,0,490000,E-Wallet,Selesai
+T00521,2025-09-05,P079,PR09,Kemeja Batik Pria,Fashion,Medan,2,189000,0,378000,Kartu Kredit,Selesai
+T00522,2025-09-05,P016,PR04,Mouse Nirkabel,Elektronik,Jakarta,2,149000,0,298000,Kartu Kredit,Selesai
+T00523,2025-09-05,P012,PR12,Jaket Hoodie,Fashion,Yogyakarta,1,199000,0,199000,E-Wallet,Selesai
+T00524,2025-09-05,P091,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Makassar,1,45000,0,45000,Transfer Bank,Selesai
+T00525,2025-09-06,P041,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Bandung,3,459000,0,1377000,E-Wallet,Selesai
+T00526,2025-09-06,P008,PR12,Jaket Hoodie,Fashion,Bandung,3,199000,0,597000,Kartu Kredit,Selesai
+T00527,2025-09-06,P005,PR10,Gamis Katun,Fashion,Bandung,2,245000,0,490000,Kartu Kredit,Dibatalkan
+T00528,2025-09-06,P080,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Medan,1,45000,5,42750,Transfer Bank,Selesai
+T00529,2025-09-07,P075,PR06,Smartwatch Sport,Elektronik,Makassar,1,899000,0,899000,E-Wallet,Selesai
+T00530,2025-09-07,P064,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Yogyakarta,2,35000,0,70000,Kartu Kredit,Selesai
+T00531,2025-09-07,P001,PR17,Madu Hutan 500 ml,Makanan & Minuman,Yogyakarta,2,115000,0,230000,E-Wallet,Selesai
+T00532,2025-09-08,P036,PR26,Dispenser Air,Rumah Tangga,Surabaya,1,729000,0,729000,Transfer Bank,Selesai
+T00533,2025-09-09,P015,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,2,95000,0,190000,E-Wallet,Selesai
+T00534,2025-09-09,P017,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Jakarta,1,42000,10,37800,Transfer Bank,Selesai
+T00535,2025-09-11,P012,PR17,Madu Hutan 500 ml,Makanan & Minuman,Yogyakarta,1,115000,5,109250,E-Wallet,Selesai
+T00536,2025-09-11,P092,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Bandung,1,45000,5,42750,E-Wallet,Selesai
+T00537,2025-09-12,P048,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,2,135000,0,270000,Kartu Kredit,Selesai
+T00538,2025-09-13,P029,PR09,Kemeja Batik Pria,Fashion,Yogyakarta,1,189000,0,189000,E-Wallet,Selesai
+T00539,2025-09-14,P030,PR04,Mouse Nirkabel,Elektronik,Jakarta,1,149000,10,134100,E-Wallet,Selesai
+T00540,2025-09-15,P051,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,2,45000,5,85500,Transfer Bank,Dikembalikan
+T00541,2025-09-15,P085,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,2,89000,10,160200,Transfer Bank,Dibatalkan
+T00542,2025-09-17,P072,PR07,Speaker Portabel,Elektronik,Yogyakarta,1,379000,0,379000,E-Wallet,Selesai
+T00543,2025-09-17,P009,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Jakarta,1,89000,0,89000,COD,Selesai
+T00544,2025-09-17,P015,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,1,99000,0,99000,E-Wallet,Selesai
+T00545,2025-09-17,P005,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,2,95000,0,190000,E-Wallet,Selesai
+T00546,2025-09-19,P005,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,3,95000,0,285000,E-Wallet,Selesai
+T00547,2025-09-20,P069,PR05,Power Bank 10.000 mAh,Elektronik,Yogyakarta,2,229000,5,435100,E-Wallet,Selesai
+T00548,2025-09-20,P009,PR07,Speaker Portabel,Elektronik,Jakarta,2,379000,15,644300,E-Wallet,Selesai
+T00549,2025-09-20,P097,PR09,Kemeja Batik Pria,Fashion,Yogyakarta,1,189000,0,189000,E-Wallet,Selesai
+T00550,2025-09-22,P028,PR12,Jaket Hoodie,Fashion,Medan,1,199000,5,189050,Transfer Bank,Selesai
+T00551,2025-09-22,P051,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,0,1899000,Transfer Bank,Selesai
+T00552,2025-09-22,P084,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Surabaya,1,45000,15,38250,Transfer Bank,Selesai
+T00553,2025-09-22,P069,PR25,Lampu LED Pintar,Rumah Tangga,Yogyakarta,2,99000,0,198000,COD,Selesai
+T00554,2025-09-23,P035,PR05,Power Bank 10.000 mAh,Elektronik,Denpasar,1,229000,0,229000,Transfer Bank,Dibatalkan
+T00555,2025-09-24,P045,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Yogyakarta,1,459000,0,459000,COD,Selesai
+T00556,2025-09-24,P074,PR32,Buku Belajar Python,Buku & Alat Tulis,Yogyakarta,1,139000,0,139000,E-Wallet,Selesai
+T00557,2025-09-26,P029,PR08,Monitor 24 inci,Elektronik,Yogyakarta,1,1899000,0,1899000,E-Wallet,Selesai
+T00558,2025-09-26,P081,PR18,Kurma Premium 1 kg,Makanan & Minuman,Bandung,2,135000,15,229500,Transfer Bank,Selesai
+T00559,2025-09-27,P031,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Bandung,2,35000,0,70000,Kartu Kredit,Selesai
+T00560,2025-09-27,P043,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,3,95000,0,285000,E-Wallet,Selesai
+T00561,2025-09-27,P041,PR05,Power Bank 10.000 mAh,Elektronik,Bandung,1,229000,0,229000,Transfer Bank,Selesai
+T00562,2025-09-27,P003,PR22,Blender 2 L,Rumah Tangga,Denpasar,1,389000,0,389000,COD,Selesai
+T00563,2025-09-27,P105,PR22,Blender 2 L,Rumah Tangga,Bandung,1,389000,0,389000,E-Wallet,Selesai
+T00564,2025-09-28,P014,PR18,Kurma Premium 1 kg,Makanan & Minuman,Surabaya,3,135000,0,405000,COD,Selesai
+T00565,2025-09-28,P063,PR04,Mouse Nirkabel,Elektronik,Surabaya,1,149000,10,134100,E-Wallet,Selesai
+T00566,2025-09-29,P027,PR12,Jaket Hoodie,Fashion,Jakarta,1,199000,15,169150,E-Wallet,Selesai
+T00567,2025-09-29,P010,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Medan,3,45000,0,135000,E-Wallet,Selesai
+T00568,2025-09-29,P045,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Yogyakarta,1,35000,0,35000,Kartu Kredit,Selesai
+T00569,2025-09-30,P016,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,0,1899000,E-Wallet,Selesai
+T00570,2025-09-30,P094,PR11,Sepatu Lari,Fashion,Surabaya,1,529000,0,529000,COD,Selesai
+T00571,2025-09-30,P048,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Jakarta,1,42000,0,42000,COD,Selesai
+T00572,2025-10-01,P107,PR11,Sepatu Lari,Fashion,Semarang,1,529000,0,529000,Transfer Bank,Selesai
+T00573,2025-10-01,P022,PR11,Sepatu Lari,Fashion,Makassar,2,529000,5,1005100,Kartu Kredit,Selesai
+T00574,2025-10-01,P045,PR24,Set Panci Anti Lengket,Rumah Tangga,Yogyakarta,3,649000,0,1947000,E-Wallet,Selesai
+T00575,2025-10-01,P045,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Yogyakarta,3,459000,5,1308150,E-Wallet,Selesai
+T00576,2025-10-02,P063,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,4,28000,0,112000,E-Wallet,Selesai
+T00577,2025-10-02,P005,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Bandung,1,459000,0,459000,E-Wallet,Selesai
+T00578,2025-10-03,P035,PR01,Laptop 14 inci Core i5,Elektronik,Denpasar,1,8499000,0,8499000,Transfer Bank,Selesai
+T00579,2025-10-04,P009,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Jakarta,1,169000,0,169000,Transfer Bank,Selesai
+T00580,2025-10-05,P104,PR12,Jaket Hoodie,Fashion,Jakarta,1,199000,0,199000,E-Wallet,Selesai
+T00581,2025-10-05,P014,PR12,Jaket Hoodie,Fashion,Surabaya,3,199000,5,567150,Kartu Kredit,Selesai
+T00582,2025-10-05,P069,PR05,Power Bank 10.000 mAh,Elektronik,Yogyakarta,3,229000,0,687000,E-Wallet,Dibatalkan
+T00583,2025-10-05,P084,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Surabaya,1,35000,0,35000,E-Wallet,Selesai
+T00584,2025-10-06,P082,PR11,Sepatu Lari,Fashion,Denpasar,2,529000,0,1058000,Kartu Kredit,Selesai
+T00585,2025-10-06,P105,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,1,95000,0,95000,E-Wallet,Selesai
+T00586,2025-10-08,P069,PR14,Tas Ransel Kerja,Fashion,Yogyakarta,2,315000,0,630000,E-Wallet,Selesai
+T00587,2025-10-10,P023,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,2,28000,5,53200,Kartu Kredit,Selesai
+T00588,2025-10-10,P105,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Bandung,1,89000,5,84550,Transfer Bank,Selesai
+T00589,2025-10-10,P084,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Surabaya,2,42000,0,84000,Kartu Kredit,Selesai
+T00590,2025-10-10,P003,PR09,Kemeja Batik Pria,Fashion,Denpasar,1,189000,5,179550,Transfer Bank,Selesai
+T00591,2025-10-12,P090,PR19,Keripik Singkong Pedas,Makanan & Minuman,Bandung,2,22000,0,44000,Transfer Bank,Selesai
+T00592,2025-10-12,P085,PR24,Set Panci Anti Lengket,Rumah Tangga,Jakarta,1,649000,5,616550,COD,Selesai
+T00593,2025-10-12,P104,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Jakarta,3,169000,0,507000,Transfer Bank,Selesai
+T00594,2025-10-13,P005,PR12,Jaket Hoodie,Fashion,Bandung,1,199000,0,199000,E-Wallet,Selesai
+T00595,2025-10-13,P064,PR35,Planner 2026,Buku & Alat Tulis,Yogyakarta,1,85000,0,85000,E-Wallet,Selesai
+T00596,2025-10-14,P005,PR05,Power Bank 10.000 mAh,Elektronik,Bandung,1,229000,0,229000,E-Wallet,Selesai
+T00597,2025-10-14,P029,PR04,Mouse Nirkabel,Elektronik,Yogyakarta,1,149000,5,141550,COD,Selesai
+T00598,2025-10-14,P029,PR11,Sepatu Lari,Fashion,Yogyakarta,1,529000,0,529000,COD,Selesai
+T00599,2025-10-15,P022,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Makassar,2,36000,5,68400,E-Wallet,Dibatalkan
+T00600,2025-10-15,P105,PR19,Keripik Singkong Pedas,Makanan & Minuman,Bandung,2,22000,5,41800,Kartu Kredit,Selesai
+T00601,2025-10-16,P058,PR32,Buku Belajar Python,Buku & Alat Tulis,Jakarta,1,139000,0,139000,E-Wallet,Selesai
+T00602,2025-10-16,P065,PR23,Setrika Uap,Rumah Tangga,Yogyakarta,2,275000,0,550000,E-Wallet,Selesai
+T00603,2025-10-17,P045,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Yogyakarta,2,45000,0,90000,COD,Selesai
+T00604,2025-10-17,P098,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Semarang,2,28000,0,56000,E-Wallet,Selesai
+T00605,2025-10-17,P041,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Bandung,1,45000,10,40500,E-Wallet,Selesai
+T00606,2025-10-17,P061,PR20,Sambal Roa Botol,Makanan & Minuman,Medan,2,45000,0,90000,Transfer Bank,Selesai
+T00607,2025-10-18,P004,PR09,Kemeja Batik Pria,Fashion,Semarang,2,189000,10,340200,Transfer Bank,Selesai
+T00608,2025-10-18,P057,PR11,Sepatu Lari,Fashion,Jakarta,1,529000,5,502550,Transfer Bank,Selesai
+T00609,2025-10-18,P049,PR03,Headset Bluetooth,Elektronik,Jakarta,2,459000,0,918000,E-Wallet,Selesai
+T00610,2025-10-19,P009,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,0,315000,Transfer Bank,Selesai
+T00611,2025-10-20,P048,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,5,299250,Kartu Kredit,Selesai
+T00612,2025-10-20,P036,PR11,Sepatu Lari,Fashion,Surabaya,3,529000,5,1507650,COD,Selesai
+T00613,2025-10-21,P056,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,1,159000,5,151050,E-Wallet,Selesai
+T00614,2025-10-21,P022,PR03,Headset Bluetooth,Elektronik,Makassar,1,459000,0,459000,Kartu Kredit,Selesai
+T00615,2025-10-21,P020,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Medan,1,159000,0,159000,COD,Selesai
+T00616,2025-10-21,P085,PR10,Gamis Katun,Fashion,Jakarta,1,245000,5,232750,E-Wallet,Selesai
+T00617,2025-10-22,P059,PR05,Power Bank 10.000 mAh,Elektronik,Medan,1,229000,5,217550,Transfer Bank,Selesai
+T00618,2025-10-22,P013,PR22,Blender 2 L,Rumah Tangga,Makassar,3,389000,0,1167000,E-Wallet,Selesai
+T00619,2025-10-25,P035,PR20,Sambal Roa Botol,Makanan & Minuman,Denpasar,1,45000,0,45000,E-Wallet,Selesai
+T00620,2025-10-25,P068,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,1,159000,0,159000,E-Wallet,Dibatalkan
+T00621,2025-10-25,P088,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,3,95000,15,242250,Transfer Bank,Selesai
+T00622,2025-10-25,P069,PR20,Sambal Roa Botol,Makanan & Minuman,Yogyakarta,1,45000,0,45000,E-Wallet,Selesai
+T00623,2025-10-25,P046,PR32,Buku Belajar Python,Buku & Alat Tulis,Yogyakarta,1,139000,0,139000,Kartu Kredit,Selesai
+T00624,2025-10-26,P060,PR10,Gamis Katun,Fashion,Jakarta,2,245000,0,490000,Transfer Bank,Selesai
+T00625,2025-10-26,P025,PR10,Gamis Katun,Fashion,Bandung,2,245000,0,490000,E-Wallet,Selesai
+T00626,2025-10-26,P101,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,2,159000,0,318000,Transfer Bank,Selesai
+T00627,2025-10-27,P081,PR10,Gamis Katun,Fashion,Bandung,2,245000,0,490000,COD,Selesai
+T00628,2025-10-28,P085,PR22,Blender 2 L,Rumah Tangga,Jakarta,1,389000,0,389000,Transfer Bank,Selesai
+T00629,2025-10-28,P040,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Jakarta,1,42000,15,35700,E-Wallet,Selesai
+T00630,2025-10-29,P005,PR25,Lampu LED Pintar,Rumah Tangga,Bandung,1,99000,5,94050,E-Wallet,Selesai
+T00631,2025-10-29,P106,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Makassar,2,36000,0,72000,COD,Selesai
+T00632,2025-10-30,P069,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Yogyakarta,2,28000,5,53200,Kartu Kredit,Selesai
+T00633,2025-10-30,P042,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,0,79000,COD,Selesai
+T00634,2025-10-30,P098,PR10,Gamis Katun,Fashion,Semarang,1,245000,0,245000,E-Wallet,Selesai
+T00635,2025-10-31,P095,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Surabaya,2,159000,0,318000,E-Wallet,Selesai
+T00636,2025-10-31,P066,PR09,Kemeja Batik Pria,Fashion,Surabaya,1,189000,15,160650,COD,Selesai
+T00637,2025-11-01,P064,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Yogyakarta,1,36000,15,30600,Kartu Kredit,Selesai
+T00638,2025-11-01,P105,PR35,Planner 2026,Buku & Alat Tulis,Bandung,1,85000,0,85000,E-Wallet,Selesai
+T00639,2025-11-01,P066,PR18,Kurma Premium 1 kg,Makanan & Minuman,Surabaya,3,135000,0,405000,Transfer Bank,Dibatalkan
+T00640,2025-11-02,P086,PR06,Smartwatch Sport,Elektronik,Jakarta,1,899000,0,899000,Transfer Bank,Selesai
+T00641,2025-11-02,P009,PR22,Blender 2 L,Rumah Tangga,Jakarta,1,389000,0,389000,Transfer Bank,Dikembalikan
+T00642,2025-11-02,P054,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Bandung,3,169000,0,507000,Transfer Bank,Selesai
+T00643,2025-11-03,P061,PR18,Kurma Premium 1 kg,Makanan & Minuman,Medan,2,135000,10,243000,Transfer Bank,Selesai
+T00644,2025-11-04,P020,PR09,Kemeja Batik Pria,Fashion,Medan,1,189000,0,189000,Transfer Bank,Selesai
+T00645,2025-11-04,P050,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Surabaya,2,89000,10,160200,Transfer Bank,Selesai
+T00646,2025-11-04,P054,PR05,Power Bank 10.000 mAh,Elektronik,Bandung,2,229000,15,389300,Kartu Kredit,Selesai
+T00647,2025-11-04,P094,PR23,Setrika Uap,Rumah Tangga,Surabaya,1,275000,5,261250,Kartu Kredit,Selesai
+T00648,2025-11-04,P005,PR03,Headset Bluetooth,Elektronik,Bandung,1,459000,0,459000,Transfer Bank,Selesai
+T00649,2025-11-05,P067,PR09,Kemeja Batik Pria,Fashion,Semarang,2,189000,10,340200,COD,Selesai
+T00650,2025-11-05,P010,PR18,Kurma Premium 1 kg,Makanan & Minuman,Medan,3,135000,5,384750,Transfer Bank,Dikembalikan
+T00651,2025-11-05,P031,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Bandung,2,89000,0,178000,E-Wallet,Dibatalkan
+T00652,2025-11-06,P012,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Yogyakarta,2,28000,10,50400,Transfer Bank,Selesai
+T00653,2025-11-07,P091,PR05,Power Bank 10.000 mAh,Elektronik,Makassar,1,229000,10,206100,Transfer Bank,Selesai
+T00654,2025-11-07,P025,PR24,Set Panci Anti Lengket,Rumah Tangga,Bandung,2,649000,15,1103300,Transfer Bank,Selesai
+T00655,2025-11-07,P015,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Jakarta,1,36000,10,32400,COD,Selesai
+T00656,2025-11-08,P050,PR24,Set Panci Anti Lengket,Rumah Tangga,Surabaya,1,649000,5,616550,Kartu Kredit,Selesai
+T00657,2025-11-09,P029,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Yogyakarta,3,35000,5,99750,E-Wallet,Selesai
+T00658,2025-11-09,P105,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,3,95000,0,285000,E-Wallet,Selesai
+T00659,2025-11-09,P091,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Makassar,1,89000,0,89000,Transfer Bank,Selesai
+T00660,2025-11-10,P028,PR10,Gamis Katun,Fashion,Medan,1,245000,10,220500,Transfer Bank,Selesai
+T00661,2025-11-10,P092,PR22,Blender 2 L,Rumah Tangga,Bandung,2,389000,10,700200,Transfer Bank,Selesai
+T00662,2025-11-11,P083,PR14,Tas Ransel Kerja,Fashion,Yogyakarta,1,315000,0,315000,E-Wallet,Selesai
+T00663,2025-11-11,P033,PR17,Madu Hutan 500 ml,Makanan & Minuman,Jakarta,3,115000,10,310500,E-Wallet,Selesai
+T00664,2025-11-11,P011,PR09,Kemeja Batik Pria,Fashion,Bandung,1,189000,0,189000,E-Wallet,Selesai
+T00665,2025-11-11,P019,PR32,Buku Belajar Python,Buku & Alat Tulis,Yogyakarta,1,139000,10,125100,Transfer Bank,Selesai
+T00666,2025-11-11,P080,PR19,Keripik Singkong Pedas,Makanan & Minuman,Medan,1,22000,0,22000,Transfer Bank,Selesai
+T00667,2025-11-13,P054,PR05,Power Bank 10.000 mAh,Elektronik,Bandung,1,229000,0,229000,Transfer Bank,Selesai
+T00668,2025-11-13,P010,PR17,Madu Hutan 500 ml,Makanan & Minuman,Medan,1,115000,0,115000,E-Wallet,Selesai
+T00669,2025-11-13,P042,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,2,95000,0,190000,COD,Selesai
+T00670,2025-11-13,P003,PR11,Sepatu Lari,Fashion,Denpasar,1,529000,10,476100,COD,Selesai
+T00671,2025-11-13,P060,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,0,1899000,E-Wallet,Selesai
+T00672,2025-11-13,P079,PR02,Smartphone 128 GB,Elektronik,Medan,1,3299000,0,3299000,Transfer Bank,Selesai
+T00673,2025-11-15,P109,PR19,Keripik Singkong Pedas,Makanan & Minuman,Surabaya,2,22000,15,37400,E-Wallet,Dibatalkan
+T00674,2025-11-15,P051,PR03,Headset Bluetooth,Elektronik,Jakarta,1,459000,15,390150,E-Wallet,Selesai
+T00675,2025-11-15,P081,PR11,Sepatu Lari,Fashion,Bandung,2,529000,0,1058000,E-Wallet,Selesai
+T00676,2025-11-15,P031,PR10,Gamis Katun,Fashion,Bandung,2,245000,0,490000,Kartu Kredit,Selesai
+T00677,2025-11-16,P048,PR04,Mouse Nirkabel,Elektronik,Jakarta,1,149000,0,149000,E-Wallet,Selesai
+T00678,2025-11-16,P063,PR06,Smartwatch Sport,Elektronik,Surabaya,1,899000,0,899000,Kartu Kredit,Selesai
+T00679,2025-11-17,P034,PR12,Jaket Hoodie,Fashion,Medan,2,199000,0,398000,E-Wallet,Selesai
+T00680,2025-11-17,P056,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,1,45000,5,42750,E-Wallet,Dikembalikan
+T00681,2025-11-17,P071,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Surabaya,1,42000,10,37800,Transfer Bank,Selesai
+T00682,2025-11-17,P103,PR14,Tas Ransel Kerja,Fashion,Jakarta,2,315000,15,535500,E-Wallet,Selesai
+T00683,2025-11-17,P058,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,0,79000,Kartu Kredit,Selesai
+T00684,2025-11-17,P084,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Surabaya,1,89000,15,75650,Transfer Bank,Selesai
+T00685,2025-11-18,P049,PR01,Laptop 14 inci Core i5,Elektronik,Jakarta,2,8499000,15,14448300,Transfer Bank,Dikembalikan
+T00686,2025-11-19,P097,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Yogyakarta,1,42000,15,35700,COD,Selesai
+T00687,2025-11-20,P069,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Yogyakarta,1,35000,10,31500,E-Wallet,Selesai
+T00688,2025-11-20,P007,PR01,Laptop 14 inci Core i5,Elektronik,Jakarta,1,8499000,0,8499000,Kartu Kredit,Selesai
+T00689,2025-11-21,P085,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,2,135000,0,270000,E-Wallet,Selesai
+T00690,2025-11-21,P014,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,1,28000,0,28000,Transfer Bank,Selesai
+T00691,2025-11-22,P009,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,2,89000,0,178000,COD,Selesai
+T00692,2025-11-22,P035,PR25,Lampu LED Pintar,Rumah Tangga,Denpasar,2,99000,0,198000,Kartu Kredit,Selesai
+T00693,2025-11-22,P080,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Medan,3,159000,0,477000,COD,Selesai
+T00694,2025-11-22,P009,PR11,Sepatu Lari,Fashion,Jakarta,1,529000,0,529000,Kartu Kredit,Selesai
+T00695,2025-11-22,P100,PR19,Keripik Singkong Pedas,Makanan & Minuman,Yogyakarta,4,22000,10,79200,Transfer Bank,Selesai
+T00696,2025-11-22,P097,PR11,Sepatu Lari,Fashion,Yogyakarta,1,529000,15,449650,Kartu Kredit,Selesai
+T00697,2025-11-23,P049,PR24,Set Panci Anti Lengket,Rumah Tangga,Jakarta,2,649000,0,1298000,Transfer Bank,Selesai
+T00698,2025-11-24,P026,PR35,Planner 2026,Buku & Alat Tulis,Medan,2,85000,0,170000,Transfer Bank,Selesai
+T00699,2025-11-24,P068,PR09,Kemeja Batik Pria,Fashion,Jakarta,2,189000,10,340200,E-Wallet,Selesai
+T00700,2025-11-24,P070,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Jakarta,1,169000,5,160550,Transfer Bank,Selesai
+T00701,2025-11-25,P096,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Bandung,2,35000,5,66500,E-Wallet,Selesai
+T00702,2025-11-25,P009,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,15,67150,Kartu Kredit,Selesai
+T00703,2025-11-25,P085,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,2,95000,5,180500,E-Wallet,Selesai
+T00704,2025-11-25,P089,PR20,Sambal Roa Botol,Makanan & Minuman,Surabaya,1,45000,0,45000,Transfer Bank,Selesai
+T00705,2025-11-26,P064,PR32,Buku Belajar Python,Buku & Alat Tulis,Yogyakarta,1,139000,10,125100,Transfer Bank,Selesai
+T00706,2025-11-26,P076,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Jakarta,1,459000,10,413100,E-Wallet,Selesai
+T00707,2025-11-26,P097,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Yogyakarta,2,159000,10,286200,E-Wallet,Selesai
+T00708,2025-11-26,P081,PR13,Kaos Polos Premium,Fashion,Bandung,2,79000,5,150100,E-Wallet,Selesai
+T00709,2025-11-26,P001,PR18,Kurma Premium 1 kg,Makanan & Minuman,Yogyakarta,2,135000,15,229500,COD,Selesai
+T00710,2025-11-26,P108,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Jakarta,2,35000,5,66500,E-Wallet,Selesai
+T00711,2025-11-26,P010,PR02,Smartphone 128 GB,Elektronik,Medan,1,3299000,10,2969100,E-Wallet,Selesai
+T00712,2025-11-27,P098,PR14,Tas Ransel Kerja,Fashion,Semarang,3,315000,0,945000,Kartu Kredit,Selesai
+T00713,2025-11-27,P026,PR18,Kurma Premium 1 kg,Makanan & Minuman,Medan,2,135000,10,243000,E-Wallet,Selesai
+T00714,2025-11-27,P092,PR24,Set Panci Anti Lengket,Rumah Tangga,Bandung,2,649000,0,1298000,E-Wallet,Dibatalkan
+T00715,2025-11-27,P064,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Yogyakarta,2,159000,10,286200,E-Wallet,Selesai
+T00716,2025-11-27,P090,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Bandung,1,95000,0,95000,COD,Selesai
+T00717,2025-11-27,P108,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Jakarta,3,28000,0,84000,E-Wallet,Selesai
+T00718,2025-11-27,P092,PR17,Madu Hutan 500 ml,Makanan & Minuman,Bandung,3,115000,0,345000,E-Wallet,Selesai
+T00719,2025-11-28,P024,PR32,Buku Belajar Python,Buku & Alat Tulis,Surabaya,1,139000,15,118150,E-Wallet,Selesai
+T00720,2025-11-28,P099,PR13,Kaos Polos Premium,Fashion,Jakarta,1,79000,15,67150,Transfer Bank,Selesai
+T00721,2025-11-28,P057,PR03,Headset Bluetooth,Elektronik,Jakarta,1,459000,10,413100,COD,Selesai
+T00722,2025-11-28,P054,PR18,Kurma Premium 1 kg,Makanan & Minuman,Bandung,2,135000,5,256500,COD,Dibatalkan
+T00723,2025-11-29,P090,PR12,Jaket Hoodie,Fashion,Bandung,1,199000,5,189050,Transfer Bank,Selesai
+T00724,2025-11-29,P105,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Bandung,1,159000,0,159000,Transfer Bank,Dibatalkan
+T00725,2025-11-29,P064,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Yogyakarta,3,36000,10,97200,E-Wallet,Selesai
+T00726,2025-11-29,P054,PR14,Tas Ransel Kerja,Fashion,Bandung,2,315000,0,630000,Kartu Kredit,Selesai
+T00727,2025-11-30,P029,PR10,Gamis Katun,Fashion,Yogyakarta,1,245000,10,220500,E-Wallet,Selesai
+T00728,2025-11-30,P028,PR09,Kemeja Batik Pria,Fashion,Medan,1,189000,0,189000,E-Wallet,Selesai
+T00729,2025-12-01,P054,PR14,Tas Ransel Kerja,Fashion,Bandung,2,315000,0,630000,Transfer Bank,Selesai
+T00730,2025-12-01,P052,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Yogyakarta,1,169000,0,169000,E-Wallet,Selesai
+T00731,2025-12-02,P043,PR02,Smartphone 128 GB,Elektronik,Jakarta,2,3299000,10,5938200,E-Wallet,Selesai
+T00732,2025-12-02,P006,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Yogyakarta,1,28000,0,28000,E-Wallet,Selesai
+T00733,2025-12-02,P109,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,2,28000,0,56000,E-Wallet,Selesai
+T00734,2025-12-02,P076,PR34,Pulpen Gel (isi 12),Buku & Alat Tulis,Jakarta,1,36000,10,32400,COD,Selesai
+T00735,2025-12-02,P070,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Jakarta,1,45000,10,40500,COD,Selesai
+T00736,2025-12-02,P006,PR18,Kurma Premium 1 kg,Makanan & Minuman,Yogyakarta,2,135000,10,243000,Transfer Bank,Selesai
+T00737,2025-12-02,P025,PR10,Gamis Katun,Fashion,Bandung,1,245000,10,220500,E-Wallet,Dibatalkan
+T00738,2025-12-03,P002,PR24,Set Panci Anti Lengket,Rumah Tangga,Jakarta,1,649000,15,551650,E-Wallet,Selesai
+T00739,2025-12-04,P006,PR36,Buku Statistik Terapan,Buku & Alat Tulis,Yogyakarta,1,169000,10,152100,Transfer Bank,Selesai
+T00740,2025-12-04,P094,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,1,28000,0,28000,Transfer Bank,Selesai
+T00741,2025-12-05,P009,PR11,Sepatu Lari,Fashion,Jakarta,3,529000,10,1428300,E-Wallet,Selesai
+T00742,2025-12-05,P084,PR12,Jaket Hoodie,Fashion,Surabaya,1,199000,0,199000,E-Wallet,Selesai
+T00743,2025-12-05,P032,PR20,Sambal Roa Botol,Makanan & Minuman,Yogyakarta,1,45000,5,42750,E-Wallet,Selesai
+T00744,2025-12-06,P064,PR35,Planner 2026,Buku & Alat Tulis,Yogyakarta,3,85000,0,255000,E-Wallet,Selesai
+T00745,2025-12-06,P045,PR05,Power Bank 10.000 mAh,Elektronik,Yogyakarta,1,229000,10,206100,COD,Selesai
+T00746,2025-12-06,P098,PR19,Keripik Singkong Pedas,Makanan & Minuman,Semarang,1,22000,10,19800,E-Wallet,Selesai
+T00747,2025-12-06,P085,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Jakarta,2,159000,10,286200,E-Wallet,Selesai
+T00748,2025-12-06,P057,PR22,Blender 2 L,Rumah Tangga,Jakarta,1,389000,5,369550,Kartu Kredit,Selesai
+T00749,2025-12-07,P042,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,4,135000,10,486000,E-Wallet,Selesai
+T00750,2025-12-07,P038,PR18,Kurma Premium 1 kg,Makanan & Minuman,Surabaya,2,135000,5,256500,Kartu Kredit,Selesai
+T00751,2025-12-08,P061,PR20,Sambal Roa Botol,Makanan & Minuman,Medan,2,45000,0,90000,COD,Selesai
+T00752,2025-12-08,P029,PR17,Madu Hutan 500 ml,Makanan & Minuman,Yogyakarta,2,115000,5,218500,E-Wallet,Selesai
+T00753,2025-12-08,P081,PR07,Speaker Portabel,Elektronik,Bandung,1,379000,0,379000,Kartu Kredit,Selesai
+T00754,2025-12-08,P063,PR07,Speaker Portabel,Elektronik,Surabaya,2,379000,5,720100,Transfer Bank,Selesai
+T00755,2025-12-08,P035,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Denpasar,2,89000,10,160200,Kartu Kredit,Selesai
+T00756,2025-12-09,P086,PR02,Smartphone 128 GB,Elektronik,Jakarta,1,3299000,10,2969100,Transfer Bank,Selesai
+T00757,2025-12-09,P071,PR22,Blender 2 L,Rumah Tangga,Surabaya,3,389000,15,991950,Transfer Bank,Selesai
+T00758,2025-12-09,P108,PR11,Sepatu Lari,Fashion,Jakarta,2,529000,10,952200,Kartu Kredit,Selesai
+T00759,2025-12-10,P005,PR23,Setrika Uap,Rumah Tangga,Bandung,1,275000,0,275000,Transfer Bank,Selesai
+T00760,2025-12-11,P047,PR35,Planner 2026,Buku & Alat Tulis,Bandung,2,85000,5,161500,COD,Selesai
+T00761,2025-12-11,P029,PR04,Mouse Nirkabel,Elektronik,Yogyakarta,2,149000,0,298000,Transfer Bank,Selesai
+T00762,2025-12-11,P084,PR30,Masker Kain (isi 5),Kesehatan & Kecantikan,Surabaya,1,35000,0,35000,Kartu Kredit,Selesai
+T00763,2025-12-11,P083,PR01,Laptop 14 inci Core i5,Elektronik,Yogyakarta,1,8499000,10,7649100,E-Wallet,Selesai
+T00764,2025-12-12,P104,PR35,Planner 2026,Buku & Alat Tulis,Jakarta,1,85000,10,76500,Transfer Bank,Selesai
+T00765,2025-12-12,P001,PR25,Lampu LED Pintar,Rumah Tangga,Yogyakarta,1,99000,0,99000,COD,Selesai
+T00766,2025-12-12,P041,PR23,Setrika Uap,Rumah Tangga,Bandung,2,275000,0,550000,E-Wallet,Dikembalikan
+T00767,2025-12-12,P048,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,1,135000,0,135000,Kartu Kredit,Selesai
+T00768,2025-12-12,P067,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Semarang,1,89000,0,89000,E-Wallet,Selesai
+T00769,2025-12-12,P051,PR09,Kemeja Batik Pria,Fashion,Jakarta,1,189000,10,170100,Transfer Bank,Selesai
+T00770,2025-12-12,P093,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Jakarta,1,95000,10,85500,E-Wallet,Selesai
+T00771,2025-12-12,P037,PR05,Power Bank 10.000 mAh,Elektronik,Bandung,2,229000,0,458000,COD,Selesai
+T00772,2025-12-12,P105,PR17,Madu Hutan 500 ml,Makanan & Minuman,Bandung,1,115000,0,115000,Transfer Bank,Selesai
+T00773,2025-12-13,P049,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,0,315000,E-Wallet,Selesai
+T00774,2025-12-13,P053,PR05,Power Bank 10.000 mAh,Elektronik,Jakarta,1,229000,10,206100,E-Wallet,Selesai
+T00775,2025-12-13,P099,PR26,Dispenser Air,Rumah Tangga,Jakarta,1,729000,15,619650,COD,Selesai
+T00776,2025-12-14,P085,PR20,Sambal Roa Botol,Makanan & Minuman,Jakarta,3,45000,0,135000,COD,Selesai
+T00777,2025-12-14,P036,PR03,Headset Bluetooth,Elektronik,Surabaya,1,459000,0,459000,Kartu Kredit,Selesai
+T00778,2025-12-14,P036,PR13,Kaos Polos Premium,Fashion,Surabaya,2,79000,5,150100,E-Wallet,Selesai
+T00779,2025-12-15,P097,PR03,Headset Bluetooth,Elektronik,Yogyakarta,2,459000,0,918000,E-Wallet,Dikembalikan
+T00780,2025-12-15,P013,PR21,"Rice Cooker 1,8 L",Rumah Tangga,Makassar,1,459000,5,436050,E-Wallet,Selesai
+T00781,2025-12-16,P025,PR08,Monitor 24 inci,Elektronik,Bandung,1,1899000,0,1899000,E-Wallet,Selesai
+T00782,2025-12-16,P014,PR14,Tas Ransel Kerja,Fashion,Surabaya,1,315000,10,283500,Transfer Bank,Selesai
+T00783,2025-12-16,P050,PR32,Buku Belajar Python,Buku & Alat Tulis,Surabaya,2,139000,0,278000,Kartu Kredit,Selesai
+T00784,2025-12-16,P086,PR09,Kemeja Batik Pria,Fashion,Jakarta,2,189000,10,340200,Kartu Kredit,Selesai
+T00785,2025-12-17,P085,PR24,Set Panci Anti Lengket,Rumah Tangga,Jakarta,1,649000,0,649000,E-Wallet,Selesai
+T00786,2025-12-17,P079,PR31,Vitamin C 1000 mg,Kesehatan & Kecantikan,Medan,2,95000,0,190000,Kartu Kredit,Dibatalkan
+T00787,2025-12-17,P022,PR07,Speaker Portabel,Elektronik,Makassar,1,379000,0,379000,Kartu Kredit,Selesai
+T00788,2025-12-18,P071,PR25,Lampu LED Pintar,Rumah Tangga,Surabaya,1,99000,10,89100,E-Wallet,Selesai
+T00789,2025-12-18,P056,PR12,Jaket Hoodie,Fashion,Jakarta,1,199000,10,179100,Transfer Bank,Selesai
+T00790,2025-12-19,P011,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Bandung,1,89000,0,89000,Transfer Bank,Selesai
+T00791,2025-12-19,P024,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Surabaya,1,28000,5,26600,Transfer Bank,Selesai
+T00792,2025-12-19,P009,PR17,Madu Hutan 500 ml,Makanan & Minuman,Jakarta,2,115000,0,230000,E-Wallet,Dibatalkan
+T00793,2025-12-19,P024,PR13,Kaos Polos Premium,Fashion,Surabaya,1,79000,15,67150,E-Wallet,Selesai
+T00794,2025-12-20,P103,PR02,Smartphone 128 GB,Elektronik,Jakarta,1,3299000,5,3134050,Transfer Bank,Selesai
+T00795,2025-12-20,P081,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Bandung,1,159000,15,135150,Transfer Bank,Selesai
+T00796,2025-12-20,P104,PR28,Sunscreen SPF 50,Kesehatan & Kecantikan,Jakarta,2,89000,10,160200,E-Wallet,Selesai
+T00797,2025-12-21,P049,PR35,Planner 2026,Buku & Alat Tulis,Jakarta,1,85000,10,76500,Kartu Kredit,Selesai
+T00798,2025-12-22,P042,PR03,Headset Bluetooth,Elektronik,Jakarta,2,459000,15,780300,E-Wallet,Selesai
+T00799,2025-12-22,P098,PR22,Blender 2 L,Rumah Tangga,Semarang,1,389000,0,389000,COD,Selesai
+T00800,2025-12-23,P024,PR03,Headset Bluetooth,Elektronik,Surabaya,1,459000,10,413100,COD,Selesai
+T00801,2025-12-24,P028,PR25,Lampu LED Pintar,Rumah Tangga,Medan,2,99000,5,188100,E-Wallet,Selesai
+T00802,2025-12-24,P013,PR14,Tas Ransel Kerja,Fashion,Makassar,1,315000,0,315000,Transfer Bank,Dikembalikan
+T00803,2025-12-24,P064,PR32,Buku Belajar Python,Buku & Alat Tulis,Yogyakarta,1,139000,10,125100,Kartu Kredit,Selesai
+T00804,2025-12-25,P032,PR16,Teh Hijau Celup (isi 25),Makanan & Minuman,Yogyakarta,1,28000,0,28000,Kartu Kredit,Selesai
+T00805,2025-12-25,P110,PR08,Monitor 24 inci,Elektronik,Jakarta,1,1899000,0,1899000,E-Wallet,Selesai
+T00806,2025-12-25,P022,PR14,Tas Ransel Kerja,Fashion,Makassar,2,315000,5,598500,COD,Selesai
+T00807,2025-12-26,P084,PR13,Kaos Polos Premium,Fashion,Surabaya,3,79000,10,213300,Kartu Kredit,Selesai
+T00808,2025-12-26,P009,PR11,Sepatu Lari,Fashion,Jakarta,1,529000,0,529000,Transfer Bank,Selesai
+T00809,2025-12-28,P019,PR07,Speaker Portabel,Elektronik,Yogyakarta,2,379000,10,682200,E-Wallet,Selesai
+T00810,2025-12-28,P048,PR18,Kurma Premium 1 kg,Makanan & Minuman,Jakarta,3,135000,10,364500,COD,Selesai
+T00811,2025-12-28,P019,PR03,Headset Bluetooth,Elektronik,Yogyakarta,2,459000,5,872100,Transfer Bank,Selesai
+T00812,2025-12-28,P078,PR29,Sabun Herbal (isi 3),Kesehatan & Kecantikan,Bandung,1,45000,10,40500,Transfer Bank,Selesai
+T00813,2025-12-28,P048,PR03,Headset Bluetooth,Elektronik,Jakarta,2,459000,10,826200,Kartu Kredit,Selesai
+T00814,2025-12-29,P057,PR14,Tas Ransel Kerja,Fashion,Jakarta,1,315000,0,315000,E-Wallet,Selesai
+T00815,2025-12-29,P087,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Jakarta,2,89000,0,178000,E-Wallet,Selesai
+T00816,2025-12-29,P077,PR27,Serum Wajah Vitamin C,Kesehatan & Kecantikan,Surabaya,2,159000,0,318000,E-Wallet,Selesai
+T00817,2025-12-29,P074,PR07,Speaker Portabel,Elektronik,Yogyakarta,2,379000,0,758000,Transfer Bank,Selesai
+T00818,2025-12-30,P074,PR33,Buku Tulis A5 (isi 10),Buku & Alat Tulis,Yogyakarta,3,42000,0,126000,Transfer Bank,Selesai
+T00819,2025-12-30,P082,PR23,Setrika Uap,Rumah Tangga,Denpasar,2,275000,0,550000,E-Wallet,Selesai
+T00820,2025-12-30,P035,PR07,Speaker Portabel,Elektronik,Denpasar,1,379000,0,379000,COD,Selesai
+T00821,2025-12-30,P059,PR05,Power Bank 10.000 mAh,Elektronik,Medan,1,229000,10,206100,E-Wallet,Selesai
+T00822,2025-12-30,P060,PR23,Setrika Uap,Rumah Tangga,Jakarta,2,275000,0,550000,Transfer Bank,Selesai
+T00823,2025-12-30,P095,PR11,Sepatu Lari,Fashion,Surabaya,1,529000,0,529000,Kartu Kredit,Selesai
+T00824,2025-12-30,P037,PR15,Kopi Arabika Gayo 250 g,Makanan & Minuman,Bandung,1,89000,10,80100,E-Wallet,Selesai
+T00825,2025-12-30,P045,PR17,Madu Hutan 500 ml,Makanan & Minuman,Yogyakarta,1,115000,5,109250,E-Wallet,Selesai
+T00826,2025-12-30,P097,PR05,Power Bank 10.000 mAh,Elektronik,Yogyakarta,1,229000,0,229000,Kartu Kredit,Selesai
+T00827,2025-12-31,P057,PR25,Lampu LED Pintar,Rumah Tangga,Jakarta,1,99000,0,99000,Transfer Bank,Selesai
+T00828,2025-12-31,P098,PR07,Speaker Portabel,Elektronik,Semarang,2,379000,5,720100,Transfer Bank,Selesai

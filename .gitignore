@@ -31,3 +31,9 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Sandbox: file Pyodide dibuat otomatis oleh `npm install` / `npm run setup:offline`
+public/pyodide/
+dev-dist/
+.scratch/
+*.tsbuildinfo

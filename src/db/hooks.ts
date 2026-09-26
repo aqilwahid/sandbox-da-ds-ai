@@ -1,85 +1,74 @@
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useCallback, useEffect, useRef } from 'react';
-import { db, saveProgress, type ExerciseProgressRecord } from './index';
+import { useCallback, useMemo } from 'react';
+import { db, saveProgress, type ExerciseProgressRecord, type ExerciseStatus } from './index';
 
 export function useExerciseProgress(exerciseId: string): ExerciseProgressRecord | undefined {
-  return useLiveQuery(() => db.progress.get(exerciseId), [exerciseId]);
+  return useLiveQuery(() => (exerciseId ? db.progress.get(exerciseId) : undefined), [exerciseId]);
 }
 
 export function useAllProgress(): Record<string, ExerciseProgressRecord> {
-  const list = useLiveQuery(() => db.progress.toArray(), []);
-  const map: Record<string, ExerciseProgressRecord> = {};
-  if (list) {
-    list.forEach((item) => {
-      map[item.exerciseId] = item;
-    });
-  }
-  return map;
+  const list = useLiveQuery(() => db.progress.toArray().catch(() => []), []);
+  return useMemo(() => {
+    const map: Record<string, ExerciseProgressRecord> = {};
+    (list || []).forEach((r) => (map[r.exerciseId] = r));
+    return map;
+  }, [list]);
 }
 
-export function useDebouncedCodePersistence(
-  exerciseId: string,
-  code: string,
-  delayMs = 1000
-) {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+export async function getSavedCode(exerciseId: string): Promise<string | undefined> {
+  try {
+    const r = await db.progress.get(exerciseId);
+    return typeof r?.code === 'string' && r.code.length ? r.code : undefined;
+  } catch {
+    return undefined;
+  }
+}
 
-  useEffect(() => {
-    if (!exerciseId) return;
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    timeoutRef.current = setTimeout(async () => {
-      const existing = await db.progress.get(exerciseId);
-      if (existing) {
-        if (existing.code !== code) {
-          await saveProgress({
-            exerciseId,
-            code,
-            status: existing.status === 'belum' ? 'dicoba' : existing.status,
-          });
-        }
-      } else {
-        await saveProgress({
-          exerciseId,
-          code,
-          status: 'dicoba',
-        });
-      }
-    }, delayMs);
-
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, [exerciseId, code, delayMs]);
+export async function saveCode(exerciseId: string, code: string) {
+  try {
+    const existing = await db.progress.get(exerciseId);
+    if (existing && existing.code === code) return;
+    await saveProgress({
+      exerciseId,
+      code,
+      status: existing ? (existing.status === 'belum' ? 'dicoba' : existing.status) : 'dicoba',
+    });
+  } catch {
+    /* abaikan */
+  }
 }
 
 export function useProgressActions() {
-  const updateStatus = useCallback(
-    async (
-      exerciseId: string,
-      status: ExerciseProgressRecord['status'],
-      opts?: { isPassed?: boolean; incrementAttempt?: boolean; incrementHint?: boolean }
-    ) => {
-      const existing = await db.progress.get(exerciseId);
-      const attemptsCount = (existing?.attemptsCount || 0) + (opts?.incrementAttempt ? 1 : 0);
-      const hintsUsed = (existing?.hintsUsed || 0) + (opts?.incrementHint ? 1 : 0);
-      const passedAt = opts?.isPassed ? Date.now() : existing?.passedAt;
-
+  const recordAttempt = useCallback(
+    async (exerciseId: string, passed: boolean, score: { passed: number; total: number } | null) => {
+      const existing = await db.progress.get(exerciseId).catch(() => undefined);
+      let status: ExerciseStatus = passed ? 'lulus' : existing?.status === 'lulus' ? 'lulus' : existing?.status === 'lihat-solusi' ? 'lihat-solusi' : 'dicoba';
+      if (existing?.status === 'lulus') status = 'lulus';
       await saveProgress({
         exerciseId,
         status,
-        attemptsCount,
-        hintsUsed,
-        passedAt,
+        attemptsCount: (existing?.attemptsCount || 0) + 1,
+        lastScore: score ?? existing?.lastScore,
+        passedAt: passed ? existing?.passedAt ?? Date.now() : existing?.passedAt,
       });
     },
-    []
+    [],
   );
 
-  return { updateStatus };
+  const recordHint = useCallback(async (exerciseId: string, level: number) => {
+    const existing = await db.progress.get(exerciseId).catch(() => undefined);
+    if ((existing?.hintsUsed || 0) >= level) return;
+    await saveProgress({ exerciseId, hintsUsed: level, status: existing?.status ?? 'dicoba' });
+  }, []);
+
+  const recordSolutionViewed = useCallback(async (exerciseId: string) => {
+    const existing = await db.progress.get(exerciseId).catch(() => undefined);
+    await saveProgress({
+      exerciseId,
+      solutionViewed: true,
+      status: existing?.status === 'lulus' ? 'lulus' : 'lihat-solusi',
+    });
+  }, []);
+
+  return { recordAttempt, recordHint, recordSolutionViewed };
 }

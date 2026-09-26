@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validasi konten + type-check + build
+        run: npm run build
+
+      - name: Cache paket Pyodide (untuk uji konten)
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/pyodide-packages
+          key: pyodide-packages-${{ hashFiles('package-lock.json') }}
+
+      - name: Uji semua latihan (solusi lulus, starter belum lulus)
+        run: npm run test:content

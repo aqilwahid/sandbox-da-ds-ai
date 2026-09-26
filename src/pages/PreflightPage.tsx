@@ -1,307 +1,294 @@
-import React, { useState, useEffect } from 'react';
-import {
-  CheckCircle2,
-  XCircle,
-  Clock,
-  HardDrive,
-  Cpu,
-  Wifi,
-  DownloadCloud,
-  Layers,
-  ArrowLeft,
-  RotateCcw,
-  Sparkles,
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { CheckCircle2, CircleDashed, Cpu, Database, HardDrive, Loader2, Package, PlayCircle, RefreshCw, Server, TriangleAlert, WifiOff, XCircle } from 'lucide-react';
+import { CDN_PACKAGE_BASE, PYODIDE_VERSION } from '../config';
+import { allDatasetRefs, allPackages } from '../content/loader';
+import { formatDuration } from '../lib/format';
+import { setPref, usePrefs } from '../lib/prefs';
+import { pythonRuntime, useRuntimeState } from '../runtime/pythonRuntime';
 import { ProgressBar } from '../components/common/ProgressBar';
-import { MockRuntimeAdapter } from '../runtime/adapters/mockAdapter';
-import { useToast } from '../components/layout/Toast';
 
-interface PreflightStep {
+type Status = 'idle' | 'running' | 'ok' | 'warn' | 'error';
+interface Step {
   id: string;
-  name: string;
-  description: string;
-  status: 'pending' | 'running' | 'success' | 'error';
-  details?: string;
+  title: string;
+  desc: string;
+  icon: React.ReactNode;
+  status: Status;
+  detail?: string;
+  sub?: { name: string; ok: boolean; detail: string }[];
 }
 
-export const PreflightPage: React.FC<{ onBackToWorkspace: () => void }> = ({ onBackToWorkspace }) => {
-  const [steps, setSteps] = useState<PreflightStep[]>([
-    {
-      id: 'sw',
-      name: 'PWA Service Worker & Cache Storage',
-      description: 'Memeriksa pendaftaran Service Worker untuk precache file statis offline.',
-      status: 'pending',
-    },
-    {
-      id: 'storage',
-      name: 'IndexedDB & Dexie Storage',
-      description: 'Memverifikasi izin penyimpanan browser lokal untuk persistensi kode & progres.',
-      status: 'pending',
-    },
-    {
-      id: 'worker',
-      name: 'Web Worker Isolation & Execution',
-      description: 'Menguji inisialisasi background Web Worker dan mekanisme timeout kill guard.',
-      status: 'pending',
-    },
-    {
-      id: 'runtime-mock',
-      name: 'Prewarm Sandbox Runtime Engine',
-      description: 'Mengalokasikan memori WebAssembly dan memuat context awal runtime.',
-      status: 'pending',
-    },
-  ]);
+const INITIAL: Step[] = [
+  { id: 'browser', title: 'Kemampuan browser', desc: 'WebAssembly, Web Worker, dan penyimpanan lokal (IndexedDB).', icon: <Cpu size={16} />, status: 'idle' },
+  { id: 'sw', title: 'Mode offline', desc: 'Service worker menyimpan aplikasi agar tetap bisa dibuka tanpa internet.', icon: <WifiOff size={16} />, status: 'idle' },
+  { id: 'python', title: 'Mesin Python (Pyodide)', desc: 'Memuat CPython dalam WebAssembly (±12 MB, sekali unduh).', icon: <Server size={16} />, status: 'idle' },
+  { id: 'packages', title: 'Pustaka data & AI', desc: 'pandas, matplotlib, scikit-learn, DuckDB, dll. yang dipakai latihan.', icon: <Package size={16} />, status: 'idle' },
+  { id: 'datasets', title: 'Dataset latihan', desc: 'File CSV yang dipakai di semua latihan.', icon: <Database size={16} />, status: 'idle' },
+  { id: 'smoke', title: 'Uji fungsi', desc: 'Menjalankan SQL, pandas, grafik, dan model kecil.', icon: <PlayCircle size={16} />, status: 'idle' },
+];
 
-  const [isRunningAll, setIsRunningAll] = useState(false);
-  const [progressPct, setProgressPct] = useState(0);
-  const [progressMsg, setProgressMsg] = useState('');
-  const [storageEstimate, setStorageEstimate] = useState<string>('');
-  const { showToast } = useToast();
+const Icon: React.FC<{ s: Status }> = ({ s }) => {
+  if (s === 'ok') return <CheckCircle2 size={18} className="text-ok" />;
+  if (s === 'warn') return <TriangleAlert size={18} className="text-warn" />;
+  if (s === 'error') return <XCircle size={18} className="text-err" />;
+  if (s === 'running') return <Loader2 size={18} className="animate-spin text-accent" />;
+  return <CircleDashed size={18} className="text-fg3" />;
+};
 
-  useEffect(() => {
-    // Check storage estimate
-    if (navigator.storage && navigator.storage.estimate) {
-      navigator.storage.estimate().then((est) => {
-        const usageMb = Math.round(((est.usage || 0) / (1024 * 1024)) * 10) / 10;
-        const quotaMb = Math.round(((est.quota || 0) / (1024 * 1024)) * 10) / 10;
-        setStorageEstimate(`Terpakai: ${usageMb} MB / Kuota: ${quotaMb} MB`);
+export const PreflightPage: React.FC = () => {
+  const [steps, setSteps] = useState<Step[]>(INITIAL);
+  const [running, setRunning] = useState(false);
+  const [progress, setProgress] = useState<{ pct: number | null; msg: string } | null>(null);
+  const [storage, setStorage] = useState<string>('');
+  const rt = useRuntimeState();
+  const prefs = usePrefs();
+  const [source, setSource] = useState(prefs.packageSource);
+
+  const upd = (id: string, patch: Partial<Step>) => setSteps((s) => s.map((x) => (x.id === id ? { ...x, ...patch } : x)));
+
+  const runAll = async () => {
+    setRunning(true);
+    setSteps(INITIAL);
+    // 1. Browser
+    upd('browser', { status: 'running' });
+    const missing: string[] = [];
+    if (typeof WebAssembly === 'undefined') missing.push('WebAssembly');
+    if (typeof Worker === 'undefined') missing.push('Web Worker');
+    let idbOk = false;
+    try {
+      await new Promise<void>((res, rej) => {
+        const r = indexedDB.open('sbx-preflight-test');
+        r.onsuccess = () => {
+          r.result.close();
+          indexedDB.deleteDatabase('sbx-preflight-test');
+          res();
+        };
+        r.onerror = () => rej(r.error);
       });
+      idbOk = true;
+    } catch {
+      missing.push('IndexedDB (progres tidak akan tersimpan)');
     }
-  }, []);
+    try {
+      const est = await navigator.storage?.estimate?.();
+      if (est) setStorage(`${Math.round((est.usage || 0) / 1048576)} MB terpakai dari ±${Math.round((est.quota || 0) / 1048576)} MB`);
+      await navigator.storage?.persist?.();
+    } catch {
+      /* abaikan */
+    }
+    upd('browser', {
+      status: missing.length ? (idbOk ? 'error' : 'warn') : 'ok',
+      detail: missing.length ? `Tidak tersedia: ${missing.join(', ')}. Gunakan Chrome/Edge/Firefox versi terbaru.` : 'Semua fitur yang dibutuhkan tersedia.',
+    });
 
-  const updateStepStatus = (id: string, status: PreflightStep['status'], details?: string) => {
-    setSteps((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, status, details: details || s.details } : s))
+    // 2. Service worker
+    upd('sw', { status: 'running' });
+    if (!('serviceWorker' in navigator) || !window.isSecureContext) {
+      upd('sw', {
+        status: 'warn',
+        detail: window.isSecureContext
+          ? 'Browser tidak mendukung service worker. Aplikasi tetap jalan selama server bisa diakses.'
+          : 'Halaman dibuka lewat http (mis. IP laptop trainer), jadi mode offline browser tidak aktif. Tidak masalah selama server kelas menyala.',
+      });
+    } else {
+      const sleep = (ms: number) => new Promise<undefined>((r) => setTimeout(() => r(undefined), ms));
+      let reg = await navigator.serviceWorker.getRegistration();
+      if (!reg) {
+        await sleep(1500); // pendaftaran service worker berjalan asinkron setelah halaman dimuat
+        reg = await navigator.serviceWorker.getRegistration();
+      }
+      if (!reg) {
+        upd('sw', { status: 'warn', detail: 'Belum aktif (normal saat `npm run dev`). Pada versi build (`npm run build`) akan aktif otomatis.' });
+      } else {
+        upd('sw', { status: 'running', detail: 'Menyimpan aplikasi untuk offline…' });
+        const ready = await Promise.race([navigator.serviceWorker.ready, sleep(60000)]);
+        const controlled =
+          !!ready?.active &&
+          (!!navigator.serviceWorker.controller ||
+            (await Promise.race([
+              new Promise<boolean>((r) => navigator.serviceWorker.addEventListener('controllerchange', () => r(true), { once: true })),
+              sleep(10000).then(() => !!navigator.serviceWorker.controller),
+            ])));
+        if (controlled) {
+          // Worker Python yang terlanjur dibuat sebelum service worker aktif dimuat ulang,
+          // agar paket yang diunduh setelah ini ikut tersimpan untuk offline.
+          const restarted = await pythonRuntime.ensureOfflineCapture();
+          upd('sw', {
+            status: 'ok',
+            detail:
+              'Aktif — aplikasi & paket yang diunduh tersimpan untuk dipakai offline.' +
+              (restarted ? ' Python dimuat ulang sekali agar unduhan paketnya ikut tersimpan.' : ''),
+          });
+        } else {
+          upd('sw', { status: 'warn', detail: 'Belum selesai terpasang (koneksi lambat?). Muat ulang halaman, lalu jalankan Cek Kesiapan sekali lagi.' });
+        }
+      }
+    }
+
+    // 3. Python
+    upd('python', { status: 'running' });
+    const t0 = performance.now();
+    try {
+      await pythonRuntime.ensureReady();
+      const st = pythonRuntime.getState();
+      upd('python', {
+        status: 'ok',
+        detail: `Python ${st.pythonVersion} siap dalam ${formatDuration(performance.now() - t0)}. Sumber paket: ${
+          st.packageSource === 'lokal' ? 'server lokal (offline)' : 'CDN jsDelivr (internet)'
+        }.`,
+      });
+    } catch (e) {
+      upd('python', { status: 'error', detail: (e as Error).message });
+      setRunning(false);
+      return;
+    }
+
+    // 4. Packages
+    const pkgs = allPackages();
+    upd('packages', { status: 'running', detail: pkgs.join(', ') });
+    const t1 = performance.now();
+    try {
+      await pythonRuntime.loadPackages(pkgs, (msg, pct) => setProgress({ msg, pct: pct ?? null }));
+      upd('packages', { status: 'ok', detail: `${pkgs.length} paket siap (${pkgs.join(', ')}) dalam ${formatDuration(performance.now() - t1)}.` });
+    } catch (e) {
+      upd('packages', { status: 'error', detail: (e as Error).message });
+    }
+    setProgress(null);
+
+    // 5. Datasets
+    upd('datasets', { status: 'running' });
+    const refs = allDatasetRefs();
+    const failed: string[] = [];
+    await Promise.all(
+      refs.map(async (d) => {
+        try {
+          const r = await fetch(d.url);
+          if (!r.ok) failed.push(d.file);
+          else await r.arrayBuffer();
+        } catch {
+          failed.push(d.file);
+        }
+      }),
     );
+    upd('datasets', {
+      status: failed.length ? 'error' : 'ok',
+      detail: failed.length ? `Gagal: ${failed.join(', ')}` : `${refs.length} dataset tersedia (${refs.map((d) => d.file).join(', ')}).`,
+    });
+
+    // 6. Smoke
+    upd('smoke', { status: 'running' });
+    try {
+      const r = await pythonRuntime.smokeTest(refs);
+      upd('smoke', { status: r.checks.every((c) => c.ok) ? 'ok' : 'error', sub: r.checks });
+    } catch (e) {
+      upd('smoke', { status: 'error', detail: (e as Error).message });
+    }
+    setRunning(false);
   };
 
-  const runAllChecks = async () => {
-    setIsRunningAll(true);
-    setProgressPct(5);
-    setProgressMsg('Memulai pengujian kesiapan offline...');
-
-    // 1. Service Worker check
-    updateStepStatus('sw', 'running');
-    try {
-      if ('serviceWorker' in navigator) {
-        const reg = await navigator.serviceWorker.getRegistration();
-        const swActive = reg && reg.active;
-        updateStepStatus(
-          'sw',
-          'success',
-          swActive
-            ? 'Service Worker aktif & precache bundle siap.'
-            : 'Service worker terdaftar (siap precache pada mode standalone/preview).'
-        );
-      } else {
-        updateStepStatus('sw', 'error', 'Browser tidak mendukung Service Worker.');
-      }
-    } catch (e: any) {
-      updateStepStatus('sw', 'error', e.message);
-    }
-    setProgressPct(30);
-
-    // 2. Storage & IndexedDB Check
-    updateStepStatus('storage', 'running');
-    try {
-      const isIndexedDbAvailable = Boolean(window.indexedDB);
-      if (isIndexedDbAvailable) {
-        updateStepStatus('storage', 'success', 'IndexedDB aktif, Dexie.js siap menyimpan progres.');
-      } else {
-        updateStepStatus('storage', 'error', 'IndexedDB tidak didukung atau diblokir.');
-      }
-    } catch (e: any) {
-      updateStepStatus('storage', 'error', e.message);
-    }
-    setProgressPct(60);
-
-    // 3. Web Worker Check & Timeout Guard
-    updateStepStatus('worker', 'running');
-    try {
-      const mockAdapter = new MockRuntimeAdapter();
-      await mockAdapter.init({
-        onProgress: (pct, msg) => {
-          setProgressMsg(msg);
-        },
-      });
-
-      const res = await mockAdapter.run('print("preflight check")', 3000);
-      if (res.error) {
-        updateStepStatus('worker', 'error', res.error);
-      } else {
-        updateStepStatus(
-          'worker',
-          'success',
-          `Worker berhasil merespons dalam ${res.durationMs}ms.`
-        );
-      }
-      mockAdapter.terminate();
-    } catch (e: any) {
-      updateStepStatus('worker', 'error', e.message);
-    }
-    setProgressPct(85);
-
-    // 4. Prewarm Sandbox Runtime
-    updateStepStatus('runtime-mock', 'running');
-    try {
-      const mockAdapter = new MockRuntimeAdapter();
-      await mockAdapter.init({ onProgress: () => {} });
-      await mockAdapter.preload(['pandas', 'duckdb']);
-      updateStepStatus('runtime-mock', 'success', 'Runtime berhasil diprewarm dan dicache di memory.');
-      mockAdapter.terminate();
-    } catch (e: any) {
-      updateStepStatus('runtime-mock', 'error', e.message);
-    }
-
-    setProgressPct(100);
-    setProgressMsg('Semua pengujian diagnostik selesai!');
-    setIsRunningAll(false);
-    showToast('Pemeriksaan kesiapan offline selesai!', 'success');
-  };
-
-  const allPassed = steps.every((s) => s.status === 'success');
+  const hardFail = steps.some((s) => s.status === 'error');
+  const done = steps.every((s) => s.status === 'ok' || s.status === 'warn');
+  const offlineReady = done && steps.find((s) => s.id === 'sw')?.status === 'ok';
 
   return (
-    <div className="flex-1 flex flex-col bg-dark-900 overflow-y-auto p-6 md:p-10">
-      <div className="max-w-3xl mx-auto w-full space-y-6">
-        {/* Header navigation */}
-        <div className="flex items-center justify-between">
-          <button
-            onClick={onBackToWorkspace}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-850 hover:bg-dark-800 text-slate-300 border border-slate-700/80 text-xs font-medium transition-colors"
-          >
-            <ArrowLeft size={14} />
-            <span>Kembali ke Latihan</span>
+    <div className="min-h-0 flex-1 overflow-y-auto">
+      <div className="mx-auto max-w-3xl space-y-5 px-5 py-8">
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight text-fg">Cek kesiapan perangkat</h1>
+          <p className="mt-1 text-xs leading-relaxed text-fg2">
+            Jalankan sekali di setiap laptop peserta <strong className="text-fg">sebelum kelas dimulai</strong> (saat masih terhubung ke internet atau server
+            kelas). Semua mesin & pustaka akan diunduh dan disimpan sehingga latihan langsung jalan tanpa menunggu.
+          </p>
+        </div>
+
+        <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
+          <div className="text-xs text-fg2">
+            <div className="flex items-center gap-2 font-semibold text-fg">
+              <HardDrive size={14} /> {storage || 'Penyimpanan browser'}
+            </div>
+            <div className="mt-0.5">
+              Pyodide {PYODIDE_VERSION} · paket dari{' '}
+              <strong className="text-fg">{rt.packageSource === 'lokal' ? 'server lokal' : rt.packageSource === 'cdn' ? 'CDN' : 'otomatis'}</strong>
+            </div>
+          </div>
+          <button type="button" className="btn-primary !px-4 !py-2" disabled={running} onClick={runAll}>
+            {running ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}
+            {running ? 'Sedang memeriksa…' : 'Mulai pemeriksaan'}
           </button>
-
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400 font-mono">
-              {storageEstimate}
-            </span>
-          </div>
         </div>
 
-        {/* Hero Card */}
-        <div className="p-6 rounded-2xl bg-gradient-to-br from-dark-850 to-dark-800 border border-slate-750 shadow-xl relative overflow-hidden">
-          <div className="relative z-10 space-y-3">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-brand-500/15 text-brand-300 border border-brand-500/30 text-xs font-mono">
-              <DownloadCloud size={13} />
-              Preflight Offline Readiness
-            </div>
+        {progress && <ProgressBar value={progress.pct} label={progress.msg} />}
 
-            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
-              Persiapan Kelas Tanpa Jaringan (100% Offline)
-            </h1>
+        <ol className="space-y-2">
+          {steps.map((s) => (
+            <li key={s.id} className={`card p-3.5 ${s.status === 'error' ? '!border-err/50' : s.status === 'ok' ? '!border-ok/35' : ''}`}>
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5">
+                  <Icon s={s.status} />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-fg">
+                    <span className="text-fg3">{s.icon}</span> {s.title}
+                  </div>
+                  <p className="text-2xs text-fg3">{s.desc}</p>
+                  {s.detail && <p className="mt-1 text-xs text-fg2">{s.detail}</p>}
+                  {s.sub && (
+                    <ul className="mt-1.5 grid gap-1 sm:grid-cols-2">
+                      {s.sub.map((c) => (
+                        <li key={c.name} className="flex items-start gap-1.5 text-2xs text-fg2">
+                          {c.ok ? <CheckCircle2 size={12} className="mt-0.5 shrink-0 text-ok" /> : <XCircle size={12} className="mt-0.5 shrink-0 text-err" />}
+                          <span>
+                            <strong className="text-fg">{c.name}</strong>: {c.detail}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
 
-            <p className="text-xs md:text-sm text-slate-300 leading-relaxed max-w-2xl">
-              Halaman ini memastikan browser Anda sudah mengunduh dan meng-cache seluruh file aplikasi, WebAssembly, Web Worker, dan pustaka runtime. Setelah proses ini selesai, laptop peserta dapat sepenuhnya diputus dari internet saat kelas berlangsung.
-            </p>
-
-            <div className="pt-2 flex items-center gap-3">
-              <button
-                onClick={runAllChecks}
-                disabled={isRunningAll}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 active:scale-95 text-white text-xs font-semibold shadow-lg shadow-brand-600/30 transition-all disabled:opacity-50"
-              >
-                {isRunningAll ? (
-                  <>
-                    <RotateCcw size={14} className="animate-spin" />
-                    <span>Sedang Menguji Cache...</span>
-                  </>
-                ) : (
-                  <>
-                    <Sparkles size={14} />
-                    <span>Precache & Verifikasi Semua Runtime</span>
-                  </>
-                )}
-              </button>
-            </div>
+        {done && (
+          <div className="rounded-xl border border-ok/40 bg-ok/10 p-4 text-sm text-fg">
+            <strong>Perangkat siap dipakai ✓</strong>{' '}
+            {offlineReady ? 'Termasuk mode offline — latihan tetap berjalan walau internet terputus.' : 'Pastikan server kelas / internet tetap tersedia saat membuka aplikasi.'}
           </div>
-        </div>
-
-        {/* Progress Bar during execution */}
-        {isRunningAll && (
-          <ProgressBar percentage={progressPct} message={progressMsg} />
+        )}
+        {hardFail && !running && (
+          <div className="rounded-xl border border-err/40 bg-err/10 p-4 text-xs leading-relaxed text-fg">
+            <strong>Ada pemeriksaan yang gagal.</strong> Coba muat ulang halaman dan ulangi. Jika paket gagal diunduh dari CDN, minta trainer menyiapkan paket lokal
+            (<code className="font-mono">npm run setup:offline</code>) lalu pilih sumber paket "Server lokal" di bawah.
+          </div>
         )}
 
-        {/* Step Checklist */}
-        <div className="space-y-3">
-          <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wider font-mono">
-            Daftar Uji Kesiapan Lingkungan
-          </h2>
-
-          <div className="space-y-2.5">
-            {steps.map((step) => {
-              return (
-                <div
-                  key={step.id}
-                  className={`p-4 rounded-xl border transition-all flex items-start gap-3.5 ${
-                    step.status === 'success'
-                      ? 'bg-emerald-950/20 border-emerald-500/40 text-slate-200'
-                      : step.status === 'error'
-                      ? 'bg-rose-950/20 border-rose-500/40 text-slate-200'
-                      : step.status === 'running'
-                      ? 'bg-brand-950/20 border-brand-500/40 text-slate-200'
-                      : 'bg-dark-850 border-slate-800 text-slate-400'
-                  }`}
-                >
-                  <div className="mt-0.5 shrink-0">
-                    {step.status === 'success' && (
-                      <CheckCircle2 size={18} className="text-emerald-400" />
-                    )}
-                    {step.status === 'error' && (
-                      <XCircle size={18} className="text-rose-400" />
-                    )}
-                    {step.status === 'running' && (
-                      <div className="w-4 h-4 rounded-full border-2 border-brand-400 border-t-transparent animate-spin" />
-                    )}
-                    {step.status === 'pending' && (
-                      <div className="w-4 h-4 rounded-full border border-slate-600" />
-                    )}
-                  </div>
-
-                  <div className="flex-1 min-w-0 space-y-1">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xs font-semibold text-slate-100">{step.name}</h3>
-                      <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-dark-900 border border-slate-800">
-                        {step.status}
-                      </span>
-                    </div>
-
-                    <p className="text-[11px] text-slate-400 leading-relaxed">
-                      {step.description}
-                    </p>
-
-                    {step.details && (
-                      <div className="pt-1 text-[11px] font-mono text-slate-300">
-                        ℹ️ {step.details}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Readiness Badge */}
-        {allPassed && (
-          <div className="p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/50 flex items-center justify-between">
-            <div className="flex items-center gap-2.5 text-emerald-200 text-xs">
-              <CheckCircle2 size={18} className="text-emerald-400" />
-              <span>
-                <strong>Browser Anda 100% Siap untuk Kelas Offline!</strong> Anda dapat mematikan koneksi WiFi sekarang.
-              </span>
-            </div>
-
+        <details className="card p-4 text-xs text-fg2">
+          <summary className="cursor-pointer font-semibold text-fg">Pengaturan lanjutan: sumber paket Python</summary>
+          <p className="mt-2 leading-relaxed">
+            <strong className="text-fg">Otomatis</strong> memakai paket lokal jika trainer sudah menjalankan <code className="font-mono">npm run setup:offline</code>, dan
+            CDN jika belum. CDN: <code className="break-all font-mono">{CDN_PACKAGE_BASE}</code>
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            {(['auto', 'lokal', 'cdn'] as const).map((opt) => (
+              <label key={opt} className={`flex cursor-pointer items-center gap-1.5 rounded-lg border px-2.5 py-1.5 ${source === opt ? 'border-accent bg-accent/10 text-fg' : 'border-line'}`}>
+                <input type="radio" name="src" checked={source === opt} onChange={() => setSource(opt)} />
+                {opt === 'auto' ? 'Otomatis' : opt === 'lokal' ? 'Server lokal (offline)' : 'CDN (internet)'}
+              </label>
+            ))}
             <button
-              onClick={onBackToWorkspace}
-              className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors"
+              type="button"
+              className="btn"
+              disabled={source === prefs.packageSource}
+              onClick={() => {
+                setPref('packageSource', source);
+                location.reload();
+              }}
             >
-              Mulai Coding
+              Terapkan & muat ulang
             </button>
           </div>
-        )}
+        </details>
       </div>
     </div>
   );

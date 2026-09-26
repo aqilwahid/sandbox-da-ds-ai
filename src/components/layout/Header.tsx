@@ -1,220 +1,132 @@
-import React, { useState, useEffect, useRef } from 'react';
-import {
-  Download,
-  Upload,
-  Wifi,
-  WifiOff,
-  Layers,
-  Terminal,
-  ChevronDown,
-  Sparkles,
-  Database,
-  BrainCircuit,
-  Wrench,
-} from 'lucide-react';
-import { TRACKS, type TrackId } from '../../content/types';
-import { exportProgressToJson, importProgressFromJson } from '../../db/exportImport';
-import { useToast } from './Toast';
+import React, { useState } from 'react';
+import { BarChart3, CircleHelp, Gauge, Home, Loader2, Moon, MonitorSmartphone, Sun, TriangleAlert, Type } from 'lucide-react';
+import { APP } from '../../config';
+import { setPref, usePrefs } from '../../lib/prefs';
+import { navigate, type Route } from '../../lib/router';
+import { useRuntimeState } from '../../runtime/pythonRuntime';
+import { Modal } from '../common/Modal';
+import { Logo } from './Logo';
 
-interface HeaderProps {
-  currentTrack: TrackId;
-  onSelectTrack: (track: TrackId) => void;
-  currentView: 'workspace' | 'preflight';
-  onNavigateView: (view: 'workspace' | 'preflight') => void;
-}
+const SIZES = ['md', 'lg', 'xl'] as const;
+const SIZE_LABEL = { md: 'Normal', lg: 'Besar', xl: 'Sangat besar' };
 
-export const Header: React.FC<HeaderProps> = ({
-  currentTrack,
-  onSelectTrack,
-  currentView,
-  onNavigateView,
-}) => {
-  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
-  const [trackDropdownOpen, setTrackDropdownOpen] = useState(false);
-  const [isExporting, setIsExporting] = useState(false);
-  const [isImporting, setIsImporting] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const { showToast } = useToast();
+export const Header: React.FC<{ route: Route }> = ({ route }) => {
+  const prefs = usePrefs();
+  const rt = useRuntimeState();
+  const [help, setHelp] = useState(false);
 
-  useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
+  const NavBtn: React.FC<{ active: boolean; onClick: () => void; icon: React.ReactNode; label: string }> = ({ active, onClick, icon, label }) => (
+    <button type="button" onClick={onClick} className={`tab ${active ? 'tab-active' : ''}`} aria-current={active ? 'page' : undefined}>
+      {icon}
+      <span className="hidden md:inline">{label}</span>
+    </button>
+  );
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-
-  const handleExport = async () => {
-    try {
-      setIsExporting(true);
-      await exportProgressToJson();
-      showToast('Cadangan progres berhasil diekspor ke file JSON.', 'success');
-    } catch (err: any) {
-      showToast(`Gagal mengekspor: ${err.message}`, 'error');
-    } finally {
-      setIsExporting(false);
-    }
-  };
-
-  const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      setIsImporting(true);
-      const text = await file.text();
-      const res = await importProgressFromJson(text);
-      showToast(`Berhasil mengimpor ${res.count} catatan progres latihan!`, 'success');
-    } catch (err: any) {
-      showToast(`Gagal mengimpor: ${err.message}`, 'error');
-    } finally {
-      setIsImporting(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
-    }
-  };
-
-  const activeTrackMeta = TRACKS[currentTrack];
-
-  const getTrackIcon = (id: TrackId) => {
-    switch (id) {
-      case 'analyst':
-        return <Database size={15} className="text-cyan-400" />;
-      case 'datascience':
-        return <BrainCircuit size={15} className="text-indigo-400" />;
-      case 'ai':
-        return <Sparkles size={15} className="text-emerald-400" />;
-    }
-  };
+  const rtPill = (() => {
+    if (rt.status === 'error')
+      return { cls: 'border-err/40 text-err', icon: <TriangleAlert size={12} />, text: 'Python gagal dimuat' };
+    if (rt.status === 'loading')
+      return {
+        cls: 'border-warn/40 text-warn',
+        icon: <Loader2 size={12} className="animate-spin" />,
+        text: `Memuat Python${rt.progress ? ` ${Math.round(rt.progress)}%` : '…'}`,
+      };
+    if (rt.status === 'busy') return { cls: 'border-accent/40 text-accent', icon: <Loader2 size={12} className="animate-spin" />, text: rt.message };
+    if (rt.status === 'ready') return { cls: 'border-ok/40 text-ok', icon: <span className="h-1.5 w-1.5 rounded-full bg-ok" />, text: 'Python siap' };
+    return { cls: 'border-line text-fg3', icon: <span className="h-1.5 w-1.5 rounded-full bg-fg3" />, text: 'Python belum dimuat' };
+  })();
 
   return (
-    <header className="h-14 bg-dark-950 border-b border-slate-800 flex items-center justify-between px-4 shrink-0 z-30">
-      {/* Brand & Track Switcher */}
-      <div className="flex items-center gap-4">
-        <button
-          onClick={() => onNavigateView('workspace')}
-          className="flex items-center gap-2.5 text-left group focus:outline-none"
-        >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-            <Terminal size={17} className="stroke-[2.5]" />
-          </div>
-          <div>
-            <span className="text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
-              Hands-On Sandbox
-              <span className="text-[10px] uppercase font-mono px-1.5 py-0.2 bg-brand-500/20 text-brand-300 rounded border border-brand-500/30">
-                Offline WASM
-              </span>
-            </span>
-          </div>
+    <header className="z-30 flex h-12 shrink-0 items-center justify-between gap-3 border-b border-line bg-panel px-3">
+      <div className="flex min-w-0 items-center gap-3">
+        <button type="button" onClick={() => navigate({ name: 'home' })} className="flex min-w-0 items-center gap-2 text-left" aria-label="Beranda">
+          <Logo />
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate text-sm font-semibold tracking-tight text-fg">{APP.name}</span>
+            {(APP.trainingTitle || APP.organization) && (
+              <span className="block truncate text-[10.5px] text-fg3">{[APP.trainingTitle, APP.organization].filter(Boolean).join(' · ')}</span>
+            )}
+          </span>
         </button>
-
-        <div className="h-4 w-[1px] bg-slate-800 hidden sm:block" />
-
-        {/* Track Dropdown */}
-        <div className="relative">
-          <button
-            onClick={() => setTrackDropdownOpen(!trackDropdownOpen)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark-850 hover:bg-dark-800 border border-slate-700/70 text-xs font-medium text-slate-200 transition-colors"
-          >
-            {getTrackIcon(currentTrack)}
-            <span>{activeTrackMeta.name}</span>
-            <ChevronDown size={14} className="text-slate-400" />
-          </button>
-
-          {trackDropdownOpen && (
-            <div className="absolute top-full left-0 mt-1.5 w-60 bg-dark-900 border border-slate-750 rounded-xl shadow-2xl py-1 z-50 backdrop-blur-lg">
-              <div className="px-3 py-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-                Pilih Jalur Belajar (Track)
+        <nav className="flex items-center gap-0.5" aria-label="Navigasi utama">
+          <NavBtn active={route.name === 'home'} onClick={() => navigate({ name: 'home' })} icon={<Home size={14} />} label="Beranda" />
+          <NavBtn active={route.name === 'progress'} onClick={() => navigate({ name: 'progress' })} icon={<BarChart3 size={14} />} label="Progres" />
+          <NavBtn active={route.name === 'preflight'} onClick={() => navigate({ name: 'preflight' })} icon={<Gauge size={14} />} label="Cek Kesiapan" />
+        </nav>
+      </div>
+      <div className="flex shrink-0 items-center gap-1.5">
+        <button
+          type="button"
+          onClick={() => navigate({ name: 'preflight' })}
+          className={`hidden items-center gap-1.5 rounded-full border px-2.5 py-1 text-2xs font-medium sm:inline-flex ${rtPill.cls}`}
+          title={rt.error || rt.message}
+        >
+          {rtPill.icon}
+          <span className="max-w-[180px] truncate">{rtPill.text}</span>
+        </button>
+        <button
+          type="button"
+          className="btn-ghost"
+          onClick={() => setPref('size', SIZES[(SIZES.indexOf(prefs.size) + 1) % SIZES.length])}
+          title={`Ukuran tampilan: ${SIZE_LABEL[prefs.size]} (mode presentasi)`}
+          aria-label="Ganti ukuran tampilan"
+        >
+          <Type size={15} />
+          <span className="text-[10px] font-semibold">{prefs.size === 'md' ? 'A' : prefs.size === 'lg' ? 'A+' : 'A++'}</span>
+        </button>
+        <button
+          type="button"
+          className="btn-ghost"
+          onClick={() => setPref('theme', prefs.theme === 'dark' ? 'light' : 'dark')}
+          title={prefs.theme === 'dark' ? 'Tema terang (cocok untuk proyektor)' : 'Tema gelap'}
+          aria-label="Ganti tema"
+        >
+          {prefs.theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+        </button>
+        <button type="button" className="btn-ghost" onClick={() => setHelp(true)} title="Cara pakai" aria-label="Bantuan">
+          <CircleHelp size={15} />
+        </button>
+      </div>
+      <Modal isOpen={help} onClose={() => setHelp(false)} title="Cara memakai sandbox" maxWidth="max-w-2xl">
+        <div className="space-y-4 text-xs leading-relaxed text-fg2">
+          <ol className="list-decimal space-y-1.5 pl-5">
+            <li>
+              Pilih <strong className="text-fg">track</strong> di Beranda, lalu buka latihan. Baca tab <strong className="text-fg">Instruksi</strong> — visualnya
+              interaktif, coba klik!
+            </li>
+            <li>
+              Lihat isi dataset di tab <strong className="text-fg">Data</strong> (SQL juga punya tab <strong className="text-fg">Target</strong>).
+            </li>
+            <li>
+              Tulis kode di editor lalu tekan <span className="kbd">Ctrl</span>+<span className="kbd">Enter</span>. Hasil tampil sebagai tabel, grafik, dan
+              checklist penilaian.
+            </li>
+            <li>
+              Buntu? Buka <strong className="text-fg">Hint</strong> bertahap. Kode tersimpan otomatis di browser ini.
+            </li>
+          </ol>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {[
+              ['Ctrl + Enter', 'Jalankan & periksa'],
+              ['Shift + Enter', 'Jalankan & periksa'],
+              ['Ctrl + /', 'Komentari baris'],
+              ['Ctrl + Z / Ctrl + Shift + Z', 'Undo / redo'],
+              ['Tab', 'Indentasi'],
+              ['Ctrl + Space', 'Saran nama kolom/fungsi'],
+            ].map(([k, v]) => (
+              <div key={k} className="flex items-center justify-between rounded-lg border border-line bg-panel2 px-2.5 py-1.5">
+                <span className="font-mono text-2xs text-fg">{k}</span>
+                <span>{v}</span>
               </div>
-              {(Object.keys(TRACKS) as TrackId[]).map((tKey) => {
-                const track = TRACKS[tKey];
-                const isSelected = tKey === currentTrack;
-                return (
-                  <button
-                    key={tKey}
-                    onClick={() => {
-                      onSelectTrack(tKey);
-                      setTrackDropdownOpen(false);
-                    }}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs text-left transition-colors ${
-                      isSelected
-                        ? 'bg-brand-600/20 text-brand-300 font-semibold'
-                        : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
-                    }`}
-                  >
-                    {getTrackIcon(tKey)}
-                    <div className="flex-1">
-                      <div className="leading-tight">{track.name}</div>
-                      <div className="text-[10px] text-slate-400 line-clamp-1">{track.description}</div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          )}
+            ))}
+          </div>
+          <p className="flex items-start gap-2 rounded-lg bg-panel2 p-2.5">
+            <MonitorSmartphone size={14} className="mt-0.5 shrink-0 text-accent" />
+            Semua kode berjalan di browser kamu (Python & DuckDB dalam WebAssembly) — tidak ada data yang dikirim ke server. Untuk proyektor, pakai tombol{' '}
+            <strong className="text-fg">A+</strong> dan tema terang.
+          </p>
         </div>
-      </div>
-
-      {/* Right Controls: Offline indicator, Preflight, Export/Import */}
-      <div className="flex items-center gap-2.5">
-        {/* Network Status Pill */}
-        <div
-          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono border ${
-            isOnline
-              ? 'bg-emerald-950/40 text-emerald-300 border-emerald-500/30'
-              : 'bg-amber-950/40 text-amber-300 border-amber-500/30'
-          }`}
-          title={isOnline ? 'Terhubung ke jaringan' : 'Bekerja 100% offline'}
-        >
-          {isOnline ? <Wifi size={12} className="text-emerald-400" /> : <WifiOff size={12} className="text-amber-400" />}
-          <span>{isOnline ? 'Online' : 'Offline Mode'}</span>
-        </div>
-
-        {/* Preflight Button */}
-        <button
-          onClick={() => onNavigateView(currentView === 'workspace' ? 'preflight' : 'workspace')}
-          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
-            currentView === 'preflight'
-              ? 'bg-brand-600 text-white border-brand-500 shadow-md shadow-brand-500/30'
-              : 'bg-dark-850 hover:bg-dark-800 text-slate-300 border-slate-700/80'
-          }`}
-          title="Buka status diagnostik & prewarm offline cache"
-        >
-          <Wrench size={13} className="text-cyan-400" />
-          <span className="hidden md:inline">Preflight Check</span>
-        </button>
-
-        {/* Export Button */}
-        <button
-          onClick={handleExport}
-          disabled={isExporting}
-          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-dark-850 hover:bg-dark-800 text-slate-300 border border-slate-700/80 text-xs font-medium transition-colors"
-          title="Ekspor progres ke file JSON"
-        >
-          <Download size={13} className="text-indigo-400" />
-          <span className="hidden sm:inline">Export</span>
-        </button>
-
-        {/* Import Button */}
-        <label className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-dark-850 hover:bg-dark-800 text-slate-300 border border-slate-700/80 text-xs font-medium cursor-pointer transition-colors">
-          <Upload size={13} className="text-cyan-400" />
-          <span className="hidden sm:inline">Import</span>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".json"
-            onChange={handleImportFile}
-            disabled={isImporting}
-            className="hidden"
-          />
-        </label>
-      </div>
+      </Modal>
     </header>
   );
 };

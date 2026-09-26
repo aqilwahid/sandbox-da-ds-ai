@@ -1,145 +1,168 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { GripVertical, GripHorizontal } from 'lucide-react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { BookOpen, Code2, LayoutList } from 'lucide-react';
+import { DEFAULT_PREFS, getPrefs, setPref } from '../../lib/prefs';
 
-interface ResizablePanelsProps {
+const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+
+interface Props {
   sidebar: React.ReactNode;
+  sidebarCollapsed: boolean;
   instructions: React.ReactNode;
   editor: React.ReactNode;
   output: React.ReactNode;
+  /** Dipanggil ketika tampilan HP ingin fokus ke tab tertentu (mis. setelah Run → Hasil). */
+  mobileFocus?: 'instruksi' | 'kode' | 'hasil';
 }
 
-export const ResizablePanels: React.FC<ResizablePanelsProps> = ({
-  sidebar,
-  instructions,
-  editor,
-  output,
-}) => {
-  const [sidebarWidth, setSidebarWidth] = useState<number>(260);
-  const [instructionWidthPct, setInstructionWidthPct] = useState<number>(36);
-  const [editorHeightPct, setEditorHeightPct] = useState<number>(55);
-
-  const isDraggingSidebar = useRef(false);
-  const isDraggingInstruction = useRef(false);
-  const isDraggingEditorSplit = useRef(false);
-
-  // Drag listeners
+function useIsNarrow(bp = 1024) {
+  const [narrow, setNarrow] = useState(() => window.innerWidth < bp);
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (isDraggingSidebar.current) {
-        const newWidth = Math.max(180, Math.min(420, e.clientX));
-        setSidebarWidth(newWidth);
-      } else if (isDraggingInstruction.current) {
-        const containerWidth = window.innerWidth - sidebarWidth;
-        const offsetLeft = e.clientX - sidebarWidth;
-        const newPct = Math.max(20, Math.min(65, (offsetLeft / containerWidth) * 100));
-        setInstructionWidthPct(newPct);
-      } else if (isDraggingEditorSplit.current) {
-        const editorContainer = document.getElementById('editor-output-container');
-        if (editorContainer) {
-          const rect = editorContainer.getBoundingClientRect();
-          const offsetY = e.clientY - rect.top;
-          const newPct = Math.max(25, Math.min(80, (offsetY / rect.height) * 100));
-          setEditorHeightPct(newPct);
+    const on = () => setNarrow(window.innerWidth < bp);
+    window.addEventListener('resize', on);
+    return () => window.removeEventListener('resize', on);
+  }, [bp]);
+  return narrow;
+}
+
+const Splitter: React.FC<{
+  dir: 'x' | 'y';
+  onDrag: (clientX: number, clientY: number) => void;
+  /** Geser dengan keyboard (panah) — delta dalam persen/px sesuai panel. */
+  onNudge: (delta: number) => void;
+  onReset: () => void;
+  label: string;
+}> = ({ dir, onDrag, onNudge, onReset, label }) => {
+  const start = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const el = e.currentTarget;
+    el.setPointerCapture(e.pointerId);
+    document.body.style.cursor = dir === 'x' ? 'col-resize' : 'row-resize';
+    document.body.style.userSelect = 'none';
+    const move = (ev: PointerEvent) => onDrag(ev.clientX, ev.clientY);
+    const up = () => {
+      el.removeEventListener('pointermove', move);
+      el.removeEventListener('pointerup', up);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+    el.addEventListener('pointermove', move);
+    el.addEventListener('pointerup', up);
+  };
+  return (
+    <div
+      role="separator"
+      aria-orientation={dir === 'x' ? 'vertical' : 'horizontal'}
+      aria-label={label}
+      tabIndex={0}
+      title={`${label} — seret, atau fokus lalu tekan tombol panah. Klik ganda untuk ukuran awal.`}
+      onPointerDown={start}
+      onDoubleClick={onReset}
+      onKeyDown={(e) => {
+        const back = dir === 'x' ? 'ArrowLeft' : 'ArrowUp';
+        const fwd = dir === 'x' ? 'ArrowRight' : 'ArrowDown';
+        if (e.key === back || e.key === fwd) {
+          e.preventDefault();
+          onNudge((e.key === fwd ? 1 : -1) * (e.shiftKey ? 5 : 1));
         }
-      }
-    };
+      }}
+      className={`group relative z-10 shrink-0 bg-line outline-none transition-colors hover:bg-accent/60 focus-visible:bg-accent ${dir === 'x' ? 'w-px cursor-col-resize' : 'h-px cursor-row-resize'}`}
+    >
+      <span className={`absolute ${dir === 'x' ? '-left-1.5 -right-1.5 inset-y-0' : '-top-1.5 -bottom-1.5 inset-x-0'}`} />
+    </div>
+  );
+};
 
-    const handleMouseUp = () => {
-      isDraggingSidebar.current = false;
-      isDraggingInstruction.current = false;
-      isDraggingEditorSplit.current = false;
-      document.body.style.cursor = 'default';
-      document.body.style.userSelect = 'auto';
-    };
+export const ResizablePanels: React.FC<Props> = ({ sidebar, sidebarCollapsed, instructions, editor, output, mobileFocus }) => {
+  const narrow = useIsNarrow();
+  const prefs = getPrefs();
+  const [sidebarW, setSidebarW] = useState(prefs.sidebarWidth);
+  const [instrPct, setInstrPct] = useState(prefs.instructionWidth);
+  const [editorPct, setEditorPct] = useState(prefs.editorSplit);
+  const [mobileTab, setMobileTab] = useState<'instruksi' | 'kode' | 'hasil'>('instruksi');
+  const mainRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
+  useEffect(() => {
+    if (mobileFocus) setMobileTab(mobileFocus);
+  }, [mobileFocus]);
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [sidebarWidth]);
+  const persist = useCallback(() => {
+    setPref('sidebarWidth', sidebarW);
+    setPref('instructionWidth', instrPct);
+    setPref('editorSplit', editorPct);
+  }, [sidebarW, instrPct, editorPct]);
+  useEffect(() => {
+    const t = setTimeout(persist, 400);
+    return () => clearTimeout(t);
+  }, [persist]);
 
-  const startDraggingSidebar = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isDraggingSidebar.current = true;
-    document.body.style.cursor = 'col-resize';
-    document.body.style.userSelect = 'none';
-  };
-
-  const startDraggingInstruction = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isDraggingInstruction.current = true;
-    document.body.style.cursor = 'col-resize';
-    document.body.style.userSelect = 'none';
-  };
-
-  const startDraggingEditorSplit = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isDraggingEditorSplit.current = true;
-    document.body.style.cursor = 'row-resize';
-    document.body.style.userSelect = 'none';
-  };
+  if (narrow) {
+    const Tab: React.FC<{ id: typeof mobileTab; icon: React.ReactNode; label: string }> = ({ id, icon, label }) => (
+      <button type="button" onClick={() => setMobileTab(id)} className={`tab flex-1 justify-center ${mobileTab === id ? 'tab-active' : ''}`}>
+        {icon} {label}
+      </button>
+    );
+    return (
+      <div className="flex min-h-0 flex-1 flex-col">
+        <div className="flex shrink-0 gap-1 border-b border-line bg-panel p-1">
+          <Tab id="instruksi" icon={<BookOpen size={13} />} label="Instruksi" />
+          <Tab id="kode" icon={<Code2 size={13} />} label="Kode" />
+          <Tab id="hasil" icon={<LayoutList size={13} />} label="Hasil" />
+        </div>
+        <div className="min-h-0 flex-1">
+          <div className={mobileTab === 'instruksi' ? 'h-full' : 'hidden'}>{instructions}</div>
+          <div className={mobileTab === 'kode' ? 'h-full' : 'hidden'}>{editor}</div>
+          <div className={mobileTab === 'hasil' ? 'h-full' : 'hidden'}>{output}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex-1 flex overflow-hidden w-full h-full bg-dark-950">
-      {/* 1. Sidebar Panel */}
-      <div style={{ width: `${sidebarWidth}px` }} className="h-full shrink-0 flex flex-col overflow-hidden">
+    <div className="flex min-h-0 flex-1 overflow-hidden">
+      <div style={{ width: sidebarCollapsed ? 48 : sidebarW }} className="h-full shrink-0 overflow-hidden">
         {sidebar}
       </div>
-
-      {/* Sidebar Splitter */}
-      <div
-        onMouseDown={startDraggingSidebar}
-        className="w-1.5 hover:w-2 bg-dark-850 hover:bg-brand-500/50 cursor-col-resize flex items-center justify-center transition-all z-20 group"
-        title="Geser untuk mengubah lebar sidebar"
-      >
-        <div className="w-[1px] h-8 bg-slate-700 group-hover:bg-brand-300 rounded" />
-      </div>
-
-      {/* Main Workspace Area (Instructions + Editor/Output) */}
-      <div className="flex-1 flex overflow-hidden h-full">
-        {/* 2. Instruction Panel */}
-        <div
-          style={{ width: `${instructionWidthPct}%` }}
-          className="h-full shrink-0 flex flex-col overflow-hidden"
-        >
+      {!sidebarCollapsed && (
+        <Splitter
+          dir="x"
+          label="Ubah lebar daftar latihan"
+          onDrag={(x) => setSidebarW(clamp(x, 200, 400))}
+          onNudge={(d) => setSidebarW((w) => clamp(w + d * 10, 200, 400))}
+          onReset={() => setSidebarW(DEFAULT_PREFS.sidebarWidth)}
+        />
+      )}
+      <div ref={mainRef} className="flex min-w-0 flex-1 overflow-hidden">
+        <div style={{ width: `${instrPct}%` }} className="h-full min-w-[280px] shrink-0 overflow-hidden">
           {instructions}
         </div>
-
-        {/* Instruction / Editor Splitter */}
-        <div
-          onMouseDown={startDraggingInstruction}
-          className="w-1.5 hover:w-2 bg-dark-850 hover:bg-brand-500/50 cursor-col-resize flex items-center justify-center transition-all z-20 group"
-          title="Geser untuk mengubah ukuran panel instruksi"
-        >
-          <div className="w-[1px] h-8 bg-slate-700 group-hover:bg-brand-300 rounded" />
-        </div>
-
-        {/* 3. Editor & Output Split Container */}
-        <div
-          id="editor-output-container"
-          className="flex-1 flex flex-col h-full overflow-hidden min-w-[320px]"
-        >
-          {/* Top: Code Editor */}
-          <div style={{ height: `${editorHeightPct}%` }} className="w-full flex flex-col overflow-hidden">
+        <Splitter
+          dir="x"
+          label="Ubah lebar panel instruksi"
+          onDrag={(x) => {
+            const box = mainRef.current?.getBoundingClientRect();
+            if (!box) return;
+            setInstrPct(clamp(((x - box.left) / box.width) * 100, 24, 64));
+          }}
+          onNudge={(d) => setInstrPct((p) => clamp(p + d, 24, 64))}
+          onReset={() => setInstrPct(DEFAULT_PREFS.instructionWidth)}
+        />
+        <div ref={rightRef} className="flex min-w-[340px] flex-1 flex-col overflow-hidden">
+          <div style={{ height: `${editorPct}%` }} className="min-h-[120px] shrink-0 overflow-hidden">
             {editor}
           </div>
-
-          {/* Editor / Output Splitter */}
-          <div
-            onMouseDown={startDraggingEditorSplit}
-            className="h-1.5 hover:h-2 bg-dark-850 hover:bg-brand-500/50 cursor-row-resize flex items-center justify-center transition-all z-20 group shrink-0"
-            title="Geser untuk mengubah tinggi output"
-          >
-            <div className="h-[1px] w-8 bg-slate-700 group-hover:bg-brand-300 rounded" />
-          </div>
-
-          {/* Bottom: Output Panel */}
-          <div className="flex-1 w-full flex flex-col overflow-hidden">
-            {output}
-          </div>
+          <Splitter
+            dir="y"
+            label="Ubah tinggi editor"
+            onDrag={(_, y) => {
+              const box = rightRef.current?.getBoundingClientRect();
+              if (!box) return;
+              setEditorPct(clamp(((y - box.top) / box.height) * 100, 20, 80));
+            }}
+            onNudge={(d) => setEditorPct((p) => clamp(p + d * 2, 20, 80))}
+            onReset={() => setEditorPct(DEFAULT_PREFS.editorSplit)}
+          />
+          <div className="min-h-0 flex-1 overflow-hidden">{output}</div>
         </div>
       </div>
     </div>

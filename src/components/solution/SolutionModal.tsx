@@ -1,111 +1,85 @@
-import React, { useState } from 'react';
-import { AlertTriangle, Copy, Check, Eye, Code } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { AlertTriangle, Check, ClipboardPaste, Copy, Eye } from 'lucide-react';
+import { copyText } from '../../lib/format';
+import { highlightToHtml } from '../../lib/highlight';
 import { Modal } from '../common/Modal';
 
-interface SolutionModalProps {
+interface Props {
   isOpen: boolean;
   onClose: () => void;
-  solutionCode: string;
-  hasAlreadySeenSolution: boolean;
-  onConfirmViewSolution: () => void;
+  code: string;
+  language: 'sql' | 'python';
+  alreadySeen: boolean;
+  onConfirm: () => void;
+  onPaste: () => void;
 }
 
-export const SolutionModal: React.FC<SolutionModalProps> = ({
-  isOpen,
-  onClose,
-  solutionCode,
-  hasAlreadySeenSolution,
-  onConfirmViewSolution,
-}) => {
-  const [confirmed, setConfirmed] = useState<boolean>(hasAlreadySeenSolution);
+export const SolutionModal: React.FC<Props> = ({ isOpen, onClose, code, language, alreadySeen, onConfirm, onPaste }) => {
+  const [confirmed, setConfirmed] = useState(alreadySeen);
   const [copied, setCopied] = useState(false);
-
-  // Sync state if already viewed
-  React.useEffect(() => {
-    if (hasAlreadySeenSolution) {
-      setConfirmed(true);
-    }
-  }, [hasAlreadySeenSolution]);
-
-  const handleConfirm = () => {
-    setConfirmed(true);
-    onConfirmViewSolution();
-  };
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(solutionCode);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      console.error('Failed to copy solution:', e);
-    }
-  };
-
+  useEffect(() => {
+    if (isOpen) setConfirmed(alreadySeen);
+  }, [isOpen, alreadySeen]);
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Jawaban Solusi Referensi"
-      maxWidth="max-w-2xl"
-    >
+    <Modal isOpen={isOpen} onClose={onClose} title="Solusi referensi" maxWidth="max-w-3xl">
       {!confirmed ? (
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-purple-950/30 border border-purple-500/40 text-purple-200 text-xs flex items-start gap-3">
-            <AlertTriangle size={20} className="text-purple-400 shrink-0 mt-0.5" />
-            <div className="leading-relaxed">
-              <span className="font-bold block text-sm text-purple-100 mb-1">
-                Konfirmasi Melihat Solusi
-              </span>
-              Melihat kunci jawaban akan menandai status latihan ini sebagai{' '}
-              <strong className="underline text-white">"Dilihat Solusinya"</strong>. Kami menyarankan Anda mencoba menggunakan fitur <em>Hint</em> bertahap terlebih dahulu sebelum membuka solusi penuh.
+          <div className="flex items-start gap-3 rounded-xl border border-warn/40 bg-warn/10 p-4 text-xs text-fg">
+            <AlertTriangle size={18} className="mt-0.5 shrink-0 text-warn" />
+            <div className="space-y-1 leading-relaxed">
+              <strong className="block text-sm">Yakin ingin melihat solusi?</strong>
+              Latihan ini akan ditandai <strong>“solusi dilihat”</strong> di catatan progres. Coba buka <em>Hint</em> bertahap dulu — belajar paling efektif saat
+              kamu menemukan jawabannya sendiri.
             </div>
           </div>
-
-          <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-800">
-            <button
-              onClick={onClose}
-              className="px-4 py-2 rounded-lg bg-dark-800 hover:bg-slate-750 text-slate-300 text-xs font-medium transition-colors"
-            >
-              Kembali & Coba Lagi
+          <div className="flex justify-end gap-2">
+            <button type="button" className="btn" onClick={onClose}>
+              Coba lagi dulu
             </button>
             <button
-              onClick={handleConfirm}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-md transition-all"
+              type="button"
+              className="btn-primary"
+              onClick={() => {
+                setConfirmed(true);
+                onConfirm();
+              }}
             >
-              <Eye size={14} />
-              <span>Buka Kunci Solusi</span>
+              <Eye size={13} /> Tampilkan solusi
             </button>
           </div>
         </div>
       ) : (
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-400 font-mono flex items-center gap-1.5">
-              <Code size={14} className="text-purple-400" />
-              Kode Jawaban Resmi
-            </span>
-
-            <button
-              onClick={handleCopy}
-              className="flex items-center gap-1 px-3 py-1 rounded bg-dark-800 hover:bg-slate-750 text-slate-300 hover:text-white border border-slate-700 text-xs font-mono transition-colors"
-            >
-              {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
-              <span>{copied ? 'Tersalin' : 'Salin Kode'}</span>
-            </button>
-          </div>
-
-          <pre className="p-4 rounded-xl bg-dark-950 border border-slate-800 text-slate-100 font-mono text-xs overflow-x-auto leading-relaxed max-h-[380px]">
-            <code>{solutionCode}</code>
+          <pre className="max-h-[55vh] overflow-auto rounded-xl border border-line bg-panel2 p-4 font-mono text-xs leading-relaxed text-fg">
+            <code dangerouslySetInnerHTML={{ __html: highlightToHtml(code, language) }} />
           </pre>
-
-          <div className="flex justify-end pt-2 border-t border-slate-800">
-            <button
-              onClick={onClose}
-              className="px-4 py-1.5 rounded-lg bg-dark-800 hover:bg-slate-750 text-slate-200 text-xs font-medium transition-colors"
-            >
-              Tutup
-            </button>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-2xs text-fg3">Pelajari logikanya, lalu coba tulis ulang dengan kata-katamu sendiri.</p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                className="btn"
+                onClick={async () => {
+                  if (await copyText(code)) {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 1500);
+                  }
+                }}
+              >
+                {copied ? <Check size={13} className="text-ok" /> : <Copy size={13} />} Salin
+              </button>
+              <button
+                type="button"
+                className="btn"
+                onClick={() => {
+                  onPaste();
+                  onClose();
+                }}
+                title="Ganti isi editor dengan solusi"
+              >
+                <ClipboardPaste size={13} /> Pakai di editor
+              </button>
+            </div>
           </div>
         </div>
       )}

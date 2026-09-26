@@ -1,62 +1,42 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
+import { AlertCircle, CheckCircle2, Info, X } from 'lucide-react';
 
 type ToastType = 'success' | 'error' | 'info';
-
 interface ToastItem {
-  id: string;
+  id: number;
   type: ToastType;
   message: string;
 }
 
-interface ToastContextValue {
-  showToast: (message: string, type?: ToastType) => void;
-}
-
-const ToastContext = createContext<ToastContextValue>({
-  showToast: () => { },
-});
-
+const ToastContext = createContext<{ showToast: (message: string, type?: ToastType) => void }>({ showToast: () => {} });
 export const useToast = () => useContext(ToastContext);
+
+let seq = 0;
 
 export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
-
+  const remove = (id: number) => setToasts((t) => t.filter((x) => x.id !== id));
   const showToast = useCallback((message: string, type: ToastType = 'info') => {
-    const id = `${Date.now()}_${Math.random()}`;
-    setToasts((prev) => [...prev, { id, type, message }]);
-
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 4000);
+    const id = ++seq;
+    setToasts((t) => [...t.slice(-3), { id, type, message }]);
+    setTimeout(() => remove(id), type === 'error' ? 6000 : 3500);
   }, []);
-
-  const removeToast = (id: string) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  };
-
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none max-w-sm">
-        {toasts.map((toast) => (
+      <div className="pointer-events-none fixed bottom-4 right-4 z-[60] flex max-w-sm flex-col gap-2" aria-live="polite">
+        {toasts.map((t) => (
           <div
-            key={toast.id}
-            className={`pointer-events-auto flex items-start gap-3 p-3.5 rounded-lg border shadow-xl backdrop-blur-md transition-all text-sm animate-slide-up ${toast.type === 'success'
-                ? 'bg-emerald-950/90 border-emerald-500/50 text-emerald-200'
-                : toast.type === 'error'
-                  ? 'bg-rose-950/90 border-rose-500/50 text-rose-200'
-                  : 'bg-dark-800/95 border-slate-700 text-slate-200'
-              }`}
+            key={t.id}
+            className={`pointer-events-auto flex animate-slide-up items-start gap-2.5 rounded-xl border bg-panel p-3 text-xs shadow-pop ${
+              t.type === 'success' ? 'border-ok/40' : t.type === 'error' ? 'border-err/40' : 'border-line2'
+            }`}
           >
-            {toast.type === 'success' && <CheckCircle2 size={18} className="text-emerald-400 shrink-0 mt-0.5" />}
-            {toast.type === 'error' && <AlertCircle size={18} className="text-rose-400 shrink-0 mt-0.5" />}
-            {toast.type === 'info' && <Info size={18} className="text-cyan-400 shrink-0 mt-0.5" />}
-            <span className="flex-1 text-xs leading-relaxed">{toast.message}</span>
-            <button
-              onClick={() => removeToast(toast.id)}
-              className="text-slate-400 hover:text-slate-100 p-0.5"
-            >
+            {t.type === 'success' && <CheckCircle2 size={16} className="shrink-0 text-ok" />}
+            {t.type === 'error' && <AlertCircle size={16} className="shrink-0 text-err" />}
+            {t.type === 'info' && <Info size={16} className="shrink-0 text-info" />}
+            <span className="flex-1 leading-relaxed text-fg">{t.message}</span>
+            <button type="button" onClick={() => remove(t.id)} className="text-fg3 hover:text-fg" aria-label="Tutup notifikasi">
               <X size={14} />
             </button>
           </div>
